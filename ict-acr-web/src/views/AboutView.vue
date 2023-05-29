@@ -2,12 +2,25 @@
   <div class="about">
     <h1>This is an about page</h1>
     <b-button>Button</b-button>
-    <b-button variant="danger">Button</b-button>
-    <b-button variant="success">Button</b-button>
-    <b-button variant="outline-primary">Button</b-button>
+    <b-form-select v-model="selected" :options="options"></b-form-select>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      selected: null,
+      options: [
+        { value: null, text: 'Please select an option' },
+        { value: 'a', text: 'This is First option' },
+        { value: 'b', text: 'Selected Option' },
+        { value: { C: '3PO' }, text: 'This is an option with object value' },
+        { value: 'd', text: 'This one is disabled', disabled: true }
+      ]
+    }
+  }
+}
+</script>
 <style>
 @media (min-width: 1024px) {
   .about {
