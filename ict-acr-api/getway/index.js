@@ -1,11 +1,13 @@
 const express = require('express')
+const cors = require('cors')
+const proxy = require('express-http-proxy')
+
 const app = express();
-const port = 8000;
+app.use(express().json());
+app.use(cors())
 
-app.get("/", (req, res) => {
-    res.send("Hello world");
-});
+app.use('/firstClass', proxy('http://localhost:8001'))
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+app.listen(8000, () => {
+    console.log(`Server is running on port 8000`)
 })
