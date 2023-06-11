@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
+const {DataTypes} = require("sequelize");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
@@ -40,4 +41,15 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.users = require('./user') (sequelize,DataTypes)
+db.roles = require('./role') (sequelize,DataTypes)
+db.permissions = require('./permission') (sequelize,DataTypes)
+
+db.users.belongsToMany(db.roles, { through: 'user_role' });
+db.roles.belongsToMany(db.users, { through: 'user_role' });
+
+db.roles.belongsToMany(db.permissions, { through: 'role_permission' });
+db.permissions.belongsToMany(db.roles, { through: 'role_permission' });
+
+db.sequelize.sync({force: true})
 module.exports = db;
