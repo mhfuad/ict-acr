@@ -1,5 +1,5 @@
 <template>
-    <header>Auth Header</header>
-    <router-view></router-view>
-    <footer>Footer</footer>
+  <div class="bg-warning text-center">
+    <router-view />
+  </div>
 </template>
