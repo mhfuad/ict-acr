@@ -1,8 +1,8 @@
 const Layout = () => import("@/views/layouts/DashboardLayout.vue")
-const Home = () => import("@/views/HomeView.vue")
+const Home = () => import("@/views/dashboard-section/index.vue")
 
 const HomeRoute = {
-    path: "/home",
+    path: "/",
     component: Layout,
     children: [{
         path: "",

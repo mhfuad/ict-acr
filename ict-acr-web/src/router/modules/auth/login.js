@@ -1,5 +1,5 @@
 const Layout = () => import("@/views/layouts/AuthLayout.vue")
-const Login = () => import("@/views/Login.vue")
+const Login = () => import("@/views/auth-section/Login.vue")
 
 const loginRoute = {
     path: "/login",
