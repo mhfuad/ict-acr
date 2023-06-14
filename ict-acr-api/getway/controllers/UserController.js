@@ -45,13 +45,18 @@ class UserController{
 
     async deleteUser(req, res) {
         try {
-            const user = await userRepository.deleteUser(req.params.id);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
+            await userRepository.deleteUser(req.params.id);
             res.json({ message: 'User deleted successfully' });
         } catch (err) {
             res.status(500).json({ error: err.message });
+        }
+    }
+
+    async assignRole(req, res){
+        try {
+            res.json("ok");
+        } catch (err){
+            res.status(500).json({ error: err.message})
         }
     }
 }

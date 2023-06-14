@@ -23,7 +23,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-
+      {
+        name: 'IRO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'CRO',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ], {});
   },
 

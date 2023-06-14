@@ -13,10 +13,10 @@ router.post('/', async (req, res) => {
     await userController.createUser(req, res)
 })
 router.put('/:id', async (req, res) => {
-    await userController.updateUser
+    await userController.updateUser(req, res)
 });
 router.delete('/:id', async (req, res) => {
-    await userController.deleteUser
+    await userController.deleteUser(req, res)
 });
 
 module.exports = router;

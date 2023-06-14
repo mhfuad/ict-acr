@@ -16,9 +16,8 @@ class UserRepository{
     }
 
     createUser(user) {
-        const role = Role.findByPk(2);
         try{
-           User.create({
+           return User.create({
                 banglaName: user.banglaName,
                 englishName: user.englishName,
                 grade: user.grade,

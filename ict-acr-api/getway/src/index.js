@@ -5,7 +5,9 @@ const proxy = require('express-http-proxy')
 //const { databaseConnection } = require('./database')
 const { PORT } = require('../config')
 
-const userRouters = require('../routes/userRoutes')
+const userRoutes = require('../routes/userRoutes')
+const roleRoutes = require('../routes/roleRoutes')
+const zoneRoutes = require('../routes/zoneRoutes')
 
 const StartServer = async () => {
     const app = express();
@@ -14,7 +16,10 @@ const StartServer = async () => {
 
     app.use('/firstClass', proxy('http://localhost:8001'))
 
-    app.use('/users', userRouters)
+    app.use('/users', userRoutes)
+    app.use('/role', roleRoutes)
+    app.use('/zone', zoneRoutes)
+
     app.listen(PORT, () => {
         console.log(`getWay is running on port ${PORT}`)
     })
