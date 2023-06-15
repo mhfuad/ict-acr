@@ -22,7 +22,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       idNo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
+      },
+      password:{
+        type: Sequelize.STRING,
       },
       batchNo: {
         type: Sequelize.STRING
@@ -100,11 +104,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

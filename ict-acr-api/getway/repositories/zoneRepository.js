@@ -43,7 +43,6 @@ class ZoneRepository{
             }
         })
     }
-
 }
 
 module.exports = new ZoneRepository();

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     grade: DataTypes.STRING,
     class: DataTypes.STRING,
     idNo: DataTypes.STRING,
+    password: DataTypes.STRING,
     batchNo: DataTypes.STRING,
     nid: DataTypes.STRING,
     cadre: DataTypes.STRING,

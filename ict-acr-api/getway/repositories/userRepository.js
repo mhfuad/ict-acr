@@ -63,6 +63,7 @@ class UserRepository{
             grade: user.grade,
             class: user.class,
             idNo: user.idNo,
+            password: '123123',
             batchNo: user.batchNo,
             nid: user.nid,
             cadre: user.cadre,

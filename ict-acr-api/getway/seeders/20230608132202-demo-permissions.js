@@ -15,18 +15,12 @@ module.exports = {
     await queryInterface.bulkInsert('Permissions', [
       {
         name: 'create_employee',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         name: 'view_employee',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         name: 'list_employee',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
     ], {});
   },
