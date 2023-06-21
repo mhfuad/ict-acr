@@ -1,7 +1,11 @@
 <template>
   <div class="px-2">
     <b-row>
-      <b-col v-for="(card, index) in formCards" :key="index">
+      <b-col
+        v-for="(card, index) in formCards"
+        :key="index"
+        class="py-1 py-lg-0"
+      >
         <b-link class="link">
           <b-card class="text-center" :class="card.cardClass">
             <b-card-text>
@@ -22,7 +26,11 @@
       </b-col>
     </b-row>
     <b-row class="py-2">
-      <b-col v-for="(summery, index) in summeryCards" :key="index">
+      <b-col
+        v-for="(summery, index) in summeryCards"
+        :key="index"
+        class="py-2 py-lg-0"
+      >
         <b-link class="link">
           <b-card class="text-center">
             <b-card-text>

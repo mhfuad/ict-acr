@@ -1,5 +1,5 @@
 <template>
-  <b-row class="bg-sidebar d-block ">
+  <b-row class="bg-sidebar d-block">
     <b-col cols="12" class="py-3 mx-1 text-center">
       <img
         src="../../../assets/images/dashboard/logo.png"
@@ -16,10 +16,21 @@
           :key="index"
           @click.prevent="action(item.id)"
         >
-          <p class="p-3">{{ item.name }}</p>
+          <b-link class="link" :to="item.link">
+            <b-row class="main-bar py-3">
+              <b-col cols="2">
+                <img :src="getImage(item.icon)" alt="icon" />
+              </b-col>
+              <b-col cols="10" class="text-start">
+                <p class="m-0 p-0 link">{{ item.name }}</p>
+              </b-col>
+            </b-row>
+          </b-link>
           <ul class="sub-li m-0 p-0" v-if="item.show == true">
-            <li v-for="sub in item.subList" class="m-0 p-0">
+            <li v-for="sub in item.subList" class="ms-3 p-2 text-start">
+              <b-link class="link" :to="sub.link">
               <p class="p-3">{{ sub.name }}</p>
+            </b-link>
             </li>
           </ul>
         </li>
@@ -36,33 +47,25 @@ export default {
           id: 1,
           name: "ড্যাশবোর্ড",
           show: false,
+          icon: "dashboard.png",
+          link:'/',
           subList: [
-            { id: 1, name: "এ সি আর" },
-            { id: 1, name: "গেজেটেড অফিসার্স" },
-            { id: 1, name: "নন-গেজেটেড অফিসার্স" },
-            { id: 1, name: "গেজেটেড ক্যাডার অফিসার্স" },
+            
           ],
         },
         {
           id: 2,
-          name: "অনুমোদিত তালিকা",
+          name: "এ সি আর",
           show: false,
+          icon: "acr.png",
+          link:'/acr',
           subList: [
-            { id: 1, name: "গেজেটেড অফিসার্স" },
-            { id: 1, name: "নন-গেজেটেড অফিসার্স" },
-            { id: 1, name: "গেজেটেড ক্যাডার অফিসার্স" },
+            { id: 1, name: "গেজেটেড অফিসার্স",link:"/" },
+            { id: 1, name: "নন-গেজেটেড অফিসার্স",link:"/" },
+            { id: 1, name: "গেজেটেড ক্যাডার অফিসার্স",link:"/" },
           ],
         },
-        {
-          id: 3,
-          name: "অনুমোদিত তালিকা",
-          show: false,
-          subList: [
-            { id: 1, name: "গেজেটেড অফিসার্স" },
-            { id: 1, name: "নন-গেজেটেড অফিসার্স" },
-            { id: 1, name: "গেজেটেড ক্যাডার অফিসার্স" },
-          ],
-        },
+       
       ],
     };
   },
@@ -79,6 +82,12 @@ export default {
       }
       previousInfo.show = false;
     },
+    getImage(image) {
+      return new URL(
+        `../../../assets/images/sidebar-icon/${image}`,
+        import.meta.url
+      ).href;
+    },
   },
 };
 </script>
@@ -87,11 +96,12 @@ export default {
 ul {
   list-style-type: none;
 }
-li p:hover {
+li:hover {
   background: #858588;
   color: white;
 }
 .bg-sidebar {
+  min-height: 975px !important;
   height: 100% !important;
   background: #2f3349;
 }
@@ -106,5 +116,36 @@ li p:hover {
 .sub-li {
   background: #858588;
   color: white;
+}
+.main-bar {
+  margin-left: 15px;
+}
+@media only screen and (max-width: 1450px) {
+  .main-bar {
+    margin-left: 30px;
+  }
+  .bg-sidebar {
+    min-height: 636px !important;
+    height: 100% !important;
+    background: #2f3349;
+  }
+}
+/* .link {
+  text-decoration: none !important;
+} */
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
 }
 </style>

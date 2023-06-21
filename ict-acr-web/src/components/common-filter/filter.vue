@@ -11,7 +11,7 @@
           <label for="" class="me-1">রেকর্ড</label>
           <b-form-select v-model="selected" :options="options"></b-form-select>
         </b-col>
-        <b-col cols="12" md="6">
+        <b-col cols="12" md="6" class="mt-2 mt-lg-0">
           <b-form-select v-model="selected" :options="options"></b-form-select>
         </b-col>
       </b-row>

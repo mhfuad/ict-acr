@@ -1,12 +1,12 @@
 <template>
   <b-row class="pt-5 mx-2">
-    <b-col cols="12" md="10">
+    <b-col cols="12" md="8" lg="10">
       <p class="navbar-title">স্বাগতম, মোঃ সামসুল আরেফিন</p>
     </b-col>
-    <b-col cols="12" md="2">
+    <b-col cols="12" md="4" lg="2">
       <b-row>
         <b-col cols="3" class="py-3">
-          <select class="border-0 bg-white">
+          <select class="border-0 bg-white shadow-sm rounded">
             <option value="tr">TR</option>
             <option value="en" selected>EN</option>
             <option value="de">DE</option>

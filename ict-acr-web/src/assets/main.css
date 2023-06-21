@@ -1,12 +1,10 @@
 @import "./base.css";
 /* main.css this file will contain only root lavel css conten */
 body {
-  min-height: 100vh;
-  min-width: 100%;
   margin: 0 !important;
   padding: 0 !important;
-  text-rendering: optimizeLegibility;
+  /* text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: block;
+  -moz-osx-font-smoothing: grayscale; */
+  overflow-x: hidden;
 }

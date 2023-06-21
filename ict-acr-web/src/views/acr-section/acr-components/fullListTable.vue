@@ -1,39 +1,14 @@
 <template>
-  <b-row class="mt-2 mt-lg-0">
-    <b-col cols="12">
-      <b-row>
-        <b-col cols="12">
-          <hero />
-        </b-col>
-        <b-col cols="12" lg>
-          <chart />
-        </b-col>
-        <b-col cols="12" lg>
-          <parcentage-report />
-        </b-col>
-        <b-col cols="12" class="mt-4">
-          <listTable :tableData="items" :tableLabel="fields" />
-        </b-col>
-        <b-col cols="12" class="mt-4">
-          <listTable :tableData="itemsTwo" :tableLabel="fields" />
-        </b-col>
-      </b-row>
-    </b-col>
+  <b-row>
+    <b-cols>
+      <full-list-table class="my-3" :tableData="items" :tableLabel="fields" />
+    </b-cols>
   </b-row>
 </template>
-
 <script>
-import hero from "./dashboard-components/hero.vue";
-import chart from "./dashboard-components/hero-components/chart.vue";
-import parcentageReport from "./dashboard-components/hero-components/parcentageReport.vue";
-import listTable from "../../components/common-table/table.vue";
-export default {
-  components: {
-    hero,
-    chart,
-    parcentageReport,
-    listTable,
-  },
+import fullListTable from "@/components/common-table/table.vue";
+
+export default{
   data() {
     return {
       // Note `isActive` is left out and will not appear in the rendered table
@@ -46,8 +21,6 @@ export default {
           deadline: "05 Jan 2018 - 31 Dec 2018",
           date: "05 Jan 2022",
         },
-      ],
-      itemsTwo: [
         {
           name: "Habib Khan",
           id: "NT001",
@@ -55,7 +28,9 @@ export default {
           deadline: "05 Jan 2018 - 31 Dec 2018",
           date: "05 Jan 2022",
         },
+        
       ],
+     
       fields: [
         {
           key: "name",
@@ -86,7 +61,8 @@ export default {
       ],
     };
   },
+  components: {
+    fullListTable,
+  },
 };
 </script>
-
-<style scoped></style>

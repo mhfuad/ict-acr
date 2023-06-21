@@ -1,10 +1,10 @@
 <template>
-  <b-row class="px-2">
-    <b-col class="mx-2" v-for="(card, index) in formCards" :key="index">
+  <b-row class="text-center mx-1 ">
+    <b-col cols="12" md   class="px-3 py-3 " v-for="(card, index) in formCards" :key="index">
       <b-link class="link">
         <b-row class="text-center card" :class="card.cardClass">
           <b-col cols="12" class="pt-5">
-            <p>মোট</p>
+            <p class="m-0 p-0 title">মোট</p>
             <p class="title m-0 p-0">{{ card.title }}</p>
           </b-col>
           <b-col
@@ -130,5 +130,18 @@ export default {
 }
 .percentage-number {
   padding: 25px;
+}
+@media only screen and (max-width: 1440px) {
+  .title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.sub-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
 }
 </style>

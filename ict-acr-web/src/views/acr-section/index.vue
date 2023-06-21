@@ -1,39 +1,19 @@
 <template>
-  <b-row class="mt-2 mt-lg-0">
-    <b-col cols="12">
-      <b-row>
-        <b-col cols="12">
-          <hero />
-        </b-col>
-        <b-col cols="12" lg>
-          <chart />
-        </b-col>
-        <b-col cols="12" lg>
-          <parcentage-report />
-        </b-col>
-        <b-col cols="12" class="mt-4">
-          <listTable :tableData="items" :tableLabel="fields" />
-        </b-col>
-        <b-col cols="12" class="mt-4">
-          <listTable :tableData="itemsTwo" :tableLabel="fields" />
-        </b-col>
-      </b-row>
+  <b-row>
+    <b-col cols="12" class="mt-4">
+      <listTable class="my-3" :tableData="items" :tableLabel="fields" />
+      <div class="d-block text-center">
+        <b-link class="link" to="/acr/view-more">আরো দেখুন</b-link>
+      </div>
+      <listTable class="my-3" :tableData="items" :tableLabel="fields" />
+      <listTable class="my-3" :tableData="items" :tableLabel="fields" />
+      <listTable class="my-3" :tableData="items" :tableLabel="fields" />
     </b-col>
   </b-row>
 </template>
-
 <script>
-import hero from "./dashboard-components/hero.vue";
-import chart from "./dashboard-components/hero-components/chart.vue";
-import parcentageReport from "./dashboard-components/hero-components/parcentageReport.vue";
 import listTable from "../../components/common-table/table.vue";
 export default {
-  components: {
-    hero,
-    chart,
-    parcentageReport,
-    listTable,
-  },
   data() {
     return {
       // Note `isActive` is left out and will not appear in the rendered table
@@ -86,7 +66,17 @@ export default {
       ],
     };
   },
+  components: {
+    listTable,
+  },
 };
 </script>
-
-<style scoped></style>
+<style scoped>
+.link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #333339;
+}
+</style>

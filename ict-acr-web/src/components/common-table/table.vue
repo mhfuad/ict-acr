@@ -5,7 +5,7 @@
         <filter-section/>
     </b-col>
     <b-col>
-      <b-table striped hover :items="tableData" :fields="tableLabel">
+      <b-table responsive striped hover :items="tableData" :fields="tableLabel">
         <template #cell(action)="">
           <button class="btn btn-light shadow-lg border-light">মূল্যায়ন</button>
         </template>
