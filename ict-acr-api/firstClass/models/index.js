@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const {DataTypes} = require("sequelize");
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
@@ -40,4 +41,12 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+const Form = require('./form') (sequelize, DataTypes)
+const Question = require('./question') (sequelize, DataTypes)
+
+Form.hasMany(Question, { onUpdate: 'CASCADE'});
+
+
+db.sequelize.sync({force: true})
 module.exports = db;
+
