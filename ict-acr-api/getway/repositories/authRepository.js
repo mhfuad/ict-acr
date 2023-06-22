@@ -16,12 +16,14 @@ class AuthRepository{
         if(!passwordMatch){
             return "Invalid credentials"
         }
+
+        const userForToken = {id: user.id}
         const secretKey = config.APP_SECRET;
-        const payload = {userId: user.idNo, username: user.englishName}
-        const options = {
-            expiresIn: '1h'
-        }
-        return jwt.sign(payload, secretKey, options)
+        //const payload = {userId: user.id, username: user.englishName}
+        // const options = {
+        //     expiresIn: '1h'
+        // }
+        return jwt.sign({userForToken}, secretKey)
 
     }
 }
