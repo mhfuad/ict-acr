@@ -51,5 +51,5 @@ db.roles.belongsToMany(db.users, { through: 'user_role' });
 db.roles.belongsToMany(db.permissions, { through: 'role_permission' });
 db.permissions.belongsToMany(db.roles, { through: 'role_permission' });
 
-db.sequelize.sync({force: false})
+db.sequelize.sync({force: true})
 module.exports = db;

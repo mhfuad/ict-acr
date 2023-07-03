@@ -49,6 +49,8 @@ module.exports = {
           role: "Admin",
           profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           banglaName: "mahadi bangla",
@@ -82,6 +84,8 @@ module.exports = {
           role: "Admin",
           profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           banglaName: "Ali Hasan",
@@ -115,6 +119,8 @@ module.exports = {
           role: "Admin",
           profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           banglaName: "Zahidul Islam",
@@ -148,6 +154,8 @@ module.exports = {
           role: "Admin",
           profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },{
           banglaName: "Kamrul Islam",
           englishName: "mahadi english",
@@ -180,6 +188,8 @@ module.exports = {
           role: "Admin",
           profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
     ], {});
   },
