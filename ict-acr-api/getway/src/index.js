@@ -12,6 +12,7 @@ const authRoutes = require('../routes/authRoute')
 const userRoutes = require('../routes/userRoutes')
 const roleRoutes = require('../routes/roleRoutes')
 const zoneRoutes = require('../routes/zoneRoutes')
+const eleventhForm = require('../routes/11thFormRoutes')
 
 const StartServer = () => {
     const app = express();
@@ -36,12 +37,13 @@ const StartServer = () => {
         })
     }
 
-    app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
+    //app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
 
     app.use('/auth', authRoutes)
     app.use('/users', verifyToken, userRoutes)
     app.use('/role', verifyToken, roleRoutes)
     app.use('/zone', verifyToken, zoneRoutes)
+    app.use('/eleventhForm', eleventhForm)
 
     app.listen(PORT, () => {
         console.log(`getWay is running on port ${PORT}`)
