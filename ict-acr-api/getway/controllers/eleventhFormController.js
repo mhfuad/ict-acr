@@ -1,4 +1,4 @@
-const repository = require('../repositories/FormRepository')
+const repository = require('../repositories/eleventhFormRepository')
 
 class FormController{
     async getForms(req, res) {

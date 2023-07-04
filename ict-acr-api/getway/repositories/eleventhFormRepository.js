@@ -1,15 +1,15 @@
-const { TenthForms } = require('../../firstClass/models');
+const { EleventhForms } = require('../models');
 const { QueryTypes } = require('sequelize');
-const { sequelize } = require('../../firstClass/models')
-const { Assessment } = require('../../firstClass/models')
-class FormRepository{
+const { sequelize } = require('../models')
+const { Assessment } = require('../models')
+class eleventhFormRepository{
 
     async allForms(req){
-        return await TenthForms.findAll();
+        return await EleventhForms.findAll();
     }
 
     async getOne(id){
-        return await TenthForms.findByPk(id, {
+        return await EleventhForms.findByPk(id, {
             include: [{
                 model: Assessment
             }]
@@ -18,7 +18,7 @@ class FormRepository{
 
     async create(data){
         try{
-            return await TenthForms.create({
+            return await EleventhForms.create({
                 name: data.name,
                 userIdNo: data.userIdNo,
                 highestEducationLevel: data.highestEducationLevel,
@@ -43,7 +43,7 @@ class FormRepository{
     }
 
     async update(id, data){
-        const dbResponse = await TenthForms.update({
+        const dbResponse = await EleventhForms.update({
             name: data.name,
             userIdNo: data.userIdNo,
             highestEducationLevel: data.highestEducationLevel,
@@ -67,8 +67,8 @@ class FormRepository{
         return dbResponse;
     }
     async delete(id){
-        await TenthForms.destroy({where: {id: id}})
+        await EleventhForms.destroy({where: {id: id}})
     }
 }
 
-module.exports = new FormRepository();
+module.exports = new eleventhFormRepository();

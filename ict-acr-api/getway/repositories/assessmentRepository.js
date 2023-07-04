@@ -1,8 +1,9 @@
-const { Question } = require('../../firstClass/models');
-const { TenthForms } = require('../../firstClass/models');
-const { Assessment } = require('../../firstClass/models');
+const { Question } = require('../models');
+const { TenthForms } = require('../models');
+const { Assessment } = require('../models');
 const { QueryTypes } = require('sequelize');
-const { sequelize } = require('../../firstClass/models')
+const { sequelize } = require('../models')
+
 class AssessmentRepository{
 
     async getFormsQuestions(id){
