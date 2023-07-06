@@ -93,7 +93,7 @@ class UserRepository{
             updatedAt: new Date(),
         },{
             where: {
-                id: id
+                idNo: id
             }
         })
     }
@@ -101,7 +101,7 @@ class UserRepository{
     deleteUser(id) {
         User.destroy({
             where: {
-                id: id
+                idNo: id
             }
         })
     }
