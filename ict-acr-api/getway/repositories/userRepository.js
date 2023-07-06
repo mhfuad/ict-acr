@@ -8,11 +8,11 @@ class UserRepository{
     }
 
     async getAllUsers(){
-        return await User.findAll();
+        return await User.findAll({attributes: { exclude: ['otp','password','createdAt','updatedAt'] }});
     }
 
     async getUserById(id) {
-        return await User.findOne({where: {idNo:id}})
+        return await User.findOne({where: {idNo:id},attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] }})
     }
 
     createUser(user) {
@@ -93,7 +93,7 @@ class UserRepository{
             updatedAt: new Date(),
         },{
             where: {
-                id: id
+                idNo: id
             }
         })
     }
@@ -101,7 +101,7 @@ class UserRepository{
     deleteUser(id) {
         User.destroy({
             where: {
-                id: id
+                idNo: id
             }
         })
     }
