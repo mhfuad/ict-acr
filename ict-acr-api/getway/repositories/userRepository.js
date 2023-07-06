@@ -15,9 +15,9 @@ class UserRepository{
         return await User.findOne({where: {idNo:id},attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] }})
     }
 
-    createUser(user) {
+    async createUser(user) {
         try{
-           return User.create({
+           return await User.create({
                 banglaName: user.banglaName,
                 englishName: user.englishName,
                 grade: user.grade,
@@ -49,21 +49,20 @@ class UserRepository{
                 profileImage: user.profileImage,
                 signatureImage: user.signatureImage,
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: null,
             });
         }catch (error){
             console.log(error)
         }
     }
 
-    updateUser(id, user) {
-        User.update({
+    async updateUser(id, user) {
+        return await User.update({
             banglaName: user.banglaName,
             englishName: user.englishName,
             grade: user.grade,
             class: user.class,
             idNo: user.idNo,
-            password: '123123',
             batchNo: user.batchNo,
             nid: user.nid,
             cadre: user.cadre,
@@ -89,7 +88,6 @@ class UserRepository{
             role: user.role,
             profileImage: user.profileImage,
             signatureImage: user.signatureImage,
-            createdAt: new Date(),
             updatedAt: new Date(),
         },{
             where: {
@@ -98,8 +96,8 @@ class UserRepository{
         })
     }
 
-    deleteUser(id) {
-        User.destroy({
+    async deleteUser(id) {
+        return await User.destroy({
             where: {
                 idNo: id
             }
