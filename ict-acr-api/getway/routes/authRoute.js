@@ -11,4 +11,8 @@ router.post('/register', async (req, res)=>{
     await controller.authenticateUser(req,res)
 })
 
+router.post('/otp', async (req, res) => {
+    await controller.otpMatching(req, res)
+})
+
 module.exports = router;

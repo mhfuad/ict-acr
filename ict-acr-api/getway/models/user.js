@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     personalMail: DataTypes.STRING,
     officialMail: DataTypes.STRING,
     personalNumber: DataTypes.STRING,
+    otp: DataTypes.STRING,
     officialNumber: DataTypes.STRING,
     status: DataTypes.STRING,
     designation: DataTypes.STRING,
