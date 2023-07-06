@@ -11,11 +11,11 @@ class AuthRepository{
     async login(req){
         const user = await User.findOne({where: {idNo: req.user_id}})
         if(!user){
-            return "User not found";
+            return "not_found";
         }
         const passwordMatch = await bcrypt.compare(req.password, user.password);
         if(!passwordMatch){
-            return "Invalid credentials"
+            return "not_match";
         }
         
         const otp = Math.floor(Math.random() * 9999) + 1;
@@ -63,7 +63,7 @@ class AuthRepository{
         const user = await User.findOne({where: {idNo: req.user_id, otp: req.otp}})
         
         if(!user){
-            return "User not found";
+            return "not_found";
         }
         User.update({otp: null},{
             where:{
