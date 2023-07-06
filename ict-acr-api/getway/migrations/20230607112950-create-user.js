@@ -82,6 +82,10 @@ module.exports = {
       personalNumber: {
         type: Sequelize.STRING
       },
+      otp: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       officialNumber: {
         type: Sequelize.STRING
       },
