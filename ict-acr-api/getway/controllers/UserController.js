@@ -37,7 +37,7 @@ class UserController{
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
             }
-            res.json(user);
+            res.json({message: "user update successfully"});
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -54,7 +54,7 @@ class UserController{
 
     async assignRole(req, res){
         try {
-            res.json("ok");
+            res.json({message: "role assign successfully"});
         } catch (err){
             res.status(500).json({ error: err.message})
         }
