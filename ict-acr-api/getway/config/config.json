@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "fuad",
-    "password": "esscsmfu2",
+    "username": "root",
+    "password": "1nFlack@",
     "database": "ict_acr",
-    "host": "localhost",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
@@ -15,9 +15,10 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "1nFlack@",
+    "database": "ict_acr",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
+
