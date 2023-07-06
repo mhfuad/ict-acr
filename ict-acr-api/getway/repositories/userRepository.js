@@ -12,7 +12,7 @@ class UserRepository{
     }
 
     async getUserById(id) {
-        return await User.findByPk(id);
+        return await User.findOne({where: {idNo:id}})
     }
 
     createUser(user) {
