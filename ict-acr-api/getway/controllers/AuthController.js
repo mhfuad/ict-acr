@@ -6,11 +6,11 @@ class AuthController{
             var message = await repository.login(req.body);
             if(message === "not_found"){
                 res.status(404).json({error: "User not found"});
-            }
-            if(message === "not_match"){
+            }else if(message === "not_match"){
                 res.status(404).json({error: "Credential not match"});
+            }else {
+                res.json({message});
             }
-            res.json({message});
         } catch (err){
             res.status(500).json({ error: err.message})
         }

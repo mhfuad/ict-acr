@@ -21,8 +21,18 @@ module.exports = {
       dateOfBirth: {
         type: Sequelize.DATE
       },
-      jobDuration: {
-        type: Sequelize.STRING
+      joiningDate: {
+        type: Sequelize.DATE
+      },
+      departmentExamPass: {
+        type: Sequelize.BOOLEAN
+      },
+      departmentExamDate: {
+        type: Sequelize.DATE
+      },
+      jobStatus: {
+        type: Sequelize.ENUM('Entering','Temporary', 'Permanent'),
+        allowNull: false
       },
       acrStart: {
         type: Sequelize.DATE
@@ -37,9 +47,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       designation:{
-        type: Sequelize.STRING
-      },
-      timeDuration:{
         type: Sequelize.STRING
       },
       salary:{

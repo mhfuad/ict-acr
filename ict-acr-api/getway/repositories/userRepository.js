@@ -1,5 +1,6 @@
 
 const { User, Role, Permission } = require('../models');
+const bcrypt = require('bcrypt');
 
 class UserRepository{
     constructor() {
@@ -23,6 +24,7 @@ class UserRepository{
                 grade: user.grade,
                 class: user.class,
                 idNo: user.idNo,
+                password: await bcrypt.hash('123123', 10),
                 batchNo: user.batchNo,
                 nid: user.nid,
                 cadre: user.cadre,

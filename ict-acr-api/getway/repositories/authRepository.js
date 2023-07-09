@@ -10,7 +10,7 @@ class AuthRepository{
 
     async login(req){
         const user = await User.findOne({where: {idNo: req.user_id}})
-        if(!user){
+        if(user === null){
             return "not_found";
         }
         const passwordMatch = await bcrypt.compare(req.password, user.password);
