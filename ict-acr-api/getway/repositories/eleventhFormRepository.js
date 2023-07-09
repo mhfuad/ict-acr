@@ -18,25 +18,28 @@ class eleventhFormRepository{
 
     async create(data){
         try{
-            return await EleventhForms.create({
+            const form =  await EleventhForms.create({
                 name: data.name,
                 userIdNo: data.userIdNo,
                 highestEducationLevel: data.highestEducationLevel,
                 dateOfBirth: data.dateOfBirth,
-                jobDuration: data.jobDuration,
+                joiningDate: data.jobDuration,
+                departmentExamPass: data.departmentExamPass,
+                departmentExamDate: data.departmentExamDate,
+                jobStatus: data.jobStatus,
                 acrStart: data.acrStart,
                 acrEnd: data.acrEnd,
                 language: data.language,
                 specialTraining: data.specialTraining,
                 designation: data.designation,
-                timeDuration: data.timeDuration,
                 salary: data.salary,
                 iro: data.iro,
                 cro: data.cro,
                 userId: data.userId,
                 createdAt: new Date(),
-                updatedAt: new Date(),
-            })
+                updatedAt: null,
+            });
+            return form;
         }catch (err){
             console.log(err)
         }
@@ -48,23 +51,26 @@ class eleventhFormRepository{
             userIdNo: data.userIdNo,
             highestEducationLevel: data.highestEducationLevel,
             dateOfBirth: data.dateOfBirth,
-            jobDuration: data.jobDuration,
+            joiningDate: data.joiningDate,
+            departmentExamPass: data.departmentExamPass,
+            departmentExamDate: data.departmentExamDate,
+            jobStatus: data.jobStatus,
             acrStart: data.acrStart,
             acrEnd: data.acrEnd,
             language: data.language,
             specialTraining: data.specialTraining,
             designation: data.designation,
-            timeDuration: data.timeDuration,
             salary: data.salary,
             iro: data.iro,
             cro: data.cro,
-            userId: data.userId
-            },
-            {
-                where:{id: id}
-            }
-        );
-        return dbResponse;
+            userId: data.userId,
+            createdAt: new Date(),
+            updatedAt: null,
+        },
+        {where:{id: id}});
+        if(dbResponse == 1){
+            return await EleventhForms.findByPk(id);
+        }
     }
     async delete(id){
         await EleventhForms.destroy({where: {id: id}})
