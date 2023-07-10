@@ -14,7 +14,6 @@ class AssessmentRepository{
         })
     }
 
-
     async creatFormsQuestions(req){
         //return req.formId;
         const form = TenthForms.findByPk( req.formId);
