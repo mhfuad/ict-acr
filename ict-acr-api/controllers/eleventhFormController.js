@@ -14,7 +14,7 @@ class FormController{
         try {
             const user = await repository.getOne(req.params.id);
             if (!user) {
-                return res.status(404).json({ error: 'User not found' });
+                return res.status(404).json({ error: 'Form not found' });
             }
             res.json(user);
         } catch (err) {
