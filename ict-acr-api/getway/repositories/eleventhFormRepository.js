@@ -23,7 +23,7 @@ class eleventhFormRepository{
                 userIdNo: data.userIdNo,
                 highestEducationLevel: data.highestEducationLevel,
                 dateOfBirth: data.dateOfBirth,
-                joiningDate: data.jobDuration,
+                joiningDate: data.joiningDate,
                 departmentExamPass: data.departmentExamPass,
                 departmentExamDate: data.departmentExamDate,
                 jobStatus: data.jobStatus,
@@ -64,8 +64,7 @@ class eleventhFormRepository{
             iro: data.iro,
             cro: data.cro,
             userId: data.userId,
-            createdAt: new Date(),
-            updatedAt: null,
+            updatedAt: new Date(),
         },
         {where:{id: id}});
         if(dbResponse == 1){
