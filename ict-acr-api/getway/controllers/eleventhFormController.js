@@ -46,17 +46,9 @@ class FormController{
     async deleteForm(req, res) {
         try {
             await repository.delete(req.params.id);
-            res.json({ message: 'User deleted successfully' });
+            res.json({ message: 'Form deleted successfully' });
         } catch (err) {
             res.status(500).json({ error: err.message });
-        }
-    }
-
-    async assignRole(req, res){
-        try {
-            res.json("ok");
-        } catch (err){
-            res.status(500).json({ error: err.message})
         }
     }
 }
