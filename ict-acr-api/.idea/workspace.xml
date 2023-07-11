@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef370ebd-5598-49b7-b4de-d3da0369ecc7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/.env.development" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/config/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/controllers/UserController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/migrations/20230608131638-create-permission.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/migrations/20230608131906-create-role.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/models/permission.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/models/role.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/repositories/userRepository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/routes/userRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/seeders/20230608090007-demo-users.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/seeders/20230608131336-demo-roles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/seeders/20230608132202-demo-permissions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/src/database/connection.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/getway/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firstClass/.env" beforeDir="false" afterPath="$PROJECT_DIR$/firstClass/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firstClass/.env.dev" beforeDir="false" afterPath="$PROJECT_DIR$/firstClass/.env.dev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getway/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/getway/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/getway/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getway/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/getway/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getway/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/getway/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="da953063-7e6c-4428-ba85-02b0870fe61b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,69 +23,37 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2QVXfGr6ncEH7k8ihSn3d66Bhmb" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2QSmdqN9nVjq82JhIhaFESNvHbQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/var/www/html/ict-acr/ict-acr-api/getway",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
-    ]
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/getway" />
-      <recent name="$PROJECT_DIR$/thirdClass" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/getway/src" />
-      <recent name="$PROJECT_DIR$/getway/src/database" />
-      <recent name="$PROJECT_DIR$/firstClass" />
-      <recent name="$PROJECT_DIR$/firstClass/src" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ef370ebd-5598-49b7-b4de-d3da0369ecc7" name="Changes" comment="" />
-      <created>1685439827783</created>
+      <changelist id="da953063-7e6c-4428-ba85-02b0870fe61b" name="Changes" comment="" />
+      <created>1685355450960</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1685439827783</updated>
-      <workItem from="1685439830784" duration="7083000" />
-      <workItem from="1685616524409" duration="109000" />
-      <workItem from="1685959009974" duration="8509000" />
-      <workItem from="1686023955612" duration="13745000" />
-      <workItem from="1686047800637" duration="7081000" />
-      <workItem from="1686112070703" duration="19844000" />
-      <workItem from="1686206099514" duration="12676000" />
+      <updated>1685355450960</updated>
+      <workItem from="1685355454530" duration="625000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
