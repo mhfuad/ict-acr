@@ -1,6 +1,7 @@
 
 const { User, Role, Permission } = require('../models');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 class UserRepository{
     constructor() {
@@ -17,8 +18,11 @@ class UserRepository{
     }
 
     async createUser(user) {
+        this.saveBase64Image(user.profileImage,"./images/profile_pic/"+user.idNo+"pic.png")
+        this.saveBase64Image(user.signatureImage,"./images/signature_pic/"+user.idNo+"sig.png")
+
         try{
-           return await User.create({
+            return await User.create({
                 banglaName: user.banglaName,
                 englishName: user.englishName,
                 grade: user.grade,
@@ -48,11 +52,12 @@ class UserRepository{
                 designation: user.designation,
                 telephone: user.telephone,
                 role: user.role,
-                profileImage: user.profileImage,
-                signatureImage: user.signatureImage,
+                profileImage: "./file/profile_pic/"+user.idNo+"pic.png",
+                signatureImage: "./file/signature_pic/"+user.idNo+"sig.png",
                 createdAt: new Date(),
                 updatedAt: null,
             });
+            
         }catch (error){
             console.log(error)
         }
@@ -101,10 +106,23 @@ class UserRepository{
     async deleteUser(id) {
         return await User.destroy({
             where: {
-                idNo: id
+                id: id
             }
         })
     }
+
+    saveBase64Image(base64String, filename) {
+        // Remove the data:image/jpeg;base64 part
+        const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
+        
+        // Convert Base64 to a buffer
+        const imageBuffer = Buffer.from(base64Data, 'base64');
+        
+        // Save the buffer to a file
+        fs.writeFileSync(filename, imageBuffer);
+    }
+
+
 }
 
 module.exports = new UserRepository();

@@ -15,8 +15,9 @@ class UserController{
             const user = await userRepository.getUserById(req.params.id);
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
+            }else{
+                res.json("User create successfully.");
             }
-            res.json(user);
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -25,7 +26,10 @@ class UserController{
     async createUser(req, res) {
         try {
             const user = await userRepository.createUser(req.body);
-            res.status(201).json(user);
+            if(user){
+                res.status(201).json({message: "User create successfull."});
+            }
+            
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -45,18 +49,15 @@ class UserController{
 
     async deleteUser(req, res) {
         try {
-            await userRepository.deleteUser(req.params.id);
-            res.json({ message: 'User deleted successfully' });
+            const re = await userRepository.deleteUser(req.params.id);
+            if(re === 1){
+                res.json({message: "User delete successfull"});
+            }else{
+                res.json({error: re})
+            }
+            
         } catch (err) {
             res.status(500).json({ error: err.message });
-        }
-    }
-
-    async assignRole(req, res){
-        try {
-            res.json({message: "role assign successfully"});
-        } catch (err){
-            res.status(500).json({ error: err.message})
         }
     }
 }
