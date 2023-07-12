@@ -47,10 +47,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },
         {
           banglaName: "mahadi bangla",
@@ -82,10 +80,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },
         {
           banglaName: "Ali Hasan",
@@ -117,10 +113,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },
         {
           banglaName: "Zahidul Islam",
@@ -152,10 +146,40 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
+        },{
+          banglaName: "Abdullah al noman",
+          englishName: "noman",
+          grade: "16th grade",
+          class: "2nd class",
+          idNo: "666666",
+          password: await bcrypt.hash('123123', 10),
+          batchNo: "23",
+          nid: "460299",
+          cadre: "yes",
+          workingArea: "Jatrabari",
+          section: "IT",
+          fatherName: "Abdul Motalib",
+          motherName: "Saleha Begum",
+          dateOfJoin: new Date("12-03-2014"),
+          dateOfBirth: new Date("10-02-1990"),
+          prlStartDate: new Date("01-01-2015"),
+          branch: "Hr",
+          maritalStatus: "Married",
+          highestEducationLevel: "MBA",
+          gender: "Male",
+          bloodGroup: "A+",
+          personalMail: "fuad@gmail.com",
+          officialMail: "fuad@inflack.com",
+          personalNumber: "01750603409",
+          officialNumber: "01914860368",
+          status: "Active",
+          designation: "Sinior Software Engineer",
+          telephone: "027541044",
+          role: "Admin",
+          createdAt: new Date(),
+          updatedAt: null
         },{
           banglaName: "Kamrul Islam",
           englishName: "mahadi english",
@@ -186,10 +210,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },{
           banglaName: "Kazi Ashraf",
           englishName: "mahadi english",
@@ -220,10 +242,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },{
           banglaName: "Ibrahim Tuhin",
           englishName: "mahadi english",
@@ -254,10 +274,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },
         {
           banglaName: "Pritom",
@@ -289,10 +307,8 @@ module.exports = {
           designation: "Sinior Software Engineer",
           telephone: "027541044",
           role: "Admin",
-          profileImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
-          signatureImage: "sfasdfasdfasdfsdfhkashdflkjhdsfkljhasdlkfjhasdkjfskdjflksdjfsdkjfkjsdhflkjdsfsdfhlkjhlkjsdhflkjshdflkjhsdfkljsahdflkjhsdflkjh",
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: null
         },
     ], {});
   },

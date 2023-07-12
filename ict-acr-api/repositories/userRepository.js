@@ -52,8 +52,6 @@ class UserRepository{
                 designation: user.designation,
                 telephone: user.telephone,
                 role: user.role,
-                profileImage: "./file/profile_pic/"+user.idNo+"pic.png",
-                signatureImage: "./file/signature_pic/"+user.idNo+"sig.png",
                 createdAt: new Date(),
                 updatedAt: null,
             });
@@ -93,8 +91,6 @@ class UserRepository{
             designation: user.designation,
             telephone: user.telephone,
             role: user.role,
-            profileImage: user.profileImage,
-            signatureImage: user.signatureImage,
             updatedAt: new Date(),
         },{
             where: {
@@ -111,6 +107,57 @@ class UserRepository{
         })
     }
 
+    async upload_image(user_id, body){
+        const name = new Date().getTime();
+        const user = await User.findOne({
+            where: {
+                idNo: user_id
+            }
+        });
+        if(user.profileImage == null){
+            
+            //save image
+            this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+            this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+            //update in database
+            User.update({
+                    profileImage: "/file/profile_pic/"+ name + "pic.png",
+                    signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                    updatedAt: new Date(),
+                },{
+                    where: {
+                        idNo: user.idNo
+                    }
+                });
+            return {
+                profileImage: "/file/profile_pic/"+ name + "pic.png",
+                signatureImage: "/file/signature_pic/"+ name +"sig.png",
+            };
+        }else {
+            //delete previous image
+            this.deleteImage(user.profileImage);
+            this.deleteImage(user.signatureImage);
+            //save image
+            this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+            this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+            //update in databases
+            User.update({
+                profileImage: "/file/profile_pic/"+ name + "pic.png",
+                signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                updatedAt: new Date(),
+            },{
+                where: {
+                    idNo: user.idNo
+                }
+            });
+            return {
+                profileImage: "/file/profile_pic/"+ name + "pic.png",
+                signatureImage: "/file/signature_pic/"+ name +"sig.png",
+            };
+        }
+        
+    }
+
     saveBase64Image(base64String, filename) {
         // Remove the data:image/jpeg;base64 part
         const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
@@ -120,6 +167,18 @@ class UserRepository{
         
         // Save the buffer to a file
         fs.writeFileSync(filename, imageBuffer);
+    }
+
+    deleteImage(path){
+        var path = path.slice(6);
+        fs.unlink("images/"+path, (error) => {
+            if(error){
+                console.log(error);
+                return 0;
+            }else{
+                return 1;
+            }
+        })
     }
 
 

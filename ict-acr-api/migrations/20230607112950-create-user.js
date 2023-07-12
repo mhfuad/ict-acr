@@ -102,10 +102,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       profileImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       signatureImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:true
       },
       createdAt: {
         allowNull: true,

@@ -16,7 +16,7 @@ class UserController{
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
             }else{
-                res.json("User create successfully.");
+                res.json(user);
             }
         } catch (err) {
             res.status(500).json({ error: err.message });
@@ -38,10 +38,11 @@ class UserController{
     async updateUser(req, res) {
         try {
             const user = await userRepository.updateUser(req.params.id, req.body);
-            if (!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
-            res.json({message: "user update successfully"});
+            // if (!user) {
+            //     return res.status(404).json({ error: 'User not found' });
+            // }
+            // res.json({message: "user update successfully"});
+            res.json(user);
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
@@ -59,6 +60,11 @@ class UserController{
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
+    }
+
+    async upload_image(req, res) {
+        const response = await userRepository.upload_image(req.params.user_id, req.body);
+        res.json(response);
     }
 }
 

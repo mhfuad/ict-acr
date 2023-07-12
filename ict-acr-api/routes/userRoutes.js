@@ -18,5 +18,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     await userController.deleteUser(req, res)
 });
+router.post("/upload_image/:user_id", async(req, res) => {
+    await userController.upload_image(req, res);
+})
 
 module.exports = router;
