@@ -2,6 +2,11 @@ const { EleventhForms } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const { Assessment } = require('../models')
+
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 class eleventhFormRepository{
 
     async allForms(req){
@@ -34,7 +39,7 @@ class eleventhFormRepository{
                 userId: data.userId,
                 createdAt: new Date(),
                 updatedAt: null,
-            });
+            });  
             return form;
         }catch (err){
             console.log(err)
@@ -69,6 +74,16 @@ class eleventhFormRepository{
     }
     async delete(id){
         await EleventhForms.destroy({where: {id: id}})
+    }
+
+    sendNotificationToUser(userId, message) {
+        const socketId = connectedUsers.get(userId);
+        if (socketId) {
+          io.to(socketId).emit('notification', message);
+          console.log(`Notification sent to User ${userId}`);
+        } else {
+          console.log(`User ${userId} is not connected`);
+        }
     }
 }
 

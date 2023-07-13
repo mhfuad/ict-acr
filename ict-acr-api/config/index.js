@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== "prod") {
 
 module.exports = {
     PORT: process.env.PORT,
+    SOCKET_PORT: process.env.SOCKET_PORT,
     APP_SECRET: process.env.APP_SECRET,
     SMS_URL: process.env.SMS_URL,
     KEY: process.env.SMS_URL,
