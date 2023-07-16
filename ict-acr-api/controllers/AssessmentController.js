@@ -9,6 +9,7 @@ class AssessmentController{
             res.status(500).json({ error: err.message });
         }
     }
+    
     async getQuestionsOfForm(req, res) {
         try {
             const data = await repository.getFormsQuestions(req.params.formId);
