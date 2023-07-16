@@ -14,6 +14,7 @@ const userRoutes = require('../routes/userRoutes')
 const roleRoutes = require('../routes/roleRoutes')
 const zoneRoutes = require('../routes/zoneRoutes')
 const eleventhForm = require('../routes/eleventhFormRoutes')
+const eleventhAssessmentRoute = require('../routes/eleventhAssessmentRoutes')
 const reporterRoutes = require('../routes/reporterRoutes')
 
 const StartServer = () => {
@@ -46,6 +47,7 @@ const StartServer = () => {
     app.use('/role', verifyToken, roleRoutes)
     app.use('/zone', verifyToken, zoneRoutes)
     app.use('/eleventhForm', eleventhForm)
+    app.use('/eleventh_assessment', eleventhAssessmentRoute)
     app.use('/reporter', reporterRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
