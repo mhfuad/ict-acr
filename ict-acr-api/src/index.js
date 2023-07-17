@@ -15,6 +15,7 @@ const roleRoutes = require('../routes/roleRoutes')
 const zoneRoutes = require('../routes/zoneRoutes')
 const eleventhForm = require('../routes/eleventhFormRoutes')
 const eleventhAssessmentRoute = require('../routes/eleventhAssessmentRoutes')
+const iroEvaluationRouts = require('../routes/iroEvaluationRoutes')
 const reporterRoutes = require('../routes/reporterRoutes')
 
 const StartServer = () => {
@@ -46,9 +47,10 @@ const StartServer = () => {
     app.use('/users', verifyToken, userRoutes)
     app.use('/role', verifyToken, roleRoutes)
     app.use('/zone', verifyToken, zoneRoutes)
-    app.use('/eleventhForm', eleventhForm)
-    app.use('/eleventh_assessment', eleventhAssessmentRoute)
-    app.use('/reporter', reporterRoutes)
+    app.use('/eleventhForm', verifyToken, eleventhForm)
+    app.use('/eleventh_assessment', verifyToken, eleventhAssessmentRoute)
+    app.use('/iro_evaluation', iroEvaluationRouts)
+    app.use('/reporter',verifyToken, reporterRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
     app.listen(PORT, () => {

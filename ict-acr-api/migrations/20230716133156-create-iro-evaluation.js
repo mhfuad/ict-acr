@@ -10,7 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       form_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique:true
       },
       user_id: {
         type: Sequelize.INTEGER
@@ -18,7 +19,7 @@ module.exports = {
       evaluation_value: {
         type: Sequelize.INTEGER
       },
-      decition: {
+      decision: {
         type: Sequelize.INTEGER
       },
       cro: {

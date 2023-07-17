@@ -49,13 +49,7 @@ class EleventhAssessmentController{
     //     }
     // }
 
-    // async assignRole(req, res){
-    //     try {
-    //         res.json("ok");
-    //     } catch (err){
-    //         res.status(500).json({ error: err.message})
-    //     }
-    // }
+
 }
 
 module.exports = new EleventhAssessmentController();
