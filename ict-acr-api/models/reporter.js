@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     cro: DataTypes.INTEGER,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
+    joining_date_current_position: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Reporter',

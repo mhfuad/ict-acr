@@ -7,13 +7,26 @@ const config = require('../config/index')
 
 class ReporterRepository{
 
-    async assignReporter(req){
-        try{
-            const data = await Reporter.create({user_id: req.params.user, iro: req.body.iro, cro: req.body.cro, start_date: req.body.start_date, end_date: req.body.start_date})
-            return data;
-        }catch (e){
-            return e;
-        }
+    async create(body){
+        // const have = Reporter.findOne({
+        //     where: {
+        //         user_id: body.user_id,
+        //         start_date: body.start_date,
+        //         end_date: body.end_date
+        //     }
+        // });
+        const [results, metadata] = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
+            replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
+            type: sequelize.QueryTypes.SELECT,
+            model: Reporter,
+        })
+        return results;
+        // try{
+        //     const data = await Reporter.create(body);
+        //     return data;
+        // }catch (e){
+        //     return e;
+        // }
     }
 
     async getIRO(user){
@@ -39,6 +52,49 @@ class ReporterRepository{
                 }
             })
             return data;
+        }catch (e){
+            return e;
+        }
+    }
+
+    async all(){
+        try{
+            const data = await Reporter.findAll({attributes: { exclude: ['createdAt','updatedAt'] }})
+            return data;
+        }catch (e){
+            return e;
+        }
+    }
+    
+    async delete(id){
+        try{
+            const data = await Reporter.destroy({where: {id: id}})
+            if(data == 1){
+                return "Reporter delete successfull.";
+            }
+            
+        }catch (e){
+            return e;
+        }
+    }
+
+    async update(id, data){
+        try{
+            const db_res = await Reporter.update({
+                user_id: data.user_id,
+                iro: data.iro,
+                cro: data.cro,
+                start_date: data.start_date,
+                end_date: data.end_date,
+                joining_date_current_position: data.joining_date_current_position
+                },
+                {
+                    where:{id:id}
+                }
+            );
+            if(db_res == 1){
+                return "Reporter update successfull.";
+            }
         }catch (e){
             return e;
         }

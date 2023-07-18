@@ -24,6 +24,9 @@ module.exports = {
       end_date: {
         type: Sequelize.DATE
       },
+      joining_date_current_position: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

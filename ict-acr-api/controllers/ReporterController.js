@@ -1,9 +1,9 @@
 const repository = require('../repositories/reporterRepository')
 class ReporterController{
 
-    async assignReporter(req, res){
+    async create(req, res){
         try {
-            var response = await repository.assignReporter(req);
+            var response = await repository.create(req.body);
             res.json(response);
         } catch (err){
             res.status(500).json({ error: err.message})
@@ -27,6 +27,33 @@ class ReporterController{
             res.json(response);
         } catch (err){
             res.status(500).json({ error: err.message})
+        }
+    }
+
+    async getAllReporters(req, res){
+        try{
+            var response = await repository.all();
+            res.json(response);
+        } catch (err){
+            res.status(500).json({error: err})
+        }
+    }
+
+    async deleteReporter(req, res){
+        try{
+            var response = await repository.delete(req.params.id);
+            res.json(response);
+        } catch (err){
+            res.status(500).json({error: err})
+        }
+    }
+
+    async updateReporter(req, res) {
+        try {
+            const data = await repository.update(req.params.id, req.body);
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
         }
     }
 }
