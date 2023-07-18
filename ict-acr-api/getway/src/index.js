@@ -12,8 +12,9 @@ const authRoutes = require('../routes/authRoute')
 const userRoutes = require('../routes/userRoutes')
 const roleRoutes = require('../routes/roleRoutes')
 const zoneRoutes = require('../routes/zoneRoutes')
+const departmentRoutes = require('../routes/departmentRoutes')
 const eleventhForm = require('../routes/eleventhFormRoutes')
-const userIroCroRoutes = require('../routes/userIroCroRoutes')
+const sectionRoutes = require('../routes/sectionRoutes')
 
 const StartServer = () => {
     const app = express();
@@ -44,8 +45,9 @@ const StartServer = () => {
     app.use('/users', verifyToken, userRoutes)
     app.use('/role', verifyToken, roleRoutes)
     app.use('/zone', verifyToken, zoneRoutes)
+    app.use('/department', verifyToken, departmentRoutes)
     app.use('/eleventhForm', eleventhForm)
-    app.use('/user-iro-cro', verifyToken, userIroCroRoutes)
+    app.use('/section', verifyToken, sectionRoutes)
 
     app.listen(PORT, () => {
         console.log(`getWay is running on port ${PORT}`)
