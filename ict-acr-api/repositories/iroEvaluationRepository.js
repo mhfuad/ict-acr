@@ -24,7 +24,7 @@ class IroEvaluationRepository{
         }
     }
 
-    async update(id, data){
+    async update(form_id, data){
         const dbResponse = await IRO_evaluation.update({
             user_id: data.user_id,
             evaluation_value: data.evaluation_value,
@@ -33,13 +33,13 @@ class IroEvaluationRepository{
             cro_date: data.cro_date
             },
             {
-                where:{form_id:id}
+                where:{form_id:form_id}
             }
         );
         return dbResponse;
     }
-    async delete(id){
-        await IRO_evaluation.destroy({where: {id: id}})
+    async delete(idform_id){
+        await IRO_evaluation.destroy({where: {form_id: form_id}})
     }
 }
 
