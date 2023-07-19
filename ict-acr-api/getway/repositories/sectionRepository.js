@@ -15,6 +15,7 @@ class SectionRepository{
         try{
             return await Section.create({
                 name: req.name,
+                name_bn: req.name_bn,
                 code: req.code,
                 department_id: req.department_id,
                 createdAt: new Date(),
@@ -30,6 +31,7 @@ class SectionRepository{
         return Section.update({
             name: section.name,
             code: section.code,
+            name_bn: section.name_bn,
             department_id: section.department_id,
             createdAt: new Date(),
             updatedAt: new Date(),

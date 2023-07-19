@@ -15,6 +15,7 @@ const zoneRoutes = require('../routes/zoneRoutes')
 const departmentRoutes = require('../routes/departmentRoutes')
 const eleventhForm = require('../routes/eleventhFormRoutes')
 const sectionRoutes = require('../routes/sectionRoutes')
+const designationRoutes = require('../routes/designationRoutes')
 
 const StartServer = () => {
     const app = express();
@@ -48,6 +49,7 @@ const StartServer = () => {
     app.use('/department', verifyToken, departmentRoutes)
     app.use('/eleventhForm', eleventhForm)
     app.use('/section', verifyToken, sectionRoutes)
+    app.use('/designation', verifyToken, designationRoutes)
 
     app.listen(PORT, () => {
         console.log(`getWay is running on port ${PORT}`)

@@ -15,6 +15,7 @@ class DepartmentRepository{
         try{
             return await Department.create({
                 name: req.name,
+                name_bn: req.name_bn,
                 code: req.code,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -29,6 +30,7 @@ class DepartmentRepository{
         return Department.update({
             name: department.name,
             code: department.code,
+            name_bn: department.name_bn,
             createdAt: new Date(),
             updatedAt: new Date(),
         },{

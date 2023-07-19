@@ -16,16 +16,19 @@ module.exports = {
     await queryInterface.bulkInsert('Sections', [
       {
         name: 'Revenue Section',
+        name_bn: 'রাজস্ব শাখা',
         code: "RSCE",
         department_id: 2
       },
       {
         name: 'Development Section',
+        name_bn: 'উন্নয়ন শাখা',
         code: "DSEC",
         department_id: 2
       },
       {
         name: 'Accounts section',
+        name_bn: 'হিসাব শাখা',
         code: "ASC",
         department_id: 2
       }
