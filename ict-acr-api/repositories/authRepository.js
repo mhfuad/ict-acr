@@ -9,14 +9,16 @@ const axios = require('axios');
 class AuthRepository{
 
     async login(req){
+        
         const user = await User.findOne({where: {idNo: req.user_id}})
         if(user === null){
             return "not_found";
         }
-        const passwordMatch = await bcrypt.compare(req.password, user.password);
-        if(!passwordMatch){
-            return "not_match";
-        }
+        //password match skipped
+        // const passwordMatch = await bcrypt.compare(req.password, user.password);
+        // if(!passwordMatch){
+        //     return "not_match";
+        // }
         
         const otp = Math.floor(Math.random() * 9999) + 1;
 
@@ -25,7 +27,10 @@ class AuthRepository{
                 id: user.id
             }
         })
-        return await this.sendSMS(user.personalNumber, otp);
+        if(req.email){
+            this.sendMail(user.personalMail, otp);
+        }
+        return await this.sendSMS(user.personalNumber,user.personalMail, otp);
     }
 
     async sendSMS(user_number, otp){
@@ -53,7 +58,7 @@ class AuthRepository{
                 return error
             });
         if(sms_res.code == 200){
-            return "OTP send to your number";
+            return `OTP send to 01*****${user_number.substring(user_number.length - 4)} number`;
         }else{
             return "Something is wrong.";
         }
@@ -74,6 +79,10 @@ class AuthRepository{
         const secretKey = config.APP_SECRET;
 
         return jwt.sign({userForToken}, secretKey)
+    }
+
+    sendMail(address, otp){
+
     }
 }
 

@@ -8,25 +8,19 @@ const config = require('../config/index')
 class ReporterRepository{
 
     async create(body){
-        // const have = Reporter.findOne({
-        //     where: {
-        //         user_id: body.user_id,
-        //         start_date: body.start_date,
-        //         end_date: body.end_date
-        //     }
-        // });
-        const [results, metadata] = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
-            replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
-            type: sequelize.QueryTypes.SELECT,
-            model: Reporter,
-        })
-        return results;
-        // try{
-        //     const data = await Reporter.create(body);
-        //     return data;
-        // }catch (e){
-        //     return e;
-        // }
+        
+        // const [results, metadata] = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
+        //     replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
+        //     type: sequelize.QueryTypes.SELECT,
+        //     model: Reporter,
+        // })
+        // return results;
+        try{
+            const data = await Reporter.create(body);
+            return data;
+        }catch (e){
+            return e;
+        }
     }
 
     async getIRO(user){
