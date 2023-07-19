@@ -5,6 +5,7 @@ const { sequelize } = require('../models')
 const jwt = require('jsonwebtoken');
 const config = require('../config/index')
 const axios = require('axios');
+const nodemailer = require("nodemailer")
 
 class AuthRepository{
 
@@ -27,10 +28,13 @@ class AuthRepository{
                 id: user.id
             }
         })
+        const send_sms = await this.sendSMS(user.personalNumber, otp);
+        //return `OTP send to 01*****${user_number.substring(user_number.length - 4)} number`;
         if(req.email){
             this.sendMail(user.personalMail, otp);
+            return `OTP send to ${send_sms} number and ${user.personalMail} email`;
         }
-        return await this.sendSMS(user.personalNumber,user.personalMail, otp);
+        return `OTP send to ${send_sms} number`;
     }
 
     async sendSMS(user_number, otp){
@@ -58,7 +62,7 @@ class AuthRepository{
                 return error
             });
         if(sms_res.code == 200){
-            return `OTP send to 01*****${user_number.substring(user_number.length - 4)} number`;
+            return `01*****${user_number.substring(user_number.length - 4)}`;
         }else{
             return "Something is wrong.";
         }
@@ -82,7 +86,29 @@ class AuthRepository{
     }
 
     sendMail(address, otp){
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: config.EMAIL_USER,
+                pass: config.EMAIL_PASSWORD
+            }
+        })
 
+        const mailerOption = {
+            from: "fuad.inflack@gmail.com",
+            to: address,
+            subject: "Varification",
+            text: `Your varification code is ${otp}`
+        }
+
+        transporter.sendMail(mailerOption, (error, info)=> {
+            if(error){
+                console.log(error)
+                return 0
+            }else{
+                return 1
+            }
+        })
     }
 }
 

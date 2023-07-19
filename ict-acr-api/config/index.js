@@ -14,5 +14,7 @@ module.exports = {
     SMS_URL: process.env.SMS_URL,
     KEY: process.env.SMS_URL,
     VALUE: process.env.VALUE,
-    SENDER_ID: process.env.SENDER_ID
+    SENDER_ID: process.env.SENDER_ID,
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD
 };
