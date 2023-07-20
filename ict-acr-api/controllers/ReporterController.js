@@ -20,6 +20,16 @@ class ReporterController{
         }
     }
 
+    async getReporter(req, res){
+        try {
+            var response = await repository.getIRO(req.params.user_id);
+            console.info(response)
+            res.json(response);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
     async getCRO(req, res){
         try {
             var response = await repository.getCRO(req.params.user);

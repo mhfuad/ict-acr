@@ -72,6 +72,17 @@ class ReporterRepository{
         }
     }
 
+    async getReporter(user_id){
+        try{
+            const data = await Reporter.findAll({where: {user_id: user_id}})
+            if(data){
+                return data;
+            }
+        }catch (e){
+            return e;
+        }
+    }
+
     async update(id, data){
         try{
             const db_res = await Reporter.update({

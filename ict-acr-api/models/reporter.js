@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     cro: DataTypes.INTEGER,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
+    gread: DataTypes.INTEGER,
+    designation: DataTypes.INTEGER,
     joining_date_current_position: DataTypes.DATE
   }, {
     sequelize,

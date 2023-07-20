@@ -19,6 +19,10 @@ router.get('/', async(req, res) => {
     await controller.getAllReporters(req, res);
 })
 
+router.get('/user/:user_id', async(req, res) => {
+    await controller.getAllReporters(req, res);
+})
+
 router.put('/:id', async(req, res) => {
     await controller.updateReporter(req, res);
 })

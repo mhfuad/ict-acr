@@ -24,6 +24,13 @@ module.exports = {
       end_date: {
         type: Sequelize.DATE
       },
+      gread:{
+        type: Sequelize.INTEGER,
+        allowNull:false
+      },
+      designation: {
+        type: Sequelize.INTEGER
+      },
       joining_date_current_position: {
         type: Sequelize.DATE
       },
