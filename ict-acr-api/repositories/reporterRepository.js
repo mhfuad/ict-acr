@@ -16,6 +16,7 @@ class ReporterRepository{
         // })
         // return results;
         try{
+            body.submited = false;
             const data = await Reporter.create(body);
             return data;
         }catch (e){

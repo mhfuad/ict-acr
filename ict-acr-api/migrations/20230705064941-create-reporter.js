@@ -34,6 +34,9 @@ module.exports = {
       joining_date_current_position: {
         type: Sequelize.DATE
       },
+      submited:{
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

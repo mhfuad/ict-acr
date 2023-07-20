@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     end_date: DataTypes.DATE,
     gread: DataTypes.INTEGER,
     designation: DataTypes.INTEGER,
-    joining_date_current_position: DataTypes.DATE
+    joining_date_current_position: DataTypes.DATE,
+    submited: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Reporter',
