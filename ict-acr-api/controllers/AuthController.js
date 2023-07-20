@@ -1,4 +1,5 @@
 const repository = require('../repositories/authRepository')
+const acceRepository = require('../repositories/accessLogRepository')
 class AuthController{
 
     async authenticateUser(req, res){
@@ -9,6 +10,7 @@ class AuthController{
             }else if(message === "not_match"){
                 res.status(404).json({error: "Credential not match"});
             }else {
+                console.log(req.headers['x-forwarded-for']);
                 res.json({message});
             }
         } catch (err){

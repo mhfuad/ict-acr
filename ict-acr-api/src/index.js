@@ -17,6 +17,7 @@ const eleventhForm = require('../routes/eleventhFormRoutes')
 const eleventhAssessmentRoute = require('../routes/eleventhAssessmentRoutes')
 const iroEvaluationRouts = require('../routes/iroEvaluationRoutes')
 const croEvaluationRouts = require('../routes/croEvaluationRoutes')
+const accessLogRoutes = require('../routes/accessLogRoutes')
 const reporterRoutes = require('../routes/reporterRoutes')
 
 const StartServer = () => {
@@ -53,6 +54,7 @@ const StartServer = () => {
     app.use('/iro_evaluation', iroEvaluationRouts)
     app.use('/cro_evaluation', croEvaluationRouts)
     app.use('/reporter',verifyToken, reporterRoutes)
+    app.use('/access_log', accessLogRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
     app.listen(PORT, () => {
