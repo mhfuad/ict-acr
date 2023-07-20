@@ -72,9 +72,9 @@ class ReporterRepository{
         }
     }
 
-    async getReporter(user_id){
+    async getReporterByUser(user_id){
         try{
-            const data = await Reporter.findAll({where: {user_id: user_id}})
+            const data = await Reporter.findAll({where: {user_id: user_id}, attributes: { exclude: ['createdAt','updatedAt']}})
             if(data){
                 return data;
             }

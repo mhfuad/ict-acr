@@ -20,7 +20,7 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/user/:user_id', async(req, res) => {
-    await controller.getAllReporters(req, res);
+    await controller.getReporterByUser(req, res);
 })
 
 router.put('/:id', async(req, res) => {

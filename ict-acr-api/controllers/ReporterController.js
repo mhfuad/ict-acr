@@ -66,6 +66,15 @@ class ReporterController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async getReporterByUser(req, res){
+        try{
+            var response = await repository.getReporterByUser(req.params.user_id);
+            res.json(response);
+        } catch (err){
+            res.status(500).json({error: err})
+        }
+    }
 }
 
 module.exports = new ReporterController();
