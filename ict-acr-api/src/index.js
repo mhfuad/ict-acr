@@ -19,6 +19,9 @@ const iroEvaluationRouts = require('../routes/iroEvaluationRoutes')
 const croEvaluationRouts = require('../routes/croEvaluationRoutes')
 const accessLogRoutes = require('../routes/accessLogRoutes')
 const reporterRoutes = require('../routes/reporterRoutes')
+const sectionRoutes = require('../routes/sectionRoutes')
+const designationRoutes = require('../routes/designationRoutes')
+const departmentRoutes = require('../routes/departmentRoutes')
 
 const StartServer = () => {
     const app = express();
@@ -55,6 +58,9 @@ const StartServer = () => {
     app.use('/cro_evaluation', croEvaluationRouts)
     app.use('/reporter',verifyToken, reporterRoutes)
     app.use('/access_log', accessLogRoutes)
+    app.use('/department', verifyToken, departmentRoutes)
+    app.use('/section', verifyToken, sectionRoutes)
+    app.use('/designation', verifyToken, designationRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
     app.listen(PORT, () => {

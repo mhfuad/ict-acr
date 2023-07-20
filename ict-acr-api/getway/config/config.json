@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "1nFlack@",
+    "password": "12345678",
     "database": "ict_acr",
     "host": "127.0.0.1",
     "dialect": "mysql"
