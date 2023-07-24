@@ -10,7 +10,12 @@ class AuthController{
             }else if(message === "not_match"){
                 res.status(404).json({error: "Credential not match"});
             }else {
-                console.log(req.headers['x-forwarded-for']);
+                console.log(req.body);
+                // acceRepository.create({
+                //     "ip":"192.168.0.1",
+                //     "user_id":req.body.user_id,
+                //     "date":"2023-07-12 06:43:39"
+                // })
                 res.json({message});
             }
         } catch (err){

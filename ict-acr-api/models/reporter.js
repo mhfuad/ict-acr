@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Reporter.init({
     user_id: DataTypes.INTEGER,
-    iro: DataTypes.INTEGER,
-    cro: DataTypes.INTEGER,
+    iro: DataTypes.STRING,
+    cro: DataTypes.STRING,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
     gread: DataTypes.INTEGER,

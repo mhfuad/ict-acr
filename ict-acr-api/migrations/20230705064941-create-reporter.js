@@ -13,10 +13,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       iro: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       cro: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       start_date: {
         type: Sequelize.DATE
