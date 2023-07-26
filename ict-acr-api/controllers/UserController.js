@@ -64,7 +64,12 @@ class UserController{
 
     async upload_image(req, res) {
         const response = await userRepository.upload_image(req.params.user_id, req.body);
-        res.json(response);
+        if(response == "no_user"){
+            res.status(500).json("No User Found.")
+        }else{
+            res.json(response);
+        }
+        
     }
 }
 

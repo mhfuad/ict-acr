@@ -114,47 +114,161 @@ class UserRepository{
                 idNo: user_id
             }
         });
-        if(user.profileImage == null){
-            
-            //save image
-            this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
-            this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
-            //update in database
-            User.update({
-                    profileImage: "/file/profile_pic/"+ name + "pic.png",
-                    signatureImage: "/file/signature_pic/"+ name + "sig.png",
-                    updatedAt: new Date(),
-                },{
-                    where: {
-                        idNo: user.idNo
-                    }
-                });
-            return {
-                profileImage: "/file/profile_pic/"+ name + "pic.png",
-                signatureImage: "/file/signature_pic/"+ name +"sig.png",
-            };
-        }else {
-            //delete previous image
-            this.deleteImage(user.profileImage);
-            this.deleteImage(user.signatureImage);
-            //save image
-            this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
-            this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
-            //update in databases
-            User.update({
-                profileImage: "/file/profile_pic/"+ name + "pic.png",
-                signatureImage: "/file/signature_pic/"+ name + "sig.png",
-                updatedAt: new Date(),
-            },{
-                where: {
-                    idNo: user.idNo
-                }
-            });
-            return {
-                profileImage: "/file/profile_pic/"+ name + "pic.png",
-                signatureImage: "/file/signature_pic/"+ name +"sig.png",
-            };
+        if(!user){
+            return "no_user";
         }
+        switch(true){
+            case body.hasOwnProperty('profile') && body.hasOwnProperty('signature'):
+                if(user.profileImage == null && user.signature == null){
+                    //save image
+                    this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+                    this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+                    //update in database
+                    User.update({
+                            profileImage: "/file/profile_pic/"+ name + "pic.png",
+                            signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                            updatedAt: new Date(),
+                        },{
+                            where: {
+                                idNo: user_id
+                            }
+                        });
+                    return {
+                        profileImage: "/file/profile_pic/"+ name + "pic.png",
+                        signatureImage: "/file/signature_pic/"+ name +"sig.png",
+                    };
+                }else {
+                    //delete previous image
+                    this.deleteImage(user.profileImage);
+                    this.deleteImage(user.signatureImage);
+                    //save image
+                    this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+                    this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+                    //update in databases
+                    User.update({
+                        profileImage: "/file/profile_pic/"+ name + "pic.png",
+                        signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                        updatedAt: new Date(),
+                    },{
+                        where: {
+                            idNo: user_id
+                        }
+                    });
+                    return {
+                        profileImage: "/file/profile_pic/"+ name + "pic.png",
+                        signatureImage: "/file/signature_pic/"+ name +"sig.png",
+                    };
+                }
+            case body.hasOwnProperty('profile'):
+                if(user.profileImage == null){
+                    //save image
+                    this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+                    //update in database
+                    User.update({
+                            profileImage: "/file/profile_pic/"+ name + "pic.png",
+                            updatedAt: new Date(),
+                        },{
+                            where: {
+                                idNo: user_id
+                            }
+                        });
+                    return {
+                        profileImage: "/file/profile_pic/"+ name + "pic.png"
+                    };
+                }else {
+                    //delete previous image
+                    this.deleteImage(user.profileImage);
+                    //save image
+                    this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+                    //update in databases
+                    User.update({
+                        profileImage: "/file/profile_pic/"+ name + "pic.png",
+                        updatedAt: new Date(),
+                    },{
+                        where: {
+                            idNo: user_id
+                        }
+                    });
+                    return {
+                        profileImage: "/file/profile_pic/"+ name + "pic.png",
+                    };
+                }
+            case body.hasOwnProperty('signature'):
+                if(user.signature == null){
+                    //save image
+                    this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+                    //update in database
+                    User.update({
+                            signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                            updatedAt: new Date(),
+                        },{
+                            where: {
+                                idNo: user_id
+                            }
+                        });
+                    return {
+                        signatureImage: "/file/signature_pic/"+ name +"sig.png",
+                    };
+                }else {
+                    //delete previous image
+                    this.deleteImage(user.signatureImage);
+                    //save image
+                    this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+                    //update in databases
+                    User.update({
+                        signatureImage: "/file/signature_pic/"+ name + "sig.png",
+                        updatedAt: new Date(),
+                    },{
+                        where: {
+                            idNo: user_id
+                        }
+                    });
+                    return {
+                        signatureImage: "/file/signature_pic/"+ name +"sig.png",
+                    };
+                }
+        }
+        // if(user.profileImage == null){
+            
+        //     //save image
+        //     this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+        //     this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+        //     //update in database
+        //     User.update({
+        //             profileImage: "/file/profile_pic/"+ name + "pic.png",
+        //             signatureImage: "/file/signature_pic/"+ name + "sig.png",
+        //             updatedAt: new Date(),
+        //         },{
+        //             where: {
+        //                 idNo: user.idNo
+        //             }
+        //         });
+        //     return {
+        //         profileImage: "/file/profile_pic/"+ name + "pic.png",
+        //         signatureImage: "/file/signature_pic/"+ name +"sig.png",
+        //     };
+        // }else {
+        //     //delete previous image
+        //     this.deleteImage(user.profileImage);
+        //     this.deleteImage(user.signatureImage);
+        //     //save image
+        //     this.saveBase64Image(body.profile,"./images/profile_pic/"+ name + "pic.png")
+        //     this.saveBase64Image(body.signature,"./images/signature_pic/"+ name + "sig.png")
+        //     //update in databases
+        //     User.update({
+        //         profileImage: "/file/profile_pic/"+ name + "pic.png",
+        //         signatureImage: "/file/signature_pic/"+ name + "sig.png",
+        //         updatedAt: new Date(),
+        //     },{
+        //         where: {
+        //             idNo: user.idNo
+        //         }
+        //     });
+        //     return {
+        //         profileImage: "/file/profile_pic/"+ name + "pic.png",
+        //         signatureImage: "/file/signature_pic/"+ name +"sig.png",
+        //     };
+        // }
         
     }
 
