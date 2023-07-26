@@ -74,14 +74,44 @@ class ReporterRepository{
     }
 
     async getReporterByUser(user_id){
-        try{
-            const data = await Reporter.findAll({where: {user_id: user_id}, attributes: { exclude: ['createdAt','updatedAt']}})
-            if(data){
-                return data;
-            }
-        }catch (e){
-            return e;
+        try {
+            const results = await sequelize.query(`SELECT 
+            r.iro, r.cro, r.start_date, r.end_date, r.gread, r.designation, r.joining_date_current_position, r.submited, iu.banglaName as iro_bangla_name, iu.englishName as iro_name, cu.banglaName as cro_bangla_name, cu.englishName as cro_name
+            FROM 
+                Reporters as r 
+            JOIN Users as iu
+                ON r.iro = iu.idNo
+            JOIN Users as cu
+                ON r.cro = cu.idNo
+            where r.user_id = :user_id`,{
+                replacements: {user_id:user_id},
+                type: sequelize.QueryTypes.SELECT,
+                model: User
+            })
+            return results
+        } catch (error) {
+            console.error('Error:', error.message);
+            return error.message
         }
+        /*
+        SELECT 
+        r.iro, r.cro, r.start_date, r.end_date, r.gread, r.designation, r.joining_date_current_position, r.submited, iu.`banglaName` as iro_bangla_name, iu.`englishName` as iro_name, cu.`banglaName` as cro_bangla_name, cu.`englishName` as cro_name
+        FROM `Reporters` as r 
+        JOIN `Users` as iu
+        ON r.iro = iu.`idNo` 
+        JOIN `Users` as cu
+        ON r.cro = cu.`idNo`
+        where r.user_id = "111111" LIMIT 0,100
+
+        */
+        // try{
+        //     const data = await Reporter.findAll({where: {user_id: user_id}, attributes: { exclude: ['createdAt','updatedAt']}})
+        //     if(data){
+        //         return data;
+        //     }
+        // }catch (e){
+        //     return e;
+        // }
     }
 
     async update(id, data){
@@ -92,6 +122,8 @@ class ReporterRepository{
                 cro: data.cro,
                 start_date: data.start_date,
                 end_date: data.end_date,
+                gread: data.gread,
+                designation: data.designation,
                 joining_date_current_position: data.joining_date_current_position
                 },
                 {

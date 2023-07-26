@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     form_id: DataTypes.INTEGER,
     evaluation: DataTypes.INTEGER,
     comment: DataTypes.STRING,
-    cro: DataTypes.INTEGER,
+    cro: DataTypes.STRING,
     cro_date: DataTypes.DATE
   }, {
     sequelize,

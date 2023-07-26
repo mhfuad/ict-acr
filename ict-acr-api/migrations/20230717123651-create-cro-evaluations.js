@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       cro: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       cro_date: {
         type: Sequelize.DATE

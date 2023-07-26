@@ -14,7 +14,7 @@ module.exports = {
         unique:true
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       evaluation_value: {
         type: Sequelize.INTEGER
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cro: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       cro_date: {
         type: Sequelize.DATE

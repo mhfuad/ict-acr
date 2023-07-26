@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   IRO_evaluation.init({
     form_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER,
+    user_id: DataTypes.STRING,
     evaluation_value: DataTypes.INTEGER,
     decision: DataTypes.INTEGER,
-    cro: DataTypes.INTEGER,
+    cro: DataTypes.STRING,
     cro_date: DataTypes.DATE
   }, {
     sequelize,
