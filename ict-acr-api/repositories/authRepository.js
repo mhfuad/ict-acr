@@ -28,21 +28,21 @@ class AuthRepository{
                 id: user.id
             }
         })
-        const send_sms = await this.sendSMS(user.personalNumber, otp);
+        const send_sms = await this.sendSMS(user.personalNumber, "Your varification code is "+otp);
         //return `OTP send to 01*****${user_number.substring(user_number.length - 4)} number`;
         if(req.email){
-            this.sendMail(user.personalMail, otp);
-            return `OTP send to ${send_sms} number and ${user.personalMail} email`;
+            this.sendMail(user.personalMail, "Your varification code is"+otp);
+            return `OTP send to 01*****${user.personalNumber.substring(user.personalNumber.length - 4)} number and ${user.personalMail} email`;
         }
-        return `OTP send to ${send_sms} number`;
+        return `OTP send to 01*****${user.personalNumber.substring(user.personalNumber.length - 4)} number`;
     }
 
-    async sendSMS(user_number, otp){
+    async sendSMS(user_number, message){
         const url = config.SMS_URL;
         const values = config.VALUE;
         const sender_id = config.SENDER_ID;
         
-        var data = `{\n    "sender_id": "${sender_id}","receiver": "${user_number}",\n    "message": "Your varification code is ${otp}.",\n    "remove_duplicate": true\n}`;
+        var data = `{\n    "sender_id": "${sender_id}","receiver": "${user_number}",\n    "message": "${message}",\n    "remove_duplicate": true\n}`;
 
         var conf = {
             method: 'post',
@@ -62,7 +62,7 @@ class AuthRepository{
                 return error
             });
         if(sms_res.code == 200){
-            return `01*****${user_number.substring(user_number.length - 4)}`;
+            return true;
         }else{
             return "Something is wrong.";
         }
@@ -85,7 +85,7 @@ class AuthRepository{
         return jwt.sign({userForToken}, secretKey)
     }
 
-    sendMail(address, otp){
+    sendMail(address, message){
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -98,7 +98,7 @@ class AuthRepository{
             from: "fuad.inflack@gmail.com",
             to: address,
             subject: "Varification",
-            text: `Your varification code is ${otp}`
+            text: `${message}`
         }
 
         transporter.sendMail(mailerOption, (error, info)=> {
