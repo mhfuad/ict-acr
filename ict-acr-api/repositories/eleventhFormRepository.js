@@ -1,7 +1,7 @@
 const { EleventhForms } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
-const { Assessment } = require('../models')
+const { Reporter } = require('../models')
 
 const app = require('express')();
 const http = require('http').Server(app);
@@ -37,9 +37,15 @@ class eleventhFormRepository{
                 iro: data.iro,
                 cro: data.cro,
                 userId: data.userId,
+                
                 createdAt: new Date(),
                 updatedAt: null,
-            });  
+            });
+            Reporter.update({
+                submited:1
+            },{
+                where:{id: data.reporterId}
+            })
             return form;
         }catch (err){
             console.log(err)

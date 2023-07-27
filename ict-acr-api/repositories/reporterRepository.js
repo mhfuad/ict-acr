@@ -76,7 +76,7 @@ class ReporterRepository{
     async getReporterByUser(user_id){
         try {
             const results = await sequelize.query(`SELECT 
-            r.iro, r.cro, r.start_date, r.end_date, r.gread, r.designation, r.joining_date_current_position, r.submited, iu.banglaName as iro_bangla_name, iu.englishName as iro_name, cu.banglaName as cro_bangla_name, cu.englishName as cro_name
+            r.id, r.iro, r.cro, r.start_date, r.end_date, r.gread, r.designation, r.joining_date_current_position, r.submited, iu.banglaName as iro_bangla_name, iu.englishName as iro_name, cu.banglaName as cro_bangla_name, cu.englishName as cro_name
             FROM 
                 Reporters as r 
             JOIN Users as iu
