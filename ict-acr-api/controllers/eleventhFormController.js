@@ -51,6 +51,15 @@ class FormController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async findForCro(req, res){
+        try {
+            const data = await repository.findForCro(req);
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
 }
 
 module.exports = new FormController();

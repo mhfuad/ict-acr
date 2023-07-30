@@ -2,6 +2,8 @@ const { EleventhForms } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const { Reporter } = require('../models')
+const AuthRepository = require('../repositories/authRepository')
+const { User } = require('../models')
 
 const app = require('express')();
 const http = require('http').Server(app);
@@ -10,7 +12,7 @@ const io = require('socket.io')(http);
 class eleventhFormRepository{
 
     async allForms(req){
-        return await EleventhForms.findAll();
+        return await EleventhForms.findAll({});
     }
 
     async getOne(id){
@@ -19,6 +21,7 @@ class eleventhFormRepository{
 
     async create(data){
         try{
+            //form created
             const form =  await EleventhForms.create({
                 name: data.name,
                 userIdNo: data.userIdNo,
@@ -37,15 +40,26 @@ class eleventhFormRepository{
                 iro: data.iro,
                 cro: data.cro,
                 userId: data.userId,
-                
+                status: data.status,
                 createdAt: new Date(),
                 updatedAt: null,
             });
+            //reporter update
             Reporter.update({
                 submited:1
             },{
                 where:{id: data.reporterId}
             })
+            //send notification to iro
+            const iro = await User.findOne({
+                where: {
+                    idNo: data.iro
+                }
+            });
+            if(iro){
+                await AuthRepository.sendSMS(iro.personalNumber,`${data.userIdNo} has submited Form`);
+                AuthRepository.sendMail(iro.personalMail,`${data.userIdNo} has submited Form`);
+            }
             return form;
         }catch (err){
             console.log(err)
@@ -89,6 +103,15 @@ class eleventhFormRepository{
           console.log(`Notification sent to User ${userId}`);
         } else {
           console.log(`User ${userId} is not connected`);
+        }
+    }
+
+    async findForCro(){
+        try{
+            const form = await EleventhForms.findAll({where:{status: "cro"}}, {attributes:{exclude:['createdAt','updatedAt']}})
+            return form;
+        }catch(err){
+            return err
         }
     }
 }

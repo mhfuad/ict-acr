@@ -3,12 +3,27 @@ const { TenthForms } = require('../models');
 const { IRO_evaluation } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
+const { User } = require('../models')
+const { EleventhForms } = require('../models');
+const AuthRepository = require('../repositories/authRepository')
 
 class IroEvaluationRepository{
 
     async create(form_id, body){
         body.form_id = form_id
-        return await IRO_evaluation.create(body);
+        const eva = await IRO_evaluation.create(body);
+        //send notification to CRO
+        const cro_user = await User.findOne({
+            where: {
+                idNo: body.cro
+            }
+        });
+        await EleventhForms.update({status:"cro"},{where:{id:form_id}});
+        if(cro_user){
+            await AuthRepository.sendSMS(cro_user.personalNumber,`${body.userIdNo} has submited Form`);
+            AuthRepository.sendMail(cro_user.personalMail,`${body.userIdNo} has submited Form`);
+        }
+        return eva;
     }
 
     async get(form_id){

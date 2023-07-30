@@ -6,6 +6,9 @@ const router = express.Router();
 router.get('/', async (req, res) =>  {
     await controller.getForms(req, res);
 });
+router.get('/for_cro', async(req, res) => {
+    await controller.findForCro(req, res)
+})
 router.get('/:id', async (req, res, id) => {
     await controller.findOne(req, res, id)
 });
@@ -18,5 +21,6 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     await controller.deleteForm(req, res)
 });
+
 
 module.exports = router;
