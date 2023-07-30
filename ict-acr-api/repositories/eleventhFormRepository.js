@@ -114,6 +114,15 @@ class eleventhFormRepository{
             return err
         }
     }
+
+    async findForIro(){
+        try{
+            const form = await EleventhForms.findAll({where:{status: "iro"}}, {attributes:{exclude:['createdAt','updatedAt']}})
+            return form;
+        }catch(err){
+            return err
+        }
+    }
 }
 
 module.exports = new eleventhFormRepository();

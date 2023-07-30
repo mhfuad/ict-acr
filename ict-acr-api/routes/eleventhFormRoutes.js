@@ -9,6 +9,9 @@ router.get('/', async (req, res) =>  {
 router.get('/for_cro', async(req, res) => {
     await controller.findForCro(req, res)
 })
+router.get('/for_iro', async(req, res) => {
+    await controller.findForIro(req, res)
+})
 router.get('/:id', async (req, res, id) => {
     await controller.findOne(req, res, id)
 });

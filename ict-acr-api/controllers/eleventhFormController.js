@@ -60,6 +60,15 @@ class FormController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async findForIro(req, res){
+        try {
+            const data = await repository.findForIro(req);
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
 }
 
 module.exports = new FormController();
