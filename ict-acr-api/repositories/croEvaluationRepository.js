@@ -1,4 +1,4 @@
-const { Question } = require('../models');
+const { EleventhForms } = require('../models');
 const { TenthForms } = require('../models');
 const { CRO_evaluations } = require('../models');
 const { QueryTypes } = require('sequelize');
@@ -8,7 +8,9 @@ class CroEvaluationRepository{
 
     async create(form_id, body){
         body.form_id = form_id
-        return await CRO_evaluations.create(body);
+        const cro_eve = await CRO_evaluations.create(body);
+        EleventhForms.update({status: "done"},{where:{id:form_id}})
+        return cro_eve;
     }
 
     async get(form_id){

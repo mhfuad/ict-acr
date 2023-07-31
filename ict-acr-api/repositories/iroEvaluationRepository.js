@@ -20,8 +20,8 @@ class IroEvaluationRepository{
         });
         await EleventhForms.update({status:"cro"},{where:{id:form_id}});
         if(cro_user){
-            await AuthRepository.sendSMS(cro_user.personalNumber,`${body.userIdNo} has submited Form`);
-            AuthRepository.sendMail(cro_user.personalMail,`${body.userIdNo} has submited Form`);
+            await AuthRepository.sendSMS(cro_user.personalNumber,`${body.user_id}'s Form has evaluated`);
+            AuthRepository.sendMail(cro_user.personalMail,`${body.user_id}'s Form has evaluated`);
         }
         return eva;
     }
