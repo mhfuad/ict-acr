@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     iro: DataTypes.STRING,
     cro: DataTypes.STRING,
     userId: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    reporter_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'EleventhForms',

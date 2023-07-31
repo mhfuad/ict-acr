@@ -12,7 +12,21 @@ const io = require('socket.io')(http);
 class eleventhFormRepository{
 
     async allForms(req){
-        return await EleventhForms.findAll({});
+        //return await EleventhForms.findAll({});
+        try {
+            const results = await sequelize.query(`SELECT f.name, f.userIdNo, f.highestEducationLevel, f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus, f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro, f.cro, f.userId, f.status, repo.joining_date_current_position, repo.designation as acr_designation
+                    FROM EleventhForms f
+                    INNER JOIN Reporters repo
+	                    ON f.reporter_id = repo.id`,{
+                replacements: {user_id:user_id},
+                type: sequelize.QueryTypes.SELECT,
+                model: User
+            })
+            return results
+        } catch (error) {
+            console.error('Error:', error.message);
+            return error.message
+        }
     }
 
     async getOne(id){
@@ -41,6 +55,7 @@ class eleventhFormRepository{
                 cro: data.cro,
                 userId: data.userId,
                 status: "iro",
+                reporterId: data.reporterId,
                 createdAt: new Date(),
                 updatedAt: null,
             });
