@@ -29,7 +29,7 @@ module.exports = {
         allowNull:false
       },
       designation: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
       },
       joining_date_current_position: {
         type: Sequelize.DATE

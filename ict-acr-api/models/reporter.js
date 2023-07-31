@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
     gread: DataTypes.INTEGER,
-    designation: DataTypes.INTEGER,
+    designation: DataTypes.STRING,
     joining_date_current_position: DataTypes.DATE,
     submited: DataTypes.BOOLEAN,
   }, {

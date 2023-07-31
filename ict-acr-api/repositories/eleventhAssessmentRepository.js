@@ -8,7 +8,7 @@ class EleventhAssessmentRepository{
 
     async create(form_id, body){
         const questionLenght = Object.keys(body).length
-        if(questionLenght != 18){
+        if(questionLenght != 21){
             return "missing";
         }
         const newData = body.map((item, index) => ({

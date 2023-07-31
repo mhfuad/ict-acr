@@ -40,13 +40,14 @@ class eleventhFormRepository{
                 iro: data.iro,
                 cro: data.cro,
                 userId: data.userId,
-                status: data.status,
+                status: "iro",
                 createdAt: new Date(),
                 updatedAt: null,
             });
             //reporter update
             Reporter.update({
-                submited:1
+                submited:1,
+                joining_date_current_position: data.joining_date_current_position
             },{
                 where:{id: data.reporterId}
             })
