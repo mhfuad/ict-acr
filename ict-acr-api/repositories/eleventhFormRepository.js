@@ -18,9 +18,9 @@ class eleventhFormRepository{
                     FROM EleventhForms f
                     INNER JOIN Reporters repo
 	                    ON f.reporter_id = repo.id`,{
-                replacements: {user_id:user_id},
+                //replacements: {user_id:user_id},
                 type: sequelize.QueryTypes.SELECT,
-                model: User
+                model: EleventhForms
             })
             return results
         } catch (error) {
