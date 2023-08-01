@@ -103,9 +103,10 @@ class AuthRepository{
 
         transporter.sendMail(mailerOption, (error, info)=> {
             if(error){
-                console.log(error)
+                console.log("Email error :", error.message)
                 return 0
             }else{
+                //console.log("Email message :", info.response)
                 return 1
             }
         })
