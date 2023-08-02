@@ -1,5 +1,4 @@
-const { Question } = require('../models');
-const { TenthForms } = require('../models');
+const { AssesmentHistory } = require('../models');
 const { EleventhAssessments } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
@@ -8,7 +7,15 @@ class EleventhAssessmentRepository{
 
     async create(form_id, body){
         const questionLenght = Object.keys(body).length
-        if(questionLenght != 21){
+        const history = AssesmentHistory.findOne({where:{form_id:form_id}});
+        
+        
+        if(history !== null){
+            return "Assessment already done !";
+        }
+        await AssesmentHistory.create({form_id:form_id});
+           
+        if(questionLenght != 22){
             return "missing";
         }
         const newData = body.map((item, index) => ({
