@@ -1,4 +1,4 @@
-const { User, Role, Permission } = require('../models');
+const { User, Role, Permission, Access_log } = require('../models');
 const bcrypt = require('bcrypt');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
@@ -70,11 +70,16 @@ class AuthRepository{
 
     async otpMatching(req){
         const user = await User.findOne({where: {idNo: req.user_id, otp: req.otp}})
+        try{
+            await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.user_id,date: new Date(Date.now() + 21600000)});
+        }catch (e){
+            await Access_log.create({ip: " ", user_id:req.user_id,date: new Date(Date.now() + 21600000)});
+        }
         
         if(!user){
             return "not_found";
         }
-        User.update({otp: null},{
+        await User.update({otp: null},{
             where:{
                 id: user.id
             }

@@ -8,14 +8,14 @@ class AccessLogRepository{
         return await Access_log.create(body);
     }
 
-    async get(form_id){
-        return await IRO_evaluation.findOne({where:{form_id:form_id}, attributes:{ exclude: ['createdAt','updatedAt'] }});
+    async get_by_user(user_id){
+        return await Access_log.findAll({where:{user_id:user_id}, attributes:{ exclude: ['createdAt','updatedAt'] }});
     }
 
 
     async all(){
         try{
-            return await IRO_evaluation.findAll({attributes: { exclude: ['createdAt','updatedAt'] }})
+            return await Access_log.findAll({attributes: { exclude: ['id','createdAt','updatedAt'] }})
         }catch (err){
             console.log(err)
         }

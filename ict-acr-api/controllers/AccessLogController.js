@@ -10,9 +10,9 @@ class AccessLogController{
         }
     }
     
-    async get(req, res) {
+    async getByUser(req, res) {
         try {
-            const data = await repository.get(req.params.form_id);
+            const data = await repository.get_by_user(req.params.user_id);
             res.json(data);
         } catch (err) {
             res.status(500).json({ error: err.message });
