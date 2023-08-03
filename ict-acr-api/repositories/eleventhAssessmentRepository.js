@@ -7,8 +7,7 @@ class EleventhAssessmentRepository{
 
     async create(form_id, body){
         const questionLenght = Object.keys(body).length
-        const history = AssesmentHistory.findOne({where:{form_id:form_id}});
-        
+        const history = await AssesmentHistory.findOne({where:{form_id:form_id}});
         
         if(history !== null){
             return "Assessment already done !";

@@ -1,5 +1,6 @@
 
 const { User, Role, Permission } = require('../models');
+const AuthRepository = require('../repositories/authRepository')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
 
@@ -18,11 +19,11 @@ class UserRepository{
     }
 
     async createUser(user) {
-        this.saveBase64Image(user.profileImage,"./images/profile_pic/"+user.idNo+"pic.png")
-        this.saveBase64Image(user.signatureImage,"./images/signature_pic/"+user.idNo+"sig.png")
+        // this.saveBase64Image(user.profileImage,"./images/profile_pic/"+user.idNo+"pic.png")
+        // this.saveBase64Image(user.signatureImage,"./images/signature_pic/"+user.idNo+"sig.png")
 
         try{
-            return await User.create({
+            const user_created = await User.create({
                 banglaName: user.banglaName,
                 englishName: user.englishName,
                 grade: user.grade,
@@ -55,7 +56,9 @@ class UserRepository{
                 createdAt: new Date(),
                 updatedAt: null,
             });
-            
+            await AuthRepository.sendSMS(user.personalNumber,`Your profile has created. \n Software link is https://acr.inflack.xyz \n Your User id is ${user.idNo}`)
+            AuthRepository.sendMail(user.personalMail,`Your profile has created. \n Software link is https://acr.inflack.xyz \n Your User id is ${user.idNo}`);
+            return user_created;
         }catch (error){
             console.log(error)
         }
