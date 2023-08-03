@@ -73,8 +73,8 @@ class eleventhFormRepository{
                 }
             });
             if(iro){
-                await AuthRepository.sendSMS(iro.personalNumber,`${data.userIdNo} has submited Form`);
-                AuthRepository.sendMail(iro.personalMail,`${data.userIdNo} has submited Form`);
+                await AuthRepository.sendSMS(iro.personalNumber,`${data.name}, requests to you ACR Evaluation. See the notification here.  http://www.acr.ictd.gov.bd `);
+                AuthRepository.sendMail(iro.personalMail,`${data.name}, requests to you for ACR Evaluation. See the notification here.  http://www.acr.ictd.gov.bd`);
             }
             return form;
         }catch (err){

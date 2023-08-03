@@ -56,8 +56,8 @@ class UserRepository{
                 createdAt: new Date(),
                 updatedAt: null,
             });
-            await AuthRepository.sendSMS(user.personalNumber,`Your profile has created. \n Software link is https://acr.inflack.xyz \n Your User id is ${user.idNo}`)
-            AuthRepository.sendMail(user.personalMail,`Your profile has created. \n Software link is https://acr.inflack.xyz \n Your User id is ${user.idNo}`);
+            await AuthRepository.sendSMS(user.personalNumber,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
+            AuthRepository.sendMail(user.personalMail,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
             return user_created;
         }catch (error){
             console.log(error)

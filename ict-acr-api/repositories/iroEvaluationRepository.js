@@ -18,10 +18,20 @@ class IroEvaluationRepository{
                 idNo: body.cro
             }
         });
+        const user = await User.findOne({
+            where: {
+                idNo: body.user_id
+            }
+        });
+        const iro_user = await User.findOne({
+            where: {
+                idNo: user.iro
+            }
+        });
         await EleventhForms.update({status:"cro"},{where:{id:form_id}});
         if(cro_user){
-            await AuthRepository.sendSMS(cro_user.personalNumber,`${body.user_id}'s Form has evaluated`);
-            AuthRepository.sendMail(cro_user.personalMail,`${body.user_id}'s Form has evaluated`);
+            await AuthRepository.sendSMS(cro_user.personalNumber,`Mr. ${iro_user.englishName} (IRO) send to you Mr. ${user.englishName} (Applicant) ACR Evaluation for Approval. See the notification here.  http://www.acr.ictd.gov.bd`);
+            AuthRepository.sendMail(cro_user.personalMail,`Mr. ${iro_user.englishName} (IRO) send to you Mr. ${user.englishName} (Applicant) ACR Evaluation for Approval. See the notification here.  http://www.acr.ictd.gov.bd`);
         }
         return eva;
     }

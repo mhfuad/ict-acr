@@ -1,15 +1,21 @@
-const { EleventhForms } = require('../models');
+const { EleventhForms, User } = require('../models');
 const { TenthForms } = require('../models');
 const { CRO_evaluations } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
+const AuthRepository = require('../repositories/authRepository')
 
 class CroEvaluationRepository{
 
     async create(form_id, body){
         body.form_id = form_id
         const cro_eve = await CRO_evaluations.create(body);
-        EleventhForms.update({status: "done"},{where:{id:form_id}})
+        await EleventhForms.update({status: "done"},{where:{id:form_id}})
+        const form = await EleventhForms.findOne({where:{id:form_id}})
+        const user = await User.findOne({where:{idNo:form.userIdNo}})
+        const cro = await User.findOne({where:{idNo:user.cro}})
+        await AuthRepository.sendSMS(user.personalNumber,`Mr. ${user.name} (Applicant) your ACR approved by Mr. ${cro.name} (CRO)`);
+        AuthRepository.sendMail(user.personalMail,`Mr. ${user.name} (Applicant) your ACR approved by Mr. ${cro.name} (CRO)`);
         return cro_eve;
     }
 
