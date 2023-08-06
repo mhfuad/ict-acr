@@ -28,6 +28,7 @@ const StartServer = () => {
     app.use(express.json({limit: '10mb'}));
     app.use(cors());
 
+    //token verification
     const verifyToken = (req, res, next) => {
         const hasToken = req.headers.authorization;
 

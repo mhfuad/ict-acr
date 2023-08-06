@@ -23,12 +23,17 @@ class IroEvaluationRepository{
                 idNo: body.user_id
             }
         });
-        const iro_user = await User.findOne({
+        const form = await EleventhForms.findOne({
             where: {
-                idNo: user.iro
+                id: form_id
             }
         });
-        await EleventhForms.update({status:"cro"},{where:{id:form_id}});
+        const iro_user = await User.findOne({
+            where: {
+                idNo: form.iro
+            }
+        });
+        await EleventhForms.update({status:"cro",updatedAt:new Date()},{where:{id:form_id}});
         if(cro_user){
             await AuthRepository.sendSMS(cro_user.personalNumber,`Mr. ${iro_user.englishName} (IRO) send to you Mr. ${user.englishName} (Applicant) ACR Evaluation for Approval. See the notification here.  http://www.acr.ictd.gov.bd`);
             AuthRepository.sendMail(cro_user.personalMail,`Mr. ${iro_user.englishName} (IRO) send to you Mr. ${user.englishName} (Applicant) ACR Evaluation for Approval. See the notification here.  http://www.acr.ictd.gov.bd`);

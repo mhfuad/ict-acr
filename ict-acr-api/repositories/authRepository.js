@@ -84,7 +84,7 @@ class AuthRepository{
                 id: user.id
             }
         })
-        const userForToken = {id: user.id}
+        const userForToken = {id: user.idNo}
         const secretKey = config.APP_SECRET;
 
         return jwt.sign({userForToken}, secretKey)
