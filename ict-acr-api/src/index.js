@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const config = require('../config/index')
 
-const { PORT, APP_SECRET } = require('../config')
+const { PORT, APP_SECRET } = require('../config/index')
 
 const authRoutes = require('../routes/authRoute')
 const userRoutes = require('../routes/userRoutes')
