@@ -15,7 +15,7 @@ class AccessLogRepository{
 
     async all(){
         try{
-            return await Access_log.findAll({attributes: { exclude: ['id','createdAt','updatedAt'] }, order:['id','DESC']})
+            return await Access_log.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
         }catch (err){
             console.log(err)
         }
