@@ -13,7 +13,7 @@ class CroEvaluationRepository{
         await EleventhForms.update({status: "done"},{where:{id:form_id}})
         const form = await EleventhForms.findOne({where:{id:form_id}})
         const user = await User.findOne({where:{idNo:form.userIdNo}})
-        const cro = await User.findOne({where:{idNo:user.cro}})
+        const cro = await User.findOne({where:{idNo:form.cro}})
         await AuthRepository.sendSMS(user.personalNumber,`Mr. ${user.name} (Applicant) your ACR approved by Mr. ${cro.name} (CRO)`);
         AuthRepository.sendMail(user.personalMail,`Mr. ${user.name} (Applicant) your ACR approved by Mr. ${cro.name} (CRO)`);
         return cro_eve;
