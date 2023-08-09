@@ -20,7 +20,7 @@ module.exports = {
         {
           banglaName: "fuad bangla",
           englishName: "Fuad english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "111111",
           password: await bcrypt.hash('123123', 10),
@@ -53,7 +53,7 @@ module.exports = {
         {
           banglaName: "mahadi bangla",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "222222",
           password: await bcrypt.hash('123123', 10),
@@ -86,7 +86,7 @@ module.exports = {
         {
           banglaName: "Ali Hasan",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "333333",
           password: await bcrypt.hash('123123', 10),
@@ -119,7 +119,7 @@ module.exports = {
         {
           banglaName: "Zahidul Islam",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "444444",
           password: await bcrypt.hash('123123', 10),
@@ -152,7 +152,7 @@ module.exports = {
         {
           banglaName: "Kamrul Islam",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "555555",
           password: await bcrypt.hash('123123', 10),
@@ -185,7 +185,7 @@ module.exports = {
         {
           banglaName: "Abdullah al noman",
           englishName: "noman",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "666666",
           password: await bcrypt.hash('123123', 10),
@@ -218,7 +218,7 @@ module.exports = {
         {
           banglaName: "Kazi Ashraf",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "777777",
           password: await bcrypt.hash('123123', 10),
@@ -251,7 +251,7 @@ module.exports = {
         {
           banglaName: "Ibrahim Tuhin",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "888888",
           password: await bcrypt.hash('123123', 10),
@@ -284,7 +284,7 @@ module.exports = {
         {
           banglaName: "Pritom",
           englishName: "mahadi english",
-          grade: "16th grade",
+          grade: "11",
           class: "2nd class",
           idNo: "101010",
           password: await bcrypt.hash('123123', 10),
@@ -315,6 +315,7 @@ module.exports = {
           updatedAt: null
         },
     ], {});
+
   },
 
   async down (queryInterface, Sequelize) {
