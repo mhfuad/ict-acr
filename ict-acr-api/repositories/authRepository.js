@@ -71,9 +71,11 @@ class AuthRepository{
     async otpMatching(req){
         const user = await User.findOne({where: {idNo: req.user_id, otp: req.otp}})
         try{
-            await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.user_id,date: new Date(Date.now() + 21600000)});
+            await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.user_id, date: new Date(Date.now() + 21600000)});
         }catch (e){
-            await Access_log.create({ip: " ", user_id:req.user_id,date: new Date(Date.now() + 21600000)});
+            console.log(e)
+        }finally{
+            await Access_log.create({ip: "", user_id:req.user_id, date: new Date(Date.now() + 21600000)});
         }
         
         if(!user){
