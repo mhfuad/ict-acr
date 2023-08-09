@@ -25,7 +25,7 @@ class AuthController{
 
     async otpMatching(req, res){
         try{
-            var token = await repository.otpMatching(req.body);
+            var token = await repository.otpMatching(req);
             if(token === "not_found"){
                 res.status(404).json({error: "User not found"});
             }

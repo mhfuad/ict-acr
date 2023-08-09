@@ -21,7 +21,8 @@ const accessLogRoutes = require('../routes/accessLogRoutes')
 const reporterRoutes = require('../routes/reporterRoutes')
 const sectionRoutes = require('../routes/sectionRoutes')
 const designationRoutes = require('../routes/designationRoutes')
-const departmentRoutes = require('../routes/departmentRoutes')
+const departmentRoutes = require('../routes/departmentRoutes');
+const { log } = require('console');
 
 const StartServer = () => {
     const app = express();
@@ -31,7 +32,7 @@ const StartServer = () => {
     //token verification
     const verifyToken = (req, res, next) => {
         const hasToken = req.headers.authorization;
-
+        
         if (!hasToken){
             return res.status(403).json({error: 'No token provided'})
 
@@ -48,7 +49,10 @@ const StartServer = () => {
     }
 
     //app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
-
+    app.use((req, res, next)=>{
+        log(req.headers)
+        next()
+    })
     app.use('/auth', authRoutes)
     app.use('/users', verifyToken, userRoutes)
     app.use('/role', verifyToken, roleRoutes)

@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Access_log.init({
     ip: DataTypes.STRING,
     user_id: DataTypes.STRING,
-    date: DataTypes.DATE
+    date: DataTypes.DATE,
+    device: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Access_log',
