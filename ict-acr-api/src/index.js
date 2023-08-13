@@ -49,10 +49,10 @@ const StartServer = () => {
     }
 
     //app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
-    app.use((req, res, next)=>{
-        log(req.headers)
-        next()
-    })
+    // app.use((req, res, next)=>{
+    //     log(req.headers)
+    //     next()
+    // })
     app.use('/auth', authRoutes)
     app.use('/users', verifyToken, userRoutes)
     app.use('/role', verifyToken, roleRoutes)

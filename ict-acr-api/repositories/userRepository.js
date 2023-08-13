@@ -15,7 +15,17 @@ class UserRepository{
     }
 
     async getUserById(id) {
-        return await User.findOne({where: {idNo:id},attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] }})
+        return await User.findOne({
+            where: {idNo:id},
+            attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] },
+            include: {
+                model: Role,
+                attributes: ['name'],
+                include:{
+                    model: Permission
+                }
+            }
+        })
     }
 
     async createUser(user) {

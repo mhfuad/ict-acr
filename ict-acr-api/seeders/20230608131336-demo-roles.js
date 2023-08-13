@@ -12,28 +12,28 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    // await queryInterface.bulkInsert('Roles', [
-    //   {
-    //     name: 'Admin',
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    //   {
-    //     name: 'User',
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    //   {
-    //     name: 'IRO',
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    //   {
-    //     name: 'CRO',
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    // ], {});
+    await queryInterface.bulkInsert('Roles', [
+      {
+        name: 'Admin',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'User',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'IRO',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'CRO',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+    ], {});
   },
 
   async down (queryInterface, Sequelize) {

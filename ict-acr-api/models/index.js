@@ -41,15 +41,15 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.users = require('./user') (sequelize,DataTypes)
-db.roles = require('./role') (sequelize,DataTypes)
-db.permissions = require('./permission') (sequelize,DataTypes)
+// db.users = require('./user') (sequelize,DataTypes)
+// db.roles = require('./role') (sequelize,DataTypes)
+// db.permissions = require('./permission') (sequelize,DataTypes)
 
-db.users.belongsToMany(db.roles, { through: 'user_role' });
-db.roles.belongsToMany(db.users, { through: 'user_role' });
+// db.users.belongsToMany(db.roles, { through: 'user_roles' });
+// db.roles.belongsToMany(db.users, { through: 'user_roles' });
 
-db.roles.belongsToMany(db.permissions, { through: 'role_permission' });
-db.permissions.belongsToMany(db.roles, { through: 'role_permission' });
+// db.roles.belongsToMany(db.permissions, { through: 'role_permissions' });
+// db.permissions.belongsToMany(db.roles, { through: 'role_permissions' });
 
 db.sequelize.sync({force: false})
 module.exports = db;
