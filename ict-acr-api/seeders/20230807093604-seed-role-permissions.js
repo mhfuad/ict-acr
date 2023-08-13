@@ -8,6 +8,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
 
     await queryInterface.bulkInsert('user_roles', [
+      //1 admin, 2 user, 3 iro, 4 cro
       {
         UserId: 1,
         RoleId: 1,
@@ -34,6 +35,34 @@ module.exports = {
       },
       
     ], {});
+
+    await queryInterface.bulkInsert('role_permissions', [
+      //1 admin, 2 user, 3 iro, 4 cro
+      {
+        RoleId: 4,
+        PermissionId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 33,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 21,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 2,
+        PermissionId: 28,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+    ], {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -44,5 +73,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('user_role', null, {});
+    await queryInterface.bulkDelete('role_permissions', null, {});
+    
   }
 };
