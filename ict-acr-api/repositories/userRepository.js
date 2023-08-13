@@ -1,5 +1,5 @@
 
-const { User, Role, Permission } = require('../models');
+const { User, Role, Permission, user_role } = require('../models');
 const AuthRepository = require('../repositories/authRepository')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -66,6 +66,13 @@ class UserRepository{
                 createdAt: new Date(),
                 updatedAt: null,
             });
+            //assign role
+            await user_role.create({
+                UserId: user_created.id,
+                RoleId: 2
+            });
+            console.log(user_created.id)
+            //send message
             await AuthRepository.sendSMS(user.personalNumber,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
             AuthRepository.sendMail(user.personalMail,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
             return user_created;
@@ -113,6 +120,7 @@ class UserRepository{
     }
 
     async deleteUser(id) {
+        await user_role.destroy({where:{UserId:id}});
         return await User.destroy({
             where: {
                 id: id
