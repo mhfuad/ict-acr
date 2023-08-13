@@ -22,7 +22,6 @@ const reporterRoutes = require('../routes/reporterRoutes')
 const sectionRoutes = require('../routes/sectionRoutes')
 const designationRoutes = require('../routes/designationRoutes')
 const departmentRoutes = require('../routes/departmentRoutes');
-const { log } = require('console');
 
 const StartServer = () => {
     const app = express();
