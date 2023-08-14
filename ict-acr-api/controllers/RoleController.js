@@ -19,6 +19,14 @@ class RoleController{
             res.status(500).json({ error: err.message})
         }
     }
+    async getAll(req, res){
+        try{
+            var roles = await repository.allRole({});
+            res.json(roles);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
 }
 
 module.exports = new RoleController();

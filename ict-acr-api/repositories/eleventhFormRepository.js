@@ -14,7 +14,11 @@ class eleventhFormRepository{
     async allForms(req){
         //return await EleventhForms.findAll({});
         try {
-            const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus, f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro, f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position, repo.designation as acr_designation
+            const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
+                            f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
+                            f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
+                            f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position,
+                             repo.designation as acr_designation
                     FROM EleventhForms f
                     INNER JOIN Reporters repo
 	                    ON f.reporter_id = repo.id`,{

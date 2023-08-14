@@ -22,6 +22,10 @@ class RoleRepository{
         return "Role remove success";
         
     }
+
+    async allRole(){
+        return await Role.findAll({ attributes:{ exclude: ['createdAt','updatedAt']}});
+    }
 }
 
 module.exports = new RoleRepository();
