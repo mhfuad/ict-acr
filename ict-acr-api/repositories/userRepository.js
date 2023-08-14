@@ -22,7 +22,8 @@ class UserRepository{
                 model: Role,
                 attributes: ['name'],
                 include:{
-                    model: Permission
+                    model: Permission,
+                    attributes: ['name']
                 }
             }
         })

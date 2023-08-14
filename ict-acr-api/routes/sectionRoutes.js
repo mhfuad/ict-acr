@@ -1,11 +1,23 @@
 const express = require('express')
 const controller = require('../controllers/SectionController')
+const { resolveUserRoles } = require('../config/userAllRole')
 
 const router = express.Router();
+
+const hasPermission = (action) => {
+    return async (req, res, next) => {
+        const userRole = await resolveUserRoles(req.body.userId)
+        console.log(userRole)
+        next();
+    };
+};
+
 //'section_all'
-router.get('/', async (req, res)=>{
-    await controller.getSections(req,res)
+router.get('/',  async (req, res)=>{
+    res.json(await resolveUserRoles(req.body.userId))
+    //await controller.getSections(req,res)
 })
+
 //'section_create'
 router.post('/', async (req, res)=>{
     await controller.createSection(req,res)
