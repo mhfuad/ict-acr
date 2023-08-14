@@ -69,35 +69,38 @@ class AuthRepository{
     }
 
     async otpMatching(req){
+        //find user and match token
         const user = await User.findOne({where: {idNo: req.body.user_id, otp: req.body.otp}})
-
+        if(!user){
+            return "not_found";
+        }
+        //get user information
+        const header = req.headers['user-agent'];
         let deviceName = ''
 
-        if(req.headers['user-agent'].includes('Dart')){
-            deviceName = "ICT ACR App"
-        }else if(req.headers['user-agent'].includes('(iPhone')){
-            deviceName = "iPhone Web"
-        }else if(req.headers['user-agent'].includes('(Windows')){
-            deviceName = "Windows"
-        }else if(req.headers['user-agent'].includes('(Android')){
-            deviceName = "Android Web"
-        }else if(req.headers['user-agent'].includes('(X11;')){
-            deviceName = "Linux Web"
-        }else{
-            deviceName = req.headers['user-agent']
+        switch(header){
+            case header.includes('Dart'):
+                deviceName = "ICT ACR App";
+                break;
+            case header.includes('(iPhone'):
+                deviceName = "iPhone Web";
+                break;
+            case header.includes('(Android'):
+                deviceName = "Android Web";
+                break;
+            case header.includes('(X11;'):
+                deviceName = "Linux Web";
+                break;
+            default:
+                deviceName =req.headers['user-agent']
         }
-
+        //saving user information to access log
         try{
             await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.user_id, date: new Date(Date.now() + 21600000), device: deviceName});
         }catch (e){
             console.log(e)
-        }finally{
-            await Access_log.create({ip: "", user_id:req.body.user_id, date: new Date(Date.now() + 21600000), device: deviceName});
         }
-        
-        if(!user){
-            return "not_found";
-        }
+        //update token field
         await User.update({otp: null},{
             where:{
                 id: user.id
