@@ -24,7 +24,8 @@ async function resolveUserRoles(id){
           }
       }
   })
-  return userWithRole
+  return userWithRole;
+  
 }
 
 module.exports = {

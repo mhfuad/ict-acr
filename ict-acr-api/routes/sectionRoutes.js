@@ -7,15 +7,26 @@ const router = express.Router();
 const hasPermission = (action) => {
     return async (req, res, next) => {
         const userRole = await resolveUserRoles(req.body.userId)
-        console.log(userRole)
-        next();
+        
+        const isAdminPresent = userRole.Roles.some((roleObj) => roleObj.name === "Admin");
+        if (isAdminPresent) {
+            next();
+        } else {
+            const hasCroPermission = userRole.Roles.some((roleObj) =>
+                roleObj.Permissions.some((permission) => permission.name === action)
+            );
+            if (hasCroPermission) {
+                next();
+            } else {
+                res.status(403).send("Forbidden").end();
+            }
+        }
     };
 };
 
 //'section_all'
-router.get('/',  async (req, res)=>{
-    res.json(await resolveUserRoles(req.body.userId))
-    //await controller.getSections(req,res)
+router.get('/', hasPermission("iro_evaCreate"), async (req, res)=>{
+    await controller.getSections(req,res)
 })
 
 //'section_create'
