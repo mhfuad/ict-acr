@@ -10,7 +10,6 @@ class RoleRepository{
             await us.addRole(r);
         });
         return "Role assign success";
-        
     }
 
     async removeRole(user, roles){
@@ -25,6 +24,28 @@ class RoleRepository{
 
     async allRole(){
         return await Role.findAll({ attributes:{ exclude: ['createdAt','updatedAt']}});
+    }
+
+    async allPermission(){
+        return await Permission.findAll({attributes:{ exclude: ['createdAt', 'updatedAt']}});
+    }
+
+    async assignPermission(role, permissions){
+        const ro = await Role.findByPk(role)
+        permissions.forEach(async (p)=>{
+            const per = await Permission.findByPk(p)
+            await ro.addPermission(per)
+        })
+        return "Permission assign success";
+    }
+
+    async removePermission(role, permissions){
+        const ro = await Role.findByPk(role)
+        permissions.forEach(async (p)=>{
+            const per = await Permission.findByPk(p)
+            await ro.removePermission(per)
+        })
+        return "Permission remove success";
     }
 }
 
