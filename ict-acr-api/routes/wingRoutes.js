@@ -1,5 +1,5 @@
 const express = require('express')
-const controller = require('../controllers/DepartmentController')
+const controller = require('../controllers/WingController')
 
 const router = express.Router();
 //'department_all'
