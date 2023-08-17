@@ -7,6 +7,18 @@ router.get('/', async (req, res)=>{
     await controller.getAll(req, res); 
 })
 
+router.post('/', async (req, res)=>{
+    await controller.create(req, res); 
+})
+
+router.delete('/:id', async (req, res)=>{
+    await controller.delete(req, res); 
+})
+
+router.get('/:id', async(req, res)=>{
+    await controller.getOneRole(req, res)
+})
+
 router.get('/permission', async (req, res)=> {
     await controller.getAllPermission(req, res);
 })

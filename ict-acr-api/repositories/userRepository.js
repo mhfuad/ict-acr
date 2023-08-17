@@ -117,8 +117,8 @@ class UserRepository{
             });
             console.log(user_created.id)
             //send message
-            await AuthRepository.sendSMS(user.personalNumber,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
-            AuthRepository.sendMail(user.personalMail,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
+            await AuthRepository.sendSMS(user.personalNumber,`Wellcome to ICT ACR, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
+            AuthRepository.sendMail(user.personalMail,`Wellcome to ICT ACR, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
             return user_created;
         }catch (error){
             console.log(error)

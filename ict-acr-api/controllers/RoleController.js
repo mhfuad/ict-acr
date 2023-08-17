@@ -46,9 +46,36 @@ class RoleController{
         }
     }
 
+    async create(req, res){
+        try{
+            var roles = await repository.create(req);
+            res.json(roles);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
+    async delete(req, res){
+        try{
+            var roles = await repository.delete(req.params.id);
+            res.json(roles);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
     async getAllPermission(req, res){
         try{
             var roles = await repository.allPermission();
+            res.json(roles);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
+    async getOneRole(req, res){
+        try{
+            var roles = await repository.getRole(req.params.id);
             res.json(roles);
         } catch (err){
             res.status(500).json({ error: err.message})
