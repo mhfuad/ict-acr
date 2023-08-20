@@ -66,8 +66,8 @@ class RoleController{
 
     async getAllPermission(req, res){
         try{
-            var roles = await repository.allPermission();
-            res.json(roles);
+            var result = await repository.allPermission(req);
+            res.json(result);
         } catch (err){
             res.status(500).json({ error: err.message})
         }

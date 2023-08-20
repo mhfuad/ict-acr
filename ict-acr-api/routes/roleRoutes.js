@@ -11,16 +11,16 @@ router.post('/', async (req, res)=>{
     await controller.create(req, res); 
 })
 
+router.get('/permission/page/:page', async (req, res)=> {
+    await controller.getAllPermission(req, res);
+})
+
 router.delete('/:id', async (req, res)=>{
     await controller.delete(req, res); 
 })
 
 router.get('/:id', async(req, res)=>{
     await controller.getOneRole(req, res)
-})
-
-router.get('/permission', async (req, res)=> {
-    await controller.getAllPermission(req, res);
 })
 
 router.post('/permissionAssign/:role', async (req, res)=> {

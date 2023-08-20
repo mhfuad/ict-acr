@@ -38,8 +38,25 @@ class RoleRepository{
         }
     }
 
-    async allPermission(){
-        return await Permission.findAll({attributes:{ exclude: ['createdAt', 'updatedAt']}});
+    async allPermission(req){
+        const PAGE_SIZE = 20;
+        const page = parseInt(req.params.page, 10);
+
+        const offset = (page - 1) * PAGE_SIZE;
+
+        try{
+            const result = await Permission.findAll({
+                attributes:{ exclude: ['createdAt', 'updatedAt']},
+                limit: PAGE_SIZE,
+                offset: offset,
+                order: [['id','ASC']]
+            });
+            return result;
+        }catch (error) {
+            console.error('Error fetching paginated permissions:', error);
+            return 500;
+        }
+        
     }
 
     async assignPermission(role, permissions){
