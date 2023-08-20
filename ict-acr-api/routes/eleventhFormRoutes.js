@@ -6,6 +6,9 @@ const router = express.Router();
 router.get('/', async (req, res) =>  {
     await controller.getForms(req, res);
 });
+router.get('/page/:page', async (req, res) =>  {
+    await controller.getFormsWithPage(req, res);
+});
 //'form_forCRO'
 router.get('/for_cro', async(req, res) => {
     await controller.findForCro(req, res)

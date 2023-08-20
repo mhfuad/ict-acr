@@ -33,6 +33,32 @@ class eleventhFormRepository{
         }
     }
 
+    async allFormsPaginat(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+        try {
+            const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
+                            f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
+                            f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
+                            f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position,
+                             repo.designation as acr_designation
+                    FROM EleventhForms f
+                    INNER JOIN Reporters repo
+	                    ON f.reporter_id = repo.id
+                    LIMIT :limit
+                    OFFSET :offset`,{
+                replacements: {limit:PAGE_SIZE, offset: offset},
+                type: sequelize.QueryTypes.SELECT,
+                model: EleventhForms
+            })
+            return results
+        } catch (error) {
+            console.error('Error:', error.message);
+            return error.message
+        }
+    }
+
     async getOne(id){
         return await EleventhForms.findByPk(id);
     }

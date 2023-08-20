@@ -10,6 +10,15 @@ class FormController{
         }
     }
 
+    async getFormsWithPage(req, res) {
+        try {
+            const data = await repository.allFormsPaginat(req);
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
     async findOne(req, res) {
         try {
             const user = await repository.getOne(req.params.id);
