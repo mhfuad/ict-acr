@@ -3,10 +3,10 @@ const userController = require('../controllers/UserController')
 
 const router = express.Router();
 //'user_all'
-router.get('/', async (req, res) =>  {
+router.get('/page/:page', async (req, res) =>  {
     await userController.getUsers(req, res);
 });
-'user_ById'
+//'user_ById'
 router.get('/:id', async (req, res, id) => {
     await userController.getUserById(req, res, id)
 });
