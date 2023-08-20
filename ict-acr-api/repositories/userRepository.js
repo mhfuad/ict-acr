@@ -28,17 +28,61 @@ class UserRepository{
     }
 
     async getUserById(id) {
-        return await User.findOne({
+        const userWithRole = await User.findOne({
             where: {idNo:id},
             attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] },
             include: {
                 model: Role,
-                attributes: ['name'],
+                attributes: ['id','name'],
                 include:{
-                    model: Permission
+                    model: Permission,
+                    attributes: ['id','name']
                 }
             }
         })
+        const filter = userWithRole.Roles.map( (r)=>({
+                id: r.id,
+                name: r.name,
+                permissions: r.Permissions.map( (p)=>({
+                    id: p.id,
+                    name: p.name
+                }))           
+            }))
+        const modify = {
+            id: userWithRole.id,
+            banglaName: userWithRole.banglaName,
+            englishName: userWithRole.englishName,
+            grade: userWithRole.grade,
+            class: userWithRole.class,
+            idNo: userWithRole.idNo,
+            batchNo: userWithRole.batchNo,
+            nid: userWithRole.nid,
+            cadre: userWithRole.cadre,
+            workingArea: userWithRole.workingArea,
+            section: userWithRole.section,
+            fatherName: userWithRole.fatherName,
+            motherName: userWithRole.motherName,
+            dateOfJoin: userWithRole.dateOfJoin,
+            dateOfBirth: userWithRole.dateOfBirth,
+            prlStartDate: userWithRole.prlStartDate,
+            branch: userWithRole.branch,
+            maritalStatus: userWithRole.maritalStatus,
+            highestEducationLevel: userWithRole.highestEducationLevel,
+            gender: userWithRole.gender,
+            bloodGroup: userWithRole.bloodGroup,
+            personalMail: userWithRole.personalMail,
+            officialMail: userWithRole.officialMail,
+            personalNumber: userWithRole.personalNumber,
+            officialNumber: userWithRole.officialNumber,
+            status: userWithRole.status,
+            designation: userWithRole.designation,
+            telephone: userWithRole.telephone,
+            role: userWithRole.role,
+            profileImage: userWithRole.profileImage,
+            signatureImage: userWithRole.signatureImage,
+            Roles:filter
+        }
+        return modify;
     }
 
     async createUser(user) {
@@ -86,8 +130,8 @@ class UserRepository{
             });
             console.log(user_created.id)
             //send message
-            await AuthRepository.sendSMS(user.personalNumber,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
-            AuthRepository.sendMail(user.personalMail,`Well come to ICT ACR Portal, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
+            await AuthRepository.sendSMS(user.personalNumber,`Wellcome to ICT ACR, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login `)
+            AuthRepository.sendMail(user.personalMail,`Wellcome to ICT ACR, Link: www.acr.ictd.gov.bd Your user ID: ${user.idNo} for login`);
             return user_created;
         }catch (error){
             console.log(error)

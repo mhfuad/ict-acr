@@ -23,5 +23,4 @@ router.delete('/:id', async (req, res)=>{
     await controller.deleteDepartment(req,res)
 })
 
-
 module.exports = router;
