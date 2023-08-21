@@ -50,15 +50,16 @@ class UserRepository{
     async getUserById(id) {
         const userWithRole = await User.findOne({
             where: {idNo:id},
-            attributes: { exclude: ['otp','password','createdAt', 'updatedAt'] },
-            include: {
-                model: Role,
-                attributes: ['id','name'],
-                include:{
-                    model: Permission,
-                    attributes: ['id','name']
+            attributes: { 
+                exclude: ['otp','password','createdAt', 'updatedAt'] },
+                include: {
+                    model: Role,
+                    attributes: ['id','name'],
+                    include:{
+                        model: Permission,
+                        attributes: ['id','name']
+                    }
                 }
-            }
         })
         const filter = userWithRole.Roles.map( (r)=>({
                 id: r.id,

@@ -1,14 +1,35 @@
 
-const { Wing } = require('../models');
+const { Wing, Branch, Section } = require('../models');
 
 class WingRepository{
 
     async getAll(){
-        return await Wing.findAll({attributes: { exclude: ['createdAt','updatedAt'] }});
+        return await Wing.findAll({
+            attributes: { 
+                exclude: ['createdAt','updatedAt'] },
+                include: {
+                    model: Branch,
+                    attributes: ['id','name'],
+                    include:{
+                        model: Section,
+                        attributes: ['id','name']
+                    }
+                }
+        });
     }
 
     async getById(id) {
-        return await Wing.findByPk(id);
+        return await Wing.findByPk(id,{
+            exclude: ['createdAt','updatedAt'] ,
+            include: {
+                model: Branch,
+                attributes: ['id','name'],
+                include:{
+                    model: Section,
+                    attributes: ['id','name']
+                }
+            }
+        });
     }
 
     async create(req) {

@@ -1,14 +1,26 @@
 
-const { Branch } = require('../models');
+const { Branch, Section } = require('../models');
 
 class BranchRepository{
 
     async getAll(){
-        return await Branch.findAll({attributes: { exclude: ['createdAt','updatedAt'] }});
+        return await Branch.findAll({
+            attributes: { exclude: ['createdAt','updatedAt'] },
+            include: {
+                model: Section,
+                attributes: ['id','name']
+            }
+        });
     }
 
     async getById(id) {
-        return await Branch.findByPk(id);
+        return await Branch.findByPk(id,{
+            attributes: { exclude: ['createdAt','updatedAt'] },
+            include: {
+                model: Section,
+                attributes: ['id','name']
+            }
+        });
     }
 
     async create(req) {
