@@ -1,19 +1,20 @@
 
-const { Wing } = require('../models');
+const { Branch } = require('../models');
 
-class WingRepository{
+class BranchRepository{
 
     async getAll(){
-        return await Wing.findAll({attributes: { exclude: ['createdAt','updatedAt'] }});
+        return await Branch.findAll({attributes: { exclude: ['createdAt','updatedAt'] }});
     }
 
     async getById(id) {
-        return await Wing.findByPk(id);
+        return await Branch.findByPk(id);
     }
 
     async create(req) {
         try{
-            return await Wing.create({
+            return await Branch.create({
+                wingId: req.wingId,
                 name: req.name,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -25,7 +26,7 @@ class WingRepository{
 
     async update(id, section) {
 
-        return Wing.update({
+        return Branch.update({
             name: section.name,
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -37,7 +38,7 @@ class WingRepository{
     }
 
     async delete(id) {
-        await Wing.destroy({
+        await Branch.destroy({
             where: {
                 id: id
             }
@@ -45,4 +46,4 @@ class WingRepository{
     }
 }
 
-module.exports = new WingRepository();
+module.exports = new BranchRepository();

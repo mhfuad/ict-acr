@@ -23,6 +23,7 @@ const sectionRoutes = require('../routes/sectionRoutes')
 const designationRoutes = require('../routes/designationRoutes')
 const departmentRoutes = require('../routes/departmentRoutes');
 const wingRoutes = require('../routes/wingRoutes');
+const branchRoutes = require('../routes/branchRoutes');
 
 const StartServer = () => {
     const app = express();
@@ -66,7 +67,8 @@ const StartServer = () => {
     app.use('/department', verifyToken, departmentRoutes)
     app.use('/section', verifyToken, sectionRoutes)
     app.use('/designation', verifyToken, designationRoutes)
-    app.use('/wing', wingRoutes)
+    app.use('/wing', verifyToken, wingRoutes)
+    app.use('/branch', branchRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
     app.listen(PORT, () => {

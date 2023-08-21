@@ -1,5 +1,5 @@
-const repository = require('../repositories/wingRepository')
-class WingController{
+const repository = require('../repositories/branchRepository')
+class BranchController{
 
     async get(req, res) {
         try {
@@ -14,7 +14,7 @@ class WingController{
         try {
             const section = await repository.getById(req.params.id);
             if (!section) {
-                return res.status(404).json({ error: 'Wing not found' });
+                return res.status(404).json({ error: 'Section not found' });
             }
             res.json(section);
         } catch (err) {
@@ -34,7 +34,7 @@ class WingController{
         try {
             const section = await repository.update(req.params.id, req.body);
             if (!section) {
-                return res.status(404).json({ error: 'Wing not found' });
+                return res.status(404).json({ error: 'section not found' });
             }
             res.json("Update successful");
         } catch (err) {
@@ -52,4 +52,4 @@ class WingController{
     }
 }
 
-module.exports = new WingController();
+module.exports = new BranchController();
