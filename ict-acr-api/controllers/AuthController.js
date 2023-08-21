@@ -28,6 +28,10 @@ class AuthController{
             var token = await repository.otpMatching(req);
             if(token === "not_found"){
                 res.status(404).json({error: "User not found"});
+            }else if(token === "otp_not_match"){
+                res.status(404).json({error: "Incorrect OTP"});
+            }else if(token === "otp_expire"){
+                res.status(404).json({error: "Time expire"});
             }else {
                 res.json({token});
             }

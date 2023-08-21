@@ -68,7 +68,7 @@ const StartServer = () => {
     app.use('/section', verifyToken, sectionRoutes)
     app.use('/designation', verifyToken, designationRoutes)
     app.use('/wing', verifyToken, wingRoutes)
-    app.use('/branch', branchRoutes)
+    app.use('/branch',verifyToken,  branchRoutes)
     //image access
     app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
     app.listen(PORT, () => {

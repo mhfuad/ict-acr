@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/index')
 const axios = require('axios');
 const nodemailer = require("nodemailer")
+const moment = require('moment');
 
 class AuthRepository{
 
@@ -23,7 +24,9 @@ class AuthRepository{
         
         const otp = Math.floor(1000 + Math.random() * 9000);
 
-        await User.update({otp: otp},{
+        await User.update(
+            {otp: otp, updatedAt: new Date()},
+            {
             where:{
                 id: user.id
             }
@@ -70,9 +73,17 @@ class AuthRepository{
 
     async otpMatching(req){
         //find user and match token
-        const user = await User.findOne({where: {idNo: req.body.user_id, otp: req.body.otp}})
+        const user = await User.findOne({where: {idNo: req.body.user_id}})
         if(!user){
             return "not_found";
+        }
+        if(user.otp != req.body.otp){
+            return "otp_not_match";
+        }
+        //check OTP time difference
+        const timeDifference = moment.duration(moment(new Date()).diff(user.updatedAt));
+        if(timeDifference.asMinutes() > 5){
+            return "otp_expire";
         }
         //get user information
         const header = req.headers['user-agent'];
