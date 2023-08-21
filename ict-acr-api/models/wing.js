@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Wing.hasMany(models.Branch,{foreignKey: 'wingId'})
+      Wing.hasMany(models.Branch)
     }
   }
   Wing.init({

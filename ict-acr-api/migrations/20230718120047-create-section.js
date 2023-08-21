@@ -13,13 +13,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       name_bn: {
-        type: Sequelize.STRING,
-        allowNull: true
+        type: Sequelize.STRING
       },
       code: {
         type: Sequelize.STRING
       },
-      department_id: {
+      branchId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

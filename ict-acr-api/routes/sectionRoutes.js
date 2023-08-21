@@ -25,7 +25,11 @@ const hasPermission = (action) => {
 };
 
 //'section_all'
-router.get('/', hasPermission("iro_evaCreate"), async (req, res)=>{
+// router.get('/', hasPermission("iro_evaCreate"), async (req, res)=>{
+//     await controller.getSections(req,res)
+// })
+
+router.get('/', async (req, res)=>{
     await controller.getSections(req,res)
 })
 

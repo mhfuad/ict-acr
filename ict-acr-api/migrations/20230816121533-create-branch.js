@@ -9,11 +9,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      wingId:{
-        type: Sequelize.INTEGER
-      },
       name: {
         type: Sequelize.STRING
+      },
+      wingId:{
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

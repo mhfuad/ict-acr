@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Branch.hasMany(models.Section,{foreignKey: 'wingId'})
+      Branch.hasMany(models.Section)
+      Branch.belongsTo(models.Wing)
     }
   }
   Branch.init({
-    wingId:DataTypes.INTEGER,
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    wingId:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Branch',

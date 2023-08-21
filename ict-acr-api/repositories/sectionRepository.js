@@ -4,7 +4,7 @@ const { Section } = require('../models');
 class SectionRepository{
 
     async getAllSections(){
-        return await Section.findAll();
+        return await Section.findAll({attributes: { exclude: ['createdAt','updatedAt','branchId','BranchId'] }});
     }
 
     async getSectionById(id) {
