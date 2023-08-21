@@ -42,6 +42,7 @@ class RoleRepository{
         try{
             const result = await Permission.findAll({
                 attributes:{ exclude: ['createdAt', 'updatedAt']},
+                order: [['id', 'ASC']]
             });
             return result;
         }catch (error) {
