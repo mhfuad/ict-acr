@@ -3,6 +3,10 @@ const userController = require('../controllers/UserController')
 
 const router = express.Router();
 //'user_all'
+router.get('/', async (req, res) =>  {
+    await userController.users(req, res);
+});
+
 router.get('/page/:page', async (req, res) =>  {
     await userController.getUsers(req, res);
 });
@@ -18,7 +22,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     await userController.updateUser(req, res)
 });
-'user_delete'
+//'user_delete'
 router.delete('/:id', async (req, res) => {
     await userController.deleteUser(req, res)
 });

@@ -39,24 +39,42 @@ class RoleRepository{
     }
 
     async allPermission(req){
-        const PAGE_SIZE = 20;
-        const page = parseInt(req.params.page, 10);
-
-        const offset = (page - 1) * PAGE_SIZE;
-
         try{
             const result = await Permission.findAll({
                 attributes:{ exclude: ['createdAt', 'updatedAt']},
-                limit: PAGE_SIZE,
-                offset: offset,
-                order: [['id','ASC']]
             });
             return result;
         }catch (error) {
             console.error('Error fetching paginated permissions:', error);
             return 500;
         }
-        
+    }
+
+    async allPermissionWithPagination(req){
+        const PAGE_SIZE = 20;
+        const page = parseInt(req.params.page, 10);
+
+        const offset = (page - 1) * PAGE_SIZE;
+
+        try{
+            const permissions = await Permission.findAll({
+                attributes:{ exclude: ['createdAt', 'updatedAt']},
+                limit: PAGE_SIZE,
+                offset: offset,
+                order: [['id','ASC']]
+            });
+            const totalCount = await Permission.count();
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page: page,
+                totalpages: totalpages,
+                permissions: permissions
+            }
+            return result;
+        }catch (error) {
+            console.error('Error fetching paginated permissions:', error);
+            return 500;
+        }
     }
 
     async assignPermission(role, permissions){

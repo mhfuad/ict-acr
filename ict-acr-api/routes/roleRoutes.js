@@ -11,8 +11,12 @@ router.post('/', async (req, res)=>{
     await controller.create(req, res); 
 })
 
-router.get('/permission/page/:page', async (req, res)=> {
+router.get('/allPermission', async (req, res)=> {
     await controller.getAllPermission(req, res);
+})
+
+router.get('/permission/page/:page', async (req, res)=> {
+    await controller.getAllPermissionWithPage(req, res);
 })
 
 router.delete('/:id', async (req, res)=>{

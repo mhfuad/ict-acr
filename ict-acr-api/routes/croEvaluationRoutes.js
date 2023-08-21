@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     await controller.index(req, res)
 })
-'cro_eva_byForm'
+//'cro_eva_byForm'
 router.get('/:form_id', async (req, res) => {
     await controller.get(req, res)
 })
@@ -14,7 +14,7 @@ router.get('/:form_id', async (req, res) => {
 router.post('/:form_id', async (req, res) => {
     await controller.create(req, res)
 })
-'cro_eva_update'
+//'cro_eva_update'
 router.put('/:id',async (req, res) => {
     await controller.update(req, res)
 })

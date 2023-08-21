@@ -73,6 +73,15 @@ class RoleController{
         }
     }
 
+    async getAllPermissionWithPage(req, res){
+        try{
+            var result = await repository.allPermissionWithPagination(req);
+            res.json(result);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
     async getOneRole(req, res){
         try{
             var roles = await repository.getRole(req.params.id);

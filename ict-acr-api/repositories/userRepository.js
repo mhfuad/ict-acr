@@ -9,6 +9,18 @@ class UserRepository{
         this.users = [];
         this.nextId = 1;
     }
+    async allUser(req){
+        
+        try{
+            const users = await User.findAll({
+                attributes: { exclude: ['otp','password','createdAt','updatedAt'] },
+            });
+            return users
+        }catch (error) {
+            console.error('Error fetching paginated users:', error);
+            return 500;
+        }
+    }
 
     async getAllUsers(req){
         const PAGE_SIZE = 10;
@@ -18,9 +30,17 @@ class UserRepository{
             const users = await User.findAll({
                 attributes: { exclude: ['otp','password','createdAt','updatedAt'] },
                 limit: PAGE_SIZE,
-                offset: offset
+                offset: offset,
+                order: [['id','ASC']]
             });
-            return users
+            const totalCount = await User.count();
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                users: users
+            }
+            return result
         }catch (error) {
             console.error('Error fetching paginated users:', error);
             return 500;

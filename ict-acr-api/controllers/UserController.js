@@ -1,6 +1,15 @@
 const userRepository = require('../repositories/userRepository')
 
 class UserController{
+    async users(req, res) {
+        try {
+            const users = await userRepository.allUser(req);
+            res.json(users);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
     async getUsers(req, res) {
         try {
             const users = await userRepository.getAllUsers(req);

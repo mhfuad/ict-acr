@@ -6,11 +6,11 @@ const router = express.Router();
 router.get('/', async (req, res)=>{
     await controller.getDepartments(req,res)
 })
-'department_create'
+//'department_create'
 router.post('/', async (req, res)=>{
     await controller.createDepartment(req,res)
 })
-'department_get'
+//'department_get'
 router.get('/:id', async (req, res)=>{
     await controller.getDepartmentById(req,res)
 })
