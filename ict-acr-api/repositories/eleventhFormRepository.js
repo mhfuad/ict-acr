@@ -42,7 +42,7 @@ class eleventhFormRepository{
                             f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
                             f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
                             f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position,
-                             repo.designation as acr_designation
+                            repo.designation as acr_designation
                     FROM EleventhForms f
                     INNER JOIN Reporters repo
 	                    ON f.reporter_id = repo.id
@@ -52,7 +52,16 @@ class eleventhFormRepository{
                 type: sequelize.QueryTypes.SELECT,
                 model: EleventhForms
             })
-            return results
+            const totalCount = await await sequelize.query(`SELECT COUNT(f.id) AS total
+                                    FROM EleventhForms f
+                                    INNER JOIN Reporters repo
+                                        ON f.reporter_id = repo.id`,{
+                replacements: {limit:PAGE_SIZE, offset: offset},
+                type: sequelize.QueryTypes.SELECT,
+                model: EleventhForms
+                });
+            console.log(totalCount)
+            return results;
         } catch (error) {
             console.error('Error:', error.message);
             return error.message
