@@ -3,6 +3,7 @@ const { User, Role, Permission, user_role } = require('../models');
 const AuthRepository = require('../repositories/authRepository')
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const { Op } = require('sequelize');
 
 class UserRepository{
     constructor() {
@@ -104,6 +105,55 @@ class UserRepository{
             Roles:filter
         }
         return modify;
+    }
+
+    async search(criteria){
+        try{
+            const users = await User.findAll({
+                where: {
+                    [Op.or]: [
+                        {
+                            banglaName: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            englishName: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            idNo: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            personalNumber: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            designation: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            nid: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            cadre: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                    ]
+                }
+            });
+            return users;
+        } catch (err){
+            console.error('Error searching for books:', err)
+        }
     }
 
     async createUser(user) {
@@ -393,8 +443,6 @@ class UserRepository{
             }
         })
     }
-
-
 }
 
 module.exports = new UserRepository();

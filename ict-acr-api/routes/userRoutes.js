@@ -6,7 +6,9 @@ const router = express.Router();
 router.get('/', async (req, res) =>  {
     await userController.users(req, res);
 });
-
+router.get('/search', async (req, res) =>  {
+    await userController.searchUser(req, res);
+});
 router.get('/page/:page', async (req, res) =>  {
     await userController.getUsers(req, res);
 });
