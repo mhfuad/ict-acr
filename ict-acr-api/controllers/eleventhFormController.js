@@ -78,6 +78,15 @@ class FormController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async findForDone(req, res){
+        try {
+            const data = await repository.doneForm(req);
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
 }
 
 module.exports = new FormController();

@@ -183,6 +183,31 @@ class eleventhFormRepository{
             return err
         }
     }
+
+    async doneForm(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+
+        try{
+            const forms = await EleventhForms.findAll({
+                where: {status: "done"}, 
+                attributes: {exclude:['createdAt','updatedAt']},
+                limit: PAGE_SIZE,
+                offset: offset,
+            })
+            const totalCount = await EleventhForms.count({where: {status: "done"}});
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                forms: forms
+            }
+            return result
+        }catch(err){
+            return err
+        }
+    }
 }
 
 module.exports = new eleventhFormRepository();

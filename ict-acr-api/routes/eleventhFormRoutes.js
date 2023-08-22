@@ -17,6 +17,9 @@ router.get('/for_cro', async(req, res) => {
 router.get('/for_iro', async(req, res) => {
     await controller.findForIro(req, res)
 })
+router.get('/done/:page', async(req, res) => {
+    await controller.findForDone(req, res)
+})
 //'form_get'
 router.get('/:id', async (req, res, id) => {
     await controller.findOne(req, res, id)
