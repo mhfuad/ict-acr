@@ -10,11 +10,11 @@ router.get('/page/:page', async (req, res) =>  {
     await controller.getFormsWithPage(req, res);
 });
 //'form_forCRO'
-router.get('/for_cro', async(req, res) => {
+router.get('/for_cro/:page', async(req, res) => {
     await controller.findForCro(req, res)
 })
 //'form_forIRO'
-router.get('/for_iro', async(req, res) => {
+router.get('/for_iro/:page', async(req, res) => {
     await controller.findForIro(req, res)
 })
 router.get('/done/:page', async(req, res) => {

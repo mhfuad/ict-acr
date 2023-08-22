@@ -166,19 +166,51 @@ class eleventhFormRepository{
         }
     }
 
-    async findForCro(){
+    async findForCro(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+
         try{
-            const form = await EleventhForms.findAll({where:{status: "cro"}}, {attributes:{exclude:['createdAt','updatedAt']}})
-            return form;
+            const forms = await EleventhForms.findAll({
+                where: {status: "cro"}, 
+                attributes: {exclude:['createdAt','updatedAt']},
+                limit: PAGE_SIZE,
+                offset: offset,
+            })
+            const totalCount = await EleventhForms.count({where: {status: "cro"}});
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                forms: forms
+            }
+            return result
         }catch(err){
             return err
         }
     }
 
-    async findForIro(){
+    async findForIro(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+
         try{
-            const form = await EleventhForms.findAll({where:{status: "iro"}}, {attributes:{exclude:['createdAt','updatedAt']}})
-            return form;
+            const forms = await EleventhForms.findAll({
+                where: {status: "iro"}, 
+                attributes: {exclude:['createdAt','updatedAt']},
+                limit: PAGE_SIZE,
+                offset: offset,
+            })
+            const totalCount = await EleventhForms.count({where: {status: "iro"}});
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                forms: forms
+            }
+            return result
         }catch(err){
             return err
         }
