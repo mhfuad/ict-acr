@@ -93,6 +93,24 @@ class UserController{
         }
         
     }
+
+    async backup(req, res){
+        try {
+            const user = await userRepository.backUp(res);
+            return res.json(user);
+        } catch (err) {
+            res.json({ error: err.message });
+        }
+    }
+
+    async restore(req, res){
+        try {
+            const user = await userRepository.restore(res);
+            return res.json(user);
+        } catch (err) {
+            res.json({ error: err.message });
+        }
+    }
 }
 
 module.exports = new UserController();

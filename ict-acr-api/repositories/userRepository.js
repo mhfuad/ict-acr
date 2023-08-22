@@ -443,6 +443,33 @@ class UserRepository{
             }
         })
     }
+
+    async backUp(){
+        try {
+            const users = await User.findAll({attributes: { exclude: ['otp'] }});
+            console.log(users)
+            const backupData = users.map(user => user.toJSON());
+        
+            fs.writeFileSync(`./backup/user.json`, JSON.stringify(backupData, null, 2));
+            return 'Backup successful.';
+          } catch (error) {
+            return {"Backup error": error}
+          }
+    }
+
+    async restore(){
+        try {
+            const backupData = JSON.parse(fs.readFileSync('./backup/user.json', 'utf8'));
+        
+            for (const userData of backupData) {
+              await User.create(userData);
+            }
+        
+            return 'Restore successful.';
+          } catch (error) {
+            return {'Restore error' : error};
+          }
+    }
 }
 
 module.exports = new UserRepository();

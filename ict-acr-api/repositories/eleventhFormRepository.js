@@ -59,10 +59,11 @@ class eleventhFormRepository{
                 replacements: {limit:PAGE_SIZE, offset: offset},
                 type: sequelize.QueryTypes.SELECT,
                 });
-            console.log("======================="+totalCount[0]['total'])
+            const totalpages = Math.ceil(totalCount[0]['total'] / PAGE_SIZE);
+            console.log("======================="+totalpages)
             const results= {
                 page: page,
-                totalpages: totalCount[0]["total"],
+                totalpages: totalpages,
                 forms: forms,
             }
             return results;

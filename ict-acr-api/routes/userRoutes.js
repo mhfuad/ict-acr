@@ -12,6 +12,13 @@ router.get('/search', async (req, res) =>  {
 router.get('/page/:page', async (req, res) =>  {
     await userController.getUsers(req, res);
 });
+router.get("/backup", async(req, res) => {
+    await userController.backup(req, res);
+})
+
+router.get("/restore", async(req, res) => {
+    await userController.restore(req, res);
+})
 //'user_ById'
 router.get('/:id', async (req, res, id) => {
     await userController.getUserById(req, res, id)
@@ -32,5 +39,9 @@ router.delete('/:id', async (req, res) => {
 router.post("/upload_image/:user_id", async(req, res) => {
     await userController.upload_image(req, res);
 })
+
+
+
+
 
 module.exports = router;
