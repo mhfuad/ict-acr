@@ -38,7 +38,7 @@ class eleventhFormRepository{
         const page = parseInt(req.params.page, 10);
         const offset = (page - 1) * PAGE_SIZE;
         try {
-            const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
+            const forms = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
                             f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
                             f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
                             f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position,
@@ -58,12 +58,16 @@ class eleventhFormRepository{
                                         ON f.reporter_id = repo.id`,{
                 replacements: {limit:PAGE_SIZE, offset: offset},
                 type: sequelize.QueryTypes.SELECT,
-                model: EleventhForms
                 });
-            console.log(totalCount)
+            console.log("======================="+totalCount[0]['total'])
+            const results= {
+                page: page,
+                totalpages: totalCount[0]["total"],
+                forms: forms,
+            }
             return results;
         } catch (error) {
-            console.error('Error:', error.message);
+            //console.error('Error:', error.message);
             return error.message
         }
     }
