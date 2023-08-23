@@ -9,11 +9,11 @@ class ReporterRepository{
 
     async create(body){
         
-        // const [results, metadata] = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
-        //     replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
-        //     type: sequelize.QueryTypes.SELECT,
-        //     model: Reporter,
-        // })
+        const check = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
+            replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
+            type: sequelize.QueryTypes.SELECT,
+            model: Reporter,
+        })
         // return results;
         try{
             body.submited = false;
@@ -65,7 +65,7 @@ class ReporterRepository{
         const page = parseInt(req.params.page, 10);
         const offset = (page - 1) * PAGE_SIZE;
         try{
-            const reporters = await await sequelize.query(`SELECT re.*, us.banglaName as user_name, iro.banglaName as iro_name, cro.banglaName as cro_name 
+            const reporters = await sequelize.query(`SELECT re.*, us.banglaName as user_name, iro.banglaName as iro_name, cro.banglaName as cro_name 
                     FROM Reporters as re
                     JOIN Users as us
                         on re.user_id = us.idNo
@@ -80,19 +80,8 @@ class ReporterRepository{
                         model: Reporter
                     }
             )
-            const totalCount = await await sequelize.query(`SELECT COUNT(re.id) AS total
-                    FROM Reporters as re
-                    JOIN Users as us
-                        on re.user_id = us.idNo
-                    JOIN Users as iro
-                        on re.iro = iro.idNo
-                    JOIN Users as cro
-                        on re.cro = cro.idNo`,
-                    {
-                        type: sequelize.QueryTypes.SELECT,
-                    }
-            );
-            const totalpages = Math.ceil(totalCount[0]['total'] / PAGE_SIZE);
+            const totalCount = await Reporter.count();
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
             const results= {
                 page: page,
                 totalpages: totalpages,
