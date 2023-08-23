@@ -4,24 +4,41 @@ const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const jwt = require('jsonwebtoken');
 const config = require('../config/index')
+const { Op } = require('sequelize');
 
 class ReporterRepository{
 
     async create(body){
         
-        const check = await sequelize.query('SELECT * FROM Reporters where user_id = :user_id && start_date > :start_date && end_date < :end_date ',{
-            replacements: { user_id: body.user_id, start_date: body.start_date, end_date: body.end_date },
-            type: sequelize.QueryTypes.SELECT,
-            model: Reporter,
-        })
-        // return results;
-        try{
-            body.submited = false;
-            const data = await Reporter.create(body);
-            return data;
-        }catch (e){
-            return e;
+        const check = await Reporter.count({
+            where: {
+                user_id: body.user_id,
+                [Op.or]: [
+                    {
+                        start_date: {
+                            [Op.between]: [body.start_date, body.end_date]
+                        }
+                    },
+                    {
+                        end_date: {
+                            [Op.between]: [body.start_date, body.end_date]
+                        }
+                    }
+                ]
+            }
+        });
+        if(check){
+            return `This user already have an ACR in this date`;
+        }else{
+            try{
+                body.submited = false;
+                const data = await Reporter.create(body);
+                return data;
+            }catch (e){
+                return e;
+            }
         }
+        
     }
 
     async getIRO(user){
