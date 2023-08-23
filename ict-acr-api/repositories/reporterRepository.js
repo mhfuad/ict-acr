@@ -60,6 +60,49 @@ class ReporterRepository{
             return e;
         }
     }
+    async allWithPagination(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+        try{
+            const reporters = await await sequelize.query(`SELECT re.*, us.banglaName as user_name, iro.banglaName as iro_name, cro.banglaName as cro_name 
+                    FROM Reporters as re
+                    JOIN Users as us
+                        on re.user_id = us.idNo
+                    JOIN Users as iro
+                        on re.iro = iro.idNo
+                    JOIN Users as cro
+                        on re.cro = cro.idNo
+                    LIMIT :limit
+                    OFFSET :offset`,{
+                        replacements: {limit:PAGE_SIZE, offset: offset},
+                        type: sequelize.QueryTypes.SELECT,
+                        model: Reporter
+                    }
+            )
+            const totalCount = await await sequelize.query(`SELECT COUNT(re.id) AS total
+                    FROM Reporters as re
+                    JOIN Users as us
+                        on re.user_id = us.idNo
+                    JOIN Users as iro
+                        on re.iro = iro.idNo
+                    JOIN Users as cro
+                        on re.cro = cro.idNo`,
+                    {
+                        type: sequelize.QueryTypes.SELECT,
+                    }
+            );
+            const totalpages = Math.ceil(totalCount[0]['total'] / PAGE_SIZE);
+            const results= {
+                page: page,
+                totalpages: totalpages,
+                reporters: reporters,
+            }
+            return results;
+        }catch (e){
+            return e;
+        }
+    }
     
     async delete(id){
         try{

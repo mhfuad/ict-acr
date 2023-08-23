@@ -56,7 +56,6 @@ class eleventhFormRepository{
                                     FROM EleventhForms f
                                     INNER JOIN Reporters repo
                                         ON f.reporter_id = repo.id`,{
-                replacements: {limit:PAGE_SIZE, offset: offset},
                 type: sequelize.QueryTypes.SELECT,
                 });
             const totalpages = Math.ceil(totalCount[0]['total'] / PAGE_SIZE);

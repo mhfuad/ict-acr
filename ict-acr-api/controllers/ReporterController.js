@@ -49,6 +49,15 @@ class ReporterController{
         }
     }
 
+    async getAllWithPagination(req, res){
+        try{
+            var response = await repository.allWithPagination(req);
+            res.json(response);
+        } catch (err){
+            res.status(500).json({error: err})
+        }
+    }
+
     async deleteReporter(req, res){
         try{
             var response = await repository.delete(req.params.id);
