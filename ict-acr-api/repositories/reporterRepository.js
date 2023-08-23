@@ -28,7 +28,7 @@ class ReporterRepository{
             }
         });
         if(check){
-            return `This user already have an ACR in this date`;
+            return `not_available`;
         }else{
             try{
                 body.submited = false;

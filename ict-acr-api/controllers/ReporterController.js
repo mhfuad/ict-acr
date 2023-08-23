@@ -4,7 +4,12 @@ class ReporterController{
     async create(req, res){
         try {
             var response = await repository.create(req.body);
-            res.json(response);
+            
+            if(response == 'not_available'){
+                res.status(403).json({error:"This user already has an ACR between this dates"});
+            }else{
+                res.json(response);
+            }
         } catch (err){
             res.status(500).json({ error: err.message})
         }
