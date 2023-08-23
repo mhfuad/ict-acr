@@ -16,8 +16,8 @@ class CroEvaluationRepository{
         const user = await User.findOne({where:{idNo:form.userIdNo}})
         const cro = await User.findOne({where:{idNo:form.cro}})
 
-        await AuthRepository.sendSMS(user.personalNumber,`Mr. ${user.englishName} (Applicant) your ACR approved by Mr. ${cro.englishName} (CRO)`);
-        AuthRepository.sendMail(user.personalMail,`Mr. ${user.englishName} (Applicant) your ACR approved by Mr. ${cro.englishName} (CRO)`);
+        await AuthRepository.sendSMS(user.personalNumber,`Mr./Ms. ${user.englishName} (Applicant). Your ACR approved by Mr./Ms. ${cro.englishName} (CRO)`);
+        AuthRepository.sendMail(user.personalMail,`Mr./Ms. ${user.englishName} (Applicant). Your ACR approved by Mr./Ms. ${cro.englishName} (CRO)`);
         return cro_eve;
     }
 
