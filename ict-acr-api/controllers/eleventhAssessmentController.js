@@ -9,6 +9,15 @@ class EleventhAssessmentController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async update(req, res){
+        try {
+            const data = await repository.update(req.params.form_id, req.body)
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
     
     async getQuestionsOfForm(req, res) {
         try {

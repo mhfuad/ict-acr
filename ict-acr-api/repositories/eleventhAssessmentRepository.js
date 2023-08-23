@@ -29,7 +29,24 @@ class EleventhAssessmentRepository{
         return await EleventhAssessments.findAll({where:{formId:form_id}});
     }
 
-    
+    async update(form_id, body){
+        const questionLenght = Object.keys(body).length
+           
+        if(questionLenght != 22){
+            return "missing";
+        }
+        const del = await EleventhAssessments.destry({
+            where: {
+                formId: form_id
+            }
+        });
+        const newData = body.map((item, index) => ({
+            ...item,
+            formId: form_id
+          }));
+        const result = await EleventhAssessments.bulkCreate(newData)
+        return result;
+    }
 
     // async create(body){
     //     try{

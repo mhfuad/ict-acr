@@ -6,6 +6,9 @@ const router = express.Router();
 router.post('/create/:form_id', async (req, res) => {
     await controller.create(req, res)
 })
+router.post('/update/:form_id', async (req, res) => {
+    await controller.update(req, res)
+})
 //'assessment_byForm'
 router.get('/:form_id', async (req, res) => {
     await controller.getQuestionsOfForm(req, res)
