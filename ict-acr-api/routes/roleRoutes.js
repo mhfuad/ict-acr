@@ -27,6 +27,10 @@ router.get('/:id', async(req, res)=>{
     await controller.getOneRole(req, res)
 })
 
+router.get('/:id/user', async(req, res)=>{
+    await controller.roleWithUser(req, res)
+})
+
 router.post('/permissionAssign/:role', async (req, res)=> {
     await controller.assignPermission(req, res);
 })

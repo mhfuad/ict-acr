@@ -1,4 +1,5 @@
 const repository = require('../repositories/roleRepository')
+const validation = require('../validation/roleValidation')
 class RoleController{
 
     async assignRole(req, res){
@@ -47,6 +48,10 @@ class RoleController{
     }
 
     async create(req, res){
+        const { error, value } = validation.validate(req.body)
+        if(error){
+            return res.status(400).json({ error: error.details });
+        }
         try{
             var roles = await repository.create(req);
             res.json(roles);
@@ -85,6 +90,15 @@ class RoleController{
     async getOneRole(req, res){
         try{
             var roles = await repository.getRole(req.params.id);
+            res.json(roles);
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
+    async roleWithUser(req, res){
+        try{
+            var roles = await repository.getRoleWithUser(req.params.id);
             res.json(roles);
         } catch (err){
             res.status(500).json({ error: err.message})

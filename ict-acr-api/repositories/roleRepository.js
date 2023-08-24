@@ -27,7 +27,10 @@ class RoleRepository{
     }
 
     async allRole(){
-        return await Role.findAll({ attributes:{ exclude: ['createdAt','updatedAt']}});
+        return await Role.findAll({ 
+            attributes:{ exclude: ['createdAt','updatedAt']},
+            order: [['id', 'ASC']]
+        });
     }
 
     async create(req){
@@ -119,6 +122,23 @@ class RoleRepository{
                 include:{
                     model: Permission,
                     attributes:{ exclude: ['createdAt','updatedAt']},
+                }
+            })
+        }catch (error){
+            console.log(error)
+        }
+    }
+
+    async getRoleWithUser(id){
+        try{
+            return await Role.findByPk(id,{
+                where: {
+                    id: id
+                },
+                attributes:{ exclude: ['createdAt','updatedAt']},
+                include:{
+                    model: User,
+                    attributes:{ exclude: ['createdAt','updatedAt','password','otp','role']},
                 }
             })
         }catch (error){
