@@ -6,16 +6,22 @@ const router = express.Router();
 router.post('/create/:form_id', async (req, res) => {
     await controller.create(req, res)
 })
-router.post('/update/:form_id', async (req, res) => {
+router.put('/update/:form_id', async (req, res) => {
     await controller.update(req, res)
 })
-//'assessment_byForm'
-router.get('/:form_id', async (req, res) => {
-    await controller.getQuestionsOfForm(req, res)
+
+router.get('/all', async (req, res) => {
+    await controller.getAll(req, res)
 })
+
 //'assessment_createForm'
 router.post('/createQuestion', async (req, res) => {
     await controller.createQuestion(req, res)
+})
+
+//'assessment_byForm'
+router.get('/:form_id', async (req, res) => {
+    await controller.getQuestionsOfForm(req, res)
 })
 
 module.exports = router;

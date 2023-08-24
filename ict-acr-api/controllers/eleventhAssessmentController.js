@@ -27,6 +27,14 @@ class EleventhAssessmentController{
             res.status(500).json({ error: err.message });
         }
     }
+    async getAll(req, res){
+        try {
+            const data = await repository.all();
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
 
     // async createQuestion(req, res) {
     //     try {
@@ -57,7 +65,7 @@ class EleventhAssessmentController{
     //         res.status(500).json({ error: err.message });
     //     }
     // }
-
+    
 
 }
 

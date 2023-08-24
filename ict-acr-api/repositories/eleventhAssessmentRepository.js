@@ -35,7 +35,7 @@ class EleventhAssessmentRepository{
         if(questionLenght != 22){
             return "missing";
         }
-        const del = await EleventhAssessments.destry({
+        const del = await EleventhAssessments.destroy({
             where: {
                 formId: form_id
             }
@@ -46,6 +46,10 @@ class EleventhAssessmentRepository{
           }));
         const result = await EleventhAssessments.bulkCreate(newData)
         return result;
+    }
+
+    async all(){
+        return await EleventhAssessments.findAll();
     }
 
     // async create(body){
