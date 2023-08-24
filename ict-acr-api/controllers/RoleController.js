@@ -3,6 +3,10 @@ const validation = require('../validation/roleValidation')
 class RoleController{
 
     async assignRole(req, res){
+        if(!req.body.role){
+            res.status(400).json({ error: "Role require" });
+        }
+        
         try {
             var test = await repository.assignRole(req.params.user, req.body.role);
             res.json(test);
@@ -12,6 +16,7 @@ class RoleController{
         }
     }
     async assignPermission(req, res){
+
         try {
             var test = await repository.assignPermission(req.params.role, req.body.permissions);
             res.json(test);
