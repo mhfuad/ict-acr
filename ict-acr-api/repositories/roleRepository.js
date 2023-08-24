@@ -119,10 +119,16 @@ class RoleRepository{
                     id: id
                 },
                 attributes:{ exclude: ['createdAt','updatedAt']},
-                include:{
-                    model: Permission,
-                    attributes:{ exclude: ['createdAt','updatedAt']},
-                }
+                include:[
+                    {
+                        model: User,
+                        attributes:{ exclude: ['createdAt','updatedAt','password','otp','role']},
+                    },
+                    {
+                        model: Permission,
+                        attributes:{ exclude: ['createdAt','updatedAt']},
+                    }
+                ]
             })
         }catch (error){
             console.log(error)
