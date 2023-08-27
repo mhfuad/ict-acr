@@ -1,7 +1,12 @@
 const repository = require('../repositories/reporterRepository')
+const validation = require('../validation/reporterValidation')
 class ReporterController{
 
     async create(req, res){
+        const { error, value } = validation.validate(req.body)
+        if(error){
+            return res.status(400).json({ error: error.details });
+        }
         try {
             var response = await repository.create(req.body);
             

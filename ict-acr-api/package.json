@@ -12,6 +12,7 @@
   "author": "inflack",
   "license": "ISC",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",

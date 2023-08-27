@@ -34,7 +34,7 @@ class UserController{
 
     async searchUser(req, res){
         try {
-            const user = await userRepository.search(req.body.criteria);
+            const user = await userRepository.search(req.params.criteria);
             if (!user) {
                 return res.status(404).json({ error: 'User not found' });
             }else{
