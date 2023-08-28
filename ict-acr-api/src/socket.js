@@ -22,11 +22,13 @@ setInterval(()=>{
 
 io.on("connection", (socket) => {
 	socket.emit('likeupdate', likes);
+	
 	socket.on('liked', () => {
 		likes++;
 		socket.emit('likeupdate', likes);
 		socket.broadcast.emit('likeupdate', likes)
 	})
+	
 	eventEmitter.on('newdata', ()=>{
 		socket.broadcast.emit('likeupdate', likes)
 	})

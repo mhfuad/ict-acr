@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Permission.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    title: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Permission',
