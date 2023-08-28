@@ -39,26 +39,104 @@ module.exports = {
     await queryInterface.bulkInsert('role_permissions', [
       //1 admin, 2 user, 3 iro, 4 cro
       {
-        RoleId: 4,
-        PermissionId: 8,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,
-        PermissionId: 33,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,
-        PermissionId: 21,
+        RoleId: 1,
+        PermissionId: 59,//dashboard
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         RoleId: 2,
-        PermissionId: 28,
+        PermissionId: 59,//dashboard
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 59,//dashboard
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,
+        PermissionId: 59,//dashboard
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 1,
+        PermissionId: 59,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 2,
+        PermissionId: 59,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 59,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,
+        PermissionId: 59,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//settings
+        PermissionId: 60,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,
+        PermissionId: 59,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//settings
+        PermissionId: 60,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 61,//acr_request
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//acr_request
+        PermissionId: 61,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 62,//acr_request
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//acr_request
+        PermissionId: 62,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 3,
+        PermissionId: 63,//acr_report
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//acr_report
+        PermissionId: 63,
         createdAt: new Date(),
         updatedAt: new Date()
       },
