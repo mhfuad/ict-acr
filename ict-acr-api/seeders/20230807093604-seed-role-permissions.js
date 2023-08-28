@@ -37,106 +37,93 @@ module.exports = {
     ], {});
 
     await queryInterface.bulkInsert('role_permissions', [
-      //1 admin, 2 user, 3 iro, 4 cro
       {
-        RoleId: 1,
-        PermissionId: 59,//dashboard
+        RoleId: 2,//user
+        PermissionId: 60,//dashboard
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 2,
-        PermissionId: 59,//dashboard
+        RoleId: 3,//iro
+        PermissionId: 60,//dashboard
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 3,
-        PermissionId: 59,//dashboard
+        RoleId: 4,//cro
+        PermissionId: 60,//dashboard
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 4,
-        PermissionId: 59,//dashboard
+        RoleId: 2,//user
+        PermissionId: 28,//form_create
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 1,
+        RoleId: 3,//iro
+        PermissionId: 28,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//cro
+        PermissionId: 28,//form_create
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//cro
+        PermissionId: 60,//settings
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        RoleId: 4,//cro
         PermissionId: 59,//form_create
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 2,
-        PermissionId: 59,//form_create
+        RoleId: 4,//cro
+        PermissionId: 60,//settings
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 3,
-        PermissionId: 59,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,
-        PermissionId: 59,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//settings
-        PermissionId: 60,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,
-        PermissionId: 59,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//settings
-        PermissionId: 60,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,
+        RoleId: 3,//iro
         PermissionId: 61,//acr_request
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 4,//acr_request
-        PermissionId: 61,
+        RoleId: 4,//cro
+        PermissionId: 61,//acr_request
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 3,
+        RoleId: 3,//iro
         PermissionId: 62,//acr_request
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 4,//acr_request
-        PermissionId: 62,
+        RoleId: 4,//cro
+        PermissionId: 62,//acr_request
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 3,
+        RoleId: 3,//iro
         PermissionId: 63,//acr_report
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        RoleId: 4,//acr_report
-        PermissionId: 63,
+        RoleId: 4,//cro
+        PermissionId: 63,//acr_report
         createdAt: new Date(),
         updatedAt: new Date()
       },

@@ -1,4 +1,7 @@
 const express = require('express')
+const http = require('http')
+const { Server } = require('socket.io');
+const events = require('events')
 const cors = require('cors')
 const proxy = require('express-http-proxy')
 const path = require('path')
@@ -25,54 +28,83 @@ const departmentRoutes = require('../routes/departmentRoutes');
 const wingRoutes = require('../routes/wingRoutes');
 const branchRoutes = require('../routes/branchRoutes');
 
-const StartServer = () => {
-    const app = express();
-    app.use(express.json({limit: '10mb'}));
-    app.use(cors());
 
-    //token verification
-    const verifyToken = (req, res, next) => {
-        const hasToken = req.headers.authorization;
-        
-        if (!hasToken){
-            return res.status(403).json({error: 'No token provided'})
+const app = express();
+const server = http.createServer(app);
 
-        }
-        const token = hasToken.split(" ")[1]
-        jwt.verify(token, APP_SECRET,  (err, data) => {
-            if (err){
-                console.log('Token verification failed:', token)
-                return res.sendStatus(403)
-            }
-            req.body.userId = data.userForToken.id;//attaching user is to request body
-            next();
-        })
+app.use(express.json({limit: '10mb'}));
+app.use(cors());
+
+//token verification
+const verifyToken = (req, res, next) => {
+    const hasToken = req.headers.authorization;
+    
+    if (!hasToken){
+        return res.status(403).json({error: 'No token provided'})
+
     }
-
-    //app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
-    // app.use((req, res, next)=>{
-    //     log(req.headers)
-    //     next()
-    // })
-    app.use('/auth', authRoutes)
-    app.use('/users', verifyToken, userRoutes)
-    app.use('/role', verifyToken, roleRoutes)
-    app.use('/zone', verifyToken, zoneRoutes)
-    app.use('/eleventhForm', verifyToken, eleventhForm)
-    app.use('/eleventh_assessment', verifyToken, eleventhAssessmentRoute)
-    app.use('/iro_evaluation', iroEvaluationRouts)
-    app.use('/cro_evaluation', croEvaluationRouts)
-    app.use('/reporter',verifyToken, reporterRoutes)
-    app.use('/access_log', accessLogRoutes)
-    app.use('/department', verifyToken, departmentRoutes)
-    app.use('/section', verifyToken, sectionRoutes)
-    app.use('/designation', verifyToken, designationRoutes)
-    app.use('/wing', verifyToken, wingRoutes)
-    app.use('/branch',verifyToken,  branchRoutes)
-    //image access
-    app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
-    app.listen(PORT, () => {
-        console.log(`getWay is running on port ${PORT}`)
+    const token = hasToken.split(" ")[1]
+    jwt.verify(token, APP_SECRET,  (err, data) => {
+        if (err){
+            console.log('Token verification failed:', token)
+            return res.sendStatus(403)
+        }
+        req.body.userId = data.userForToken.id;//attaching user is to request body
+        next();
     })
 }
-StartServer();
+
+//app.use('/firstClass', verifyToken, proxy('http://localhost:8001'))
+// app.use((req, res, next)=>{
+//     log(req.headers)
+//     next()
+// })
+app.use('/auth', authRoutes)
+app.use('/users', verifyToken, userRoutes)
+app.use('/role', verifyToken, roleRoutes)
+app.use('/zone', verifyToken, zoneRoutes)
+app.use('/eleventhForm', verifyToken, eleventhForm)
+app.use('/eleventh_assessment', verifyToken, eleventhAssessmentRoute)
+app.use('/iro_evaluation', iroEvaluationRouts)
+app.use('/cro_evaluation', croEvaluationRouts)
+app.use('/reporter',verifyToken, reporterRoutes)
+app.use('/access_log', accessLogRoutes)
+app.use('/department', verifyToken, departmentRoutes)
+app.use('/section', verifyToken, sectionRoutes)
+app.use('/designation', verifyToken, designationRoutes)
+app.use('/wing', verifyToken, wingRoutes)
+app.use('/branch',verifyToken,  branchRoutes)
+//image access
+app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
+
+
+//socket
+const io = new Server(server,{
+	cors: {
+		origin: "*",
+	}
+});
+
+let likes = 0;
+const eventEmitter = new events.EventEmitter();
+
+setInterval(()=>{
+	likes++;
+	eventEmitter.emit("newdata");
+}, 2000);
+
+io.on("connection", (socket) => {
+	socket.emit('likeupdate', likes);
+	socket.on('liked', () => {
+		likes++;
+		socket.emit('likeupdate', likes);
+		socket.broadcast.emit('likeupdate', likes)
+	})
+	eventEmitter.on('newdata', ()=>{
+		socket.broadcast.emit('likeupdate', likes)
+	})
+});
+
+server.listen(PORT, () => {
+    console.log(`getWay is running on port ${PORT}`)
+})

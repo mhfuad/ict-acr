@@ -340,61 +340,61 @@ module.exports = {
         updatedAt: new Date()
       },
       //zone
-      //54
+      //55
       {
         name: 'zone_all',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //55
+      //56
       {
         name: 'zone_create',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //56
+      //57
       {
         name: 'zone_ById',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //57
+      //58
       {
         name: 'zone_update',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //58
+      //59
       {
         name: 'zone_delete',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //59
+      //60
       {
         name: 'dashboard',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //60
+      //61
       {
         name: 'settings',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //61
+      //62
       {
         name: 'acr_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //62
+      //63
       {
         name: 'acr_approved',
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      //63
+      //64
       {
         name: 'acr_report',
         createdAt: new Date(),
