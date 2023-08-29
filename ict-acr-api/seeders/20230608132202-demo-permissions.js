@@ -266,37 +266,42 @@ module.exports = {
       },
       //37
       {
-        title: 'Can see Reporter ',
+        title: 'Can see Reporter\'s IRO',
         name: 'reporter_ByIRO',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //38
       {
+        title: 'Can see Reporter\'s CRO',
         name: 'reporter_ByCRO',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //39
       {
+        title: 'Can see all Reporter',
         name: 'reporter_all',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //40
       {
+        title: 'Can see all Reporter by user',
         name: 'reporter_ByUser',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //41
       {
+        title: 'Can update Reporter',
         name: 'reporter_update',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //42
       {
+        title: 'Can delete Reporter',
         name: 'reporter_delete',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -304,6 +309,7 @@ module.exports = {
       //Role
       //43
       {
+        title: 'Can assign role',
         name: 'role_assign',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -311,30 +317,35 @@ module.exports = {
       //section
       //44
       {
+        title: 'Can see all section',
         name: 'section_all',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //45
       {
+        title: 'Can create section',
         name: 'section_create',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //46
       {
+        title: 'Can see section by id',
         name: 'section_ById',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //47
       {
+        title: 'Can update section',
         name: 'section_update',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //48
       {
+        title: 'Can delete section',
         name: 'section_delete',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -342,36 +353,42 @@ module.exports = {
       //User
       //49
       {
+        title: 'Can see all user',
         name: 'user_all',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //50
       {
+        title: 'Can see user by id',
         name: 'user_ById',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //51
       {
+        title: 'Can create user',
         name: 'user_create',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //52
       {
+        title: 'Can update user',
         name: 'user_update',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //53
       {
+        title: 'Can delete user',
         name: 'user_delete',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //54
       {
+        title: 'Can upload image',
         name: 'user_ImageUpload',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -379,60 +396,70 @@ module.exports = {
       //zone
       //55
       {
+        title: 'Can see all zone',
         name: 'zone_all',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //56
       {
+        title: 'Can create zone',
         name: 'zone_create',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //57
       {
+        title: 'Can see zone by id',
         name: 'zone_ById',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //58
       {
+        title: 'Can update zone',
         name: 'zone_update',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //59
       {
+        title: 'Can delete zone',
         name: 'zone_delete',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //60
       {
+        title: 'Can see dashboard',
         name: 'dashboard',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //61
       {
+        title: 'Can see Settings',
         name: 'settings',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //62
       {
+        title: 'Can request ACR',
         name: 'acr_request',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //63
       {
+        title: 'Can see acr approved',
         name: 'acr_approved',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       //64
       {
+        title: 'Can see acr approved',
         name: 'acr_report',
         createdAt: new Date(),
         updatedAt: new Date()
