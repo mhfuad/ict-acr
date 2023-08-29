@@ -7,7 +7,8 @@
 </head>
 <body>
     <button id="likes">0</button>
-
+    <button id="custom">custom</button>
+    
 </body>
 <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
 <script>
@@ -18,14 +19,22 @@
     })
 
     const btn = document.querySelector("button")
+    const custom = document.getElementById("custom")
     const like = document.getElementById("likes")
+
+    socket.on("likeupdate", (count) => {
+        like.textContent = count;
+    })
 
     btn.addEventListener('click', ()=>{
         socket.emit('liked');
     })
 
-    socket.on("likeupdate", (count) => {
-        like.textContent = count;
+    custom.addEventListener('click', ()=>{
+        socket.emit('custom-event', 10, 'h1', {a: 'a'})
     })
+
+
+    
 </script>
 </html>

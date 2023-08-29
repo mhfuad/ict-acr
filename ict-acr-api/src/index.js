@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const { Server } = require('socket.io');
-const events = require('events')
+//const events = require('events')
 const cors = require('cors')
 const proxy = require('express-http-proxy')
 const path = require('path')
@@ -86,23 +86,31 @@ const io = new Server(server,{
 });
 
 let likes = 0;
-const eventEmitter = new events.EventEmitter();
+//const eventEmitter = new events.EventEmitter();
 
-setInterval(()=>{
-	likes++;
-	eventEmitter.emit("newdata");
-}, 2000);
+// setInterval(()=>{
+// 	likes++;
+// 	//eventEmitter.emit("newdata");
+// }, 2000);
 
 io.on("connection", (socket) => {
+
 	socket.emit('likeupdate', likes);
+
 	socket.on('liked', () => {
 		likes++;
 		socket.emit('likeupdate', likes);
-		socket.broadcast.emit('likeupdate', likes)
+		socket.broadcast.emit('likeupdate', likes) 
 	})
-	eventEmitter.on('newdata', ()=>{
-		socket.broadcast.emit('likeupdate', likes)
-	})
+
+    socket.on('custom-event', (number, string, obj)=>{
+        console.log(number, string, obj)
+    })
+    
+	// eventEmitter.on('newdata', ()=>{
+	// 	socket.broadcast.emit('likeupdate', likes)
+	// })
+    
 });
 
 server.listen(PORT, () => {
