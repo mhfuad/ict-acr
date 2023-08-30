@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const { Server } = require('socket.io');
-//const events = require('events')
+const events = require('events')
 const cors = require('cors')
 const proxy = require('express-http-proxy')
 const path = require('path')
@@ -27,6 +27,7 @@ const designationRoutes = require('../routes/designationRoutes')
 const departmentRoutes = require('../routes/departmentRoutes');
 const wingRoutes = require('../routes/wingRoutes');
 const branchRoutes = require('../routes/branchRoutes');
+const { message } = require('../validation/roleValidation');
 
 
 const app = express();
@@ -86,15 +87,15 @@ const io = new Server(server,{
 });
 
 let likes = 0;
-//const eventEmitter = new events.EventEmitter();
+eventEmitter = new events.EventEmitter();
 
-// setInterval(()=>{
-// 	likes++;
-// 	//eventEmitter.emit("newdata");
-// }, 2000);
+setInterval(()=>{
+	likes++;
+	eventEmitter.emit("event");
+}, 2000);
 
 io.on("connection", (socket) => {
-
+    console.log(socket.id)
 	socket.emit('likeupdate', likes);
 
 	socket.on('liked', () => {
@@ -106,10 +107,28 @@ io.on("connection", (socket) => {
     socket.on('custom-event', (number, string, obj)=>{
         console.log(number, string, obj)
     })
+
+    socket.on('send-message', message =>{
+        /* including sender send message to all
+        *   io.emit('receive-message', message);
+        */
+        //except sender send message to all
+        socket.broadcast.emit('receive-message', message);
+    })
+
+    socket.on('send_to', (message, room) => {
+        if(room != ""){
+            socket.to(room).emit('user_message', message)
+        }
+    })
     
-	// eventEmitter.on('newdata', ()=>{
-	// 	socket.broadcast.emit('likeupdate', likes)
-	// })
+    socket.on("user-connected", user_id =>{
+        console.log(user_id)
+        socket.join(user_id)
+    })
+	eventEmitter.on('event', ()=>{
+		socket.broadcast.emit('message', "bla")
+	})
     
 });
 
