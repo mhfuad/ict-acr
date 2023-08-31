@@ -103,33 +103,6 @@ io.on("connection", (socket) => {
 		socket.emit('likeupdate', likes);
 		socket.broadcast.emit('likeupdate', likes) 
 	})
-
-    socket.on('custom-event', (number, string, obj)=>{
-        console.log(number, string, obj)
-    })
-
-    socket.on('send-message', message =>{
-        /* including sender send message to all
-        *   io.emit('receive-message', message);
-        */
-        //except sender send message to all
-        socket.broadcast.emit('receive-message', message);
-    })
-
-    socket.on('send_to', (message, room) => {
-        if(room != ""){
-            socket.to(room).emit('user_message', message)
-        }
-    })
-    
-    socket.on("user-connected", user_id =>{
-        console.log(user_id)
-        socket.join(user_id)
-    })
-	eventEmitter.on('event', ()=>{
-		socket.broadcast.emit('message', "bla")
-	})
-    
 });
 
 server.listen(PORT, () => {
