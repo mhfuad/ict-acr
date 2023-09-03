@@ -5,6 +5,7 @@ const events = require('events')
 const cors = require('cors')
 const proxy = require('express-http-proxy')
 const path = require('path')
+const { Notification } = require('../models');
 
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
@@ -103,6 +104,19 @@ io.on("connection", (socket) => {
 		socket.emit('likeupdate', likes);
 		socket.broadcast.emit('likeupdate', likes) 
 	})
+
+    socket.on('user-connected', async(user_id, room, cb)=>{
+        const notifications = await Notification.findAll({where: {userId: user_id}});
+        cb(notifications)
+    })
+
+    socket.on('disconnect',()=>{
+        console.log("discconected "+socket.id)
+        const index = user_socketId.indexOf(socket.id)
+        if(index != -1){
+            user_socketId.splice(index)
+        }
+    })
 });
 
 server.listen(PORT, () => {
