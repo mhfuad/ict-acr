@@ -5,10 +5,12 @@ class RoleRepository{
 
     async assignRole(user, roles){
         const us = await User.findByPk(user,{ include:{model: Role}});
-
-        us.Roles.forEach( async (r) => {
-            await us.removeRole(r.id)
-        })
+        if(us.Roles){
+            console.log("have Roles")
+            us.Roles.forEach( async (r) => {
+                await us.removeRole(r.id)
+            })
+        }
 
         roles.forEach ( async (r) => {
             await us.addRole(r)

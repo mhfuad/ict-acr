@@ -106,17 +106,17 @@ io.on("connection", (socket) => {
 	})
 
     socket.on('user-connected', async(user_id, room, cb)=>{
-        const notifications = await Notification.findAll({where: {userId: user_id}});
+        const notifications = await Notification.findAll({where: {userId: user_id, deletedAt: null}});
         cb(notifications)
     })
 
-    socket.on('disconnect',()=>{
-        console.log("discconected "+socket.id)
-        const index = user_socketId.indexOf(socket.id)
-        if(index != -1){
-            user_socketId.splice(index)
-        }
-    })
+    // socket.on('disconnect',()=>{
+    //     console.log("discconected "+socket.id)
+    //     const index = user_socketId.indexOf(socket.id)
+    //     if(index != -1){
+    //         user_socketId.splice(index)
+    //     }
+    // })
 });
 
 server.listen(PORT, () => {
