@@ -1,7 +1,6 @@
 const express = require('express')
 const http = require('http')
 const { Server } = require('socket.io');
-const events = require('events')
 const cors = require('cors')
 const proxy = require('express-http-proxy')
 const path = require('path')
@@ -28,6 +27,7 @@ const designationRoutes = require('../routes/designationRoutes')
 const departmentRoutes = require('../routes/departmentRoutes');
 const wingRoutes = require('../routes/wingRoutes');
 const branchRoutes = require('../routes/branchRoutes');
+const notificationRoutes = require('../routes/notificationRoutes')
 const { message } = require('../validation/roleValidation');
 
 
@@ -76,6 +76,7 @@ app.use('/section', verifyToken, sectionRoutes)
 app.use('/designation', verifyToken, designationRoutes)
 app.use('/wing', verifyToken, wingRoutes)
 app.use('/branch',verifyToken,  branchRoutes)
+app.use('/notification',verifyToken,  notificationRoutes)
 //image access
 app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
 
@@ -88,12 +89,6 @@ const io = new Server(server,{
 });
 
 let likes = 0;
-eventEmitter = new events.EventEmitter();
-
-setInterval(()=>{
-	likes++;
-	eventEmitter.emit("event");
-}, 2000);
 
 io.on("connection", (socket) => {
     console.log(socket.id)
@@ -105,9 +100,11 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit('likeupdate', likes) 
 	})
 
-    socket.on('user-connected', async(user_id, room, cb)=>{
+
+
+    socket.on('user-connected', async(user_id, room)=>{
         const notifications = await Notification.findAll({where: {userId: user_id, deletedAt: null}});
-        cb(notifications)
+        socket.emit('notification', notifications)
     })
 
     // socket.on('disconnect',()=>{
