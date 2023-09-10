@@ -1,5 +1,6 @@
 const express = require('express')
 const http = require('http')
+const EventEmitter = require('events')
 const { Server } = require('socket.io');
 const cors = require('cors')
 const proxy = require('express-http-proxy')
@@ -76,7 +77,7 @@ app.use('/section', verifyToken, sectionRoutes)
 app.use('/designation', verifyToken, designationRoutes)
 app.use('/wing', verifyToken, wingRoutes)
 app.use('/branch',verifyToken,  branchRoutes)
-app.use('/notification',verifyToken,  notificationRoutes)
+app.use('/notification',  notificationRoutes)
 //image access
 app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
 
@@ -88,7 +89,11 @@ const io = new Server(server,{
 	}
 });
 
+class MyEmitter extends EventEmitter {};
+const myEmitter = new MyEmitter();
+
 let likes = 0;
+let live_users = new Map();
 
 io.on("connection", (socket) => {
     console.log(socket.id)
@@ -100,21 +105,26 @@ io.on("connection", (socket) => {
 		socket.broadcast.emit('likeupdate', likes) 
 	})
 
-
-
-    socket.on('user-connected', async(user_id, room)=>{
-        const notifications = await Notification.findAll({where: {userId: user_id, deletedAt: null}});
+    socket.on('user-connected', async (user_id) =>{
+        live_users.set(user_id, socket.id);
+        const notifications = await Notification.count({where: {userId: user_id, deletedAt: null, viewed:false}});
+        console.log(notifications)
         socket.emit('notification', notifications)
+        socket.user_id = user_id;
     })
 
-    // socket.on('disconnect',()=>{
-    //     console.log("discconected "+socket.id)
-    //     const index = user_socketId.indexOf(socket.id)
-    //     if(index != -1){
-    //         user_socketId.splice(index)
-    //     }
-    // })
+    myEmitter.on('formSubmit', ( iro_id )=>{
+        console.log("iro id: ")
+    })
+
+    socket.on('disconnect',()=>{
+        live_users.delete(socket.user_id)
+    })
+
+    
 });
+
+
 
 server.listen(PORT, () => {
     console.log(`getWay is running on port ${PORT}`)

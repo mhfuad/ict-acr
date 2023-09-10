@@ -107,7 +107,10 @@ class UserRepository{
         return modify;
     }
 
-    async search(criteria){
+    async search(criteria, req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
         try{
             const users = await User.findAll({
                 where: {
@@ -148,9 +151,58 @@ class UserRepository{
                             } 
                         },
                     ]
+                },
+                limit: PAGE_SIZE,
+                offset: offset,
+            });
+            const totalCount = await User.count({
+                where: {
+                    [Op.or]: [
+                        {
+                            banglaName: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            englishName: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            idNo: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            personalNumber: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            designation: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            nid: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                        {
+                            cadre: {
+                                [Op.like]: `%${criteria}%`,
+                            } 
+                        },
+                    ]
                 }
             });
-            return users;
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                users: users
+            }
+            return result;
         } catch (err){
             console.error('Error searching for books:', err)
         }
