@@ -30,6 +30,7 @@ const wingRoutes = require('../routes/wingRoutes');
 const branchRoutes = require('../routes/branchRoutes');
 const notificationRoutes = require('../routes/notificationRoutes')
 const { message } = require('../validation/roleValidation');
+const { ioInit } = require('./socket');
 
 
 const app = express();
@@ -78,8 +79,11 @@ app.use('/designation', verifyToken, designationRoutes)
 app.use('/wing', verifyToken, wingRoutes)
 app.use('/branch',verifyToken,  branchRoutes)
 app.use('/notification',  notificationRoutes)
+
 //image access
 app.use('/file',(req,res) => res.sendFile(path.join(__dirname, `../images/${req.url}`)))
+
+
 
 
 //socket
@@ -95,37 +99,39 @@ const myEmitter = new MyEmitter();
 let likes = 0;
 let live_users = new Map();
 
-io.on("connection", (socket) => {
-    console.log(socket.id)
-	socket.emit('likeupdate', likes);
+// io.on("connection", (socket) => {
+//     console.log(socket.id)
+// 	socket.emit('likeupdate', likes);
 
-	socket.on('liked', () => {
-		likes++;
-		socket.emit('likeupdate', likes);
-		socket.broadcast.emit('likeupdate', likes) 
-	})
+// 	socket.on('liked', () => {
+// 		likes++;
+// 		socket.emit('likeupdate', likes);
+// 		socket.broadcast.emit('likeupdate', likes) 
+// 	})
 
-    socket.on('user-connected', async (user_id) =>{
-        live_users.set(user_id, socket.id);
-        const notifications = await Notification.count({where: {userId: user_id, deletedAt: null, viewed:false}});
-        console.log(notifications)
-        socket.emit('notification', notifications)
-        socket.user_id = user_id;
-    })
+//     socket.on('user-connected', async (user_id) =>{
+//         live_users.set(user_id, socket.id);
+//         const notifications = await Notification.count({where: {userId: user_id, deletedAt: null, viewed:false}});
+//         console.log(notifications)
+//         socket.emit('notification', notifications)
+//         socket.user_id = user_id;
+//     })
 
-    myEmitter.on('formSubmit', ( iro_id )=>{
-        console.log("iro id: ")
-    })
+//     myEmitter.on('form-submit', ( iro_id )=>{
+//         console.log("iro id: "+ iro_id)
+//     })
 
-    socket.on('disconnect',()=>{
-        live_users.delete(socket.user_id)
-    })
+//     socket.on('disconnect',()=>{
+//         live_users.delete(socket.user_id)
+//     })
 
     
-});
+// });
 
 
 
 server.listen(PORT, () => {
     console.log(`getWay is running on port ${PORT}`)
 })
+
+require('./socket').ioInit(io);

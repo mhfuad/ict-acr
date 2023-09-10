@@ -1,4 +1,5 @@
 const repository = require('../repositories/eleventhFormRepository')
+const validation = require('../validation/eleventhFormValidation')
 
 class FormController{
     async getForms(req, res) {
@@ -32,6 +33,7 @@ class FormController{
     }
 
     async createFrom(req, res) {
+        const { error, value } = validation.validate(req.body)
         try {
             const data = await repository.create(req.body);
             res.status(201).json(data);

@@ -4,14 +4,9 @@ const { sequelize } = require('../models')
 const { Reporter } = require('../models')
 const AuthRepository = require('../repositories/authRepository')
 const { User } = require('../models')
+const { formSubmit } = require('../src/customEmites');
+const {sendNotification} = require("../src/socket");
 
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-const EventEmitter = require('events')
-class MyEmitter extends EventEmitter {}
-const myEmitter = new MyEmitter();
 
 class eleventhFormRepository{
 
@@ -113,7 +108,7 @@ class eleventhFormRepository{
             // },{
             //     where:{id: data.reporterId}
             // })
-            // //send sms to iro
+            // //send notification to iro
             // const iro = await User.findOne({
             //     where: {
             //         idNo: data.iro
@@ -123,10 +118,12 @@ class eleventhFormRepository{
             //     await AuthRepository.sendSMS(iro.personalNumber,`${data.name}, requests to you ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
             //     AuthRepository.sendMail(iro.personalMail,`${data.name}, requests to you for ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
             // }
-            //send notification to iro
-            myEmitter.emit('formSubmit', data.iro)
+            //formSubmit(data.userIdNo);
+
+            sendNotification('', {user : data.userIdNo, message: `hello your acr created` })
+
+            return "okay"
             //return form;
-            return "oka";
         }catch (err){
             console.log(err)
         }
@@ -160,16 +157,6 @@ class eleventhFormRepository{
     }
     async delete(id){
         await EleventhForms.destroy({where: {id: id}})
-    }
-
-    sendNotificationToUser(userId, message) {
-        const socketId = connectedUsers.get(userId);
-        if (socketId) {
-          io.to(socketId).emit('notification', message);
-          console.log(`Notification sent to User ${userId}`);
-        } else {
-          console.log(`User ${userId} is not connected`);
-        }
     }
 
     async findForCro(req){
