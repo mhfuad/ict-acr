@@ -4,7 +4,6 @@ const { sequelize } = require('../models')
 const { Reporter } = require('../models')
 const AuthRepository = require('../repositories/authRepository')
 const { User } = require('../models')
-const { formSubmit } = require('../src/customEmites');
 const {sendNotification} = require("../src/socket");
 
 
@@ -78,52 +77,50 @@ class eleventhFormRepository{
     async create(data){
         try{
             //form created
-            // const form =  await EleventhForms.create({
-            //     name: data.name,
-            //     userIdNo: data.userIdNo,
-            //     highestEducationLevel: data.highestEducationLevel,
-            //     dateOfBirth: data.dateOfBirth,
-            //     joiningDate: data.joiningDate,
-            //     departmentExamPass: data.departmentExamPass,
-            //     departmentExamDate: data.departmentExamDate,
-            //     jobStatus: data.jobStatus,
-            //     acrStart: data.acrStart,
-            //     acrEnd: data.acrEnd,
-            //     language: data.language,
-            //     specialTraining: data.specialTraining,
-            //     designation: data.designation,
-            //     salary: data.salary,
-            //     iro: data.iro,
-            //     cro: data.cro,
-            //     userId: data.userId,
-            //     status: "iro",
-            //     reporter_id: data.reporterId,
-            //     createdAt: new Date(),
-            //     updatedAt: null,
-            // });
-            // //reporter update
-            // Reporter.update({
-            //     submited:1,
-            //     joining_date_current_position: data.joining_date_current_position
-            // },{
-            //     where:{id: data.reporterId}
-            // })
-            // //send notification to iro
-            // const iro = await User.findOne({
-            //     where: {
-            //         idNo: data.iro
-            //     }
-            // });
-            // if(iro){
-            //     await AuthRepository.sendSMS(iro.personalNumber,`${data.name}, requests to you ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
-            //     AuthRepository.sendMail(iro.personalMail,`${data.name}, requests to you for ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
-            // }
-            //formSubmit(data.userIdNo);
+            const form =  await EleventhForms.create({
+                name: data.name,
+                userIdNo: data.userIdNo,
+                highestEducationLevel: data.highestEducationLevel,
+                dateOfBirth: data.dateOfBirth,
+                joiningDate: data.joiningDate,
+                departmentExamPass: data.departmentExamPass,
+                departmentExamDate: data.departmentExamDate,
+                jobStatus: data.jobStatus,
+                acrStart: data.acrStart,
+                acrEnd: data.acrEnd,
+                language: data.language,
+                specialTraining: data.specialTraining,
+                designation: data.designation,
+                salary: data.salary,
+                iro: data.iro,
+                cro: data.cro,
+                userId: data.userId,
+                status: "iro",
+                reporter_id: data.reporterId,
+                createdAt: new Date(),
+                updatedAt: null,
+            });
+            //reporter update
+            Reporter.update({
+                submited:1,
+                joining_date_current_position: data.joining_date_current_position
+            },{
+                where:{id: data.reporterId}
+            })
+            //send notification to iro
+            const iro = await User.findOne({
+                where: {
+                    idNo: data.iro
+                }
+            });
+            if(iro){
+                await AuthRepository.sendSMS(iro.personalNumber,`${data.name}, requests to you ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
+                AuthRepository.sendMail(iro.personalMail,`${data.name}, requests to you for ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
+            }
 
-            sendNotification('', {user : data.userIdNo, message: `hello your acr created` })
+            sendNotification('', {user : data.iro, message: `${data.name}(${data.userIdNo}), requests to you ACR Evaluation.` })
 
-            return "okay"
-            //return form;
+            return form;
         }catch (err){
             console.log(err)
         }

@@ -1,119 +1,77 @@
-// const express = require('express')
-// const app = express();
-// const http = require('http');
-// const server = http.createServer(app);
-
-// const events = require('events')
-// const { Server } = require('socket.io');
-
-// const io = new Server(server,{
-// 	cors: {
-// 		origin: "*",
-// 	}
-// });
-
-// let likes = 0;
-// const eventEmitter = new events.EventEmitter();
-
-// setInterval(()=>{
-// 	likes++;
-// 	eventEmitter.emit("newdata");
-// }, 2000);
-
-// io.on("connection", (socket) => {
-// 	socket.emit('likeupdate', likes);
-	
-// 	socket.on('liked', () => {
-// 		likes++;
-// 		socket.emit('likeupdate', likes);
-// 		socket.broadcast.emit('likeupdate', likes)
-// 	})
-	
-// 	eventEmitter.on('newdata', ()=>{
-// 		socket.broadcast.emit('likeupdate', likes)
-// 	})
-// });
-// app.get('/',(req, res)=>{
-// 	res.send("Hello World")
-// })
-
-// server.listen(3000);
-
+const { User, Notification } = require('../models');
 let likes = 0;
 let live_users = new Map();
 
-
 const sendNotification = (type, data) => {
-
 	try{
-
-		console.log(data)
-
 		if(live_users.has(data.user)){
 			(live_users.get(data.user)).emit('noti', data.message);
+			Notification.create({userId:data.user, message: data.message, viewed: 0, createdAt: new Date(), updatedAt: new Date()})
+		}else{
+			console.log("No user found in live user")
+			Notification.create({userId:data.user, message: data.message, viewed: 0, createdAt: new Date(), updatedAt: new Date()})
 		}
-
-
 	}catch(error){
 		console.log(error);
 	}
-
 }
 
 const ioInit = async(io)=> {
 	try{
-
-		const authSocketMiddleware = (socket , next) =>{
-
+		const authSocketMiddleware = async (socket , next) =>{
 			
 			try {
-				const token = socket.handshake.headers.ulala;
-
-				if(token != '111111'){
-					throw "vul token nia kno asle beyadop"
+				const token = socket.handshake.headers.user_id;
+				const user =await User.count({where:{idNo:token}})
+				if(user == 1){
+					socket.user = token;
+					live_users.set(token, socket)
+					next();
+				}else{
+					throw "User not found in database"
 				}
-				socket.user = token;
-				live_users.set(token, socket)
-				next();
-
+				
 			} catch (err) {
 				return next(new Error("NOT AUTHORIZED tata bye bye"));
 			}
-			
 		}
-
 
 		io.use((socket, next) => {
 			authSocketMiddleware(socket, next);
-		  });
+		});
 
 		io.on("connection", (socket) => {
-			
-			socket.emit('likeupdate', "ulala");
+			socket.emit('likeupdate', likes);
 
 			socket.on('liked', () => {
 				likes++;
 				socket.emit('likeupdate', likes);
 				socket.broadcast.emit('likeupdate', likes) 
 			})
-		
-			socket.on('user-connected', async (user_id) =>{
-				live_users.set(user_id, socket.id);
-				const notifications = await Notification.count({where: {userId: user_id, deletedAt: null, viewed:false}});
-				console.log("Hello: ",notifications)
-				socket.emit('notification', notifications)
-				socket.user_id = user_id;
-			})
-		
-			// myEmitter.on('form-submit', ( iro_id )=>{
-			// 	console.log("iro id: "+ iro_id)
+
+			// socket.on('user-connected', async (user_id) =>{
+			// 	live_users.set(user_id, socket.id);
+			// 	const notifications = await Notification.count({where: {userId: user_id, deletedAt: null, viewed:false}});
+			// 	console.log("Hello: ",notifications)
+			// 	socket.emit('notification', notifications)
+			// 	socket.user_id = user_id;
 			// })
-		
+
+			socket.emit('new_notification', "")
+
 			socket.on('disconnect',()=>{
 				live_users.delete(socket.user_id)
 			})
-		
-			
+
+			socket.on('custom-event',(data, me, extra)=>{
+				var jsonArray = [];
+				for (let [key, value] of live_users) {
+					var jsonObject = {};
+					jsonObject[key] = value.id;
+					jsonArray.push(jsonObject);
+				  }
+				socket.emit('users', jsonArray )
+			})
 		});
 		
 	}catch(error){
@@ -122,7 +80,7 @@ const ioInit = async(io)=> {
 }
 
 setInterval(()=>{
-console.log("User connected: ",live_users.size)
+	console.log("User connected: ",live_users.size)
 }, 2000)
 
 module.exports = {

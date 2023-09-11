@@ -3,7 +3,8 @@ const validation = require('../validation/reporterValidation')
 class ReporterController{
 
     async create(req, res){
-        const { error, value } = validation.validate(req.body)
+        const { error, value } = validation.validate(req.body, {abortEarly: false})
+
         if(error){
             return res.status(400).json({ error: error.details });
         }

@@ -12,13 +12,16 @@ class NotificationRepository{
         return await Notification.findAll({where:{userId:user_id}, attributes:{ exclude: ['createdAt','updatedAt'] }});
     }
 
-
     async all(){
         try{
             return await Notification.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
         }catch (err){
             console.log(err)
         }
+    }
+
+    async getUnReadNotification(user_id){
+        return await Notification.count({where:{userId:user_id,viewed:0}})
     }
 
     async update(id){

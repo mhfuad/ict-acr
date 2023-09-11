@@ -5,7 +5,8 @@ const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const { User } = require('../models')
 const { EleventhForms } = require('../models');
-const AuthRepository = require('../repositories/authRepository')
+const AuthRepository = require('../repositories/authRepository');
+const { sendNotification } = require('../src/socket');
 
 class IroEvaluationRepository{
 
@@ -38,6 +39,7 @@ class IroEvaluationRepository{
             await AuthRepository.sendSMS(cro_user.personalNumber,`Mr./Ms. ${iro_user.englishName} (IRO) send to you Mr./Ms. ${user.englishName}'s (Applicant) ACR Evaluation for Approval. See the notification here.  https://acr.inflack.xyz`);
             AuthRepository.sendMail(cro_user.personalMail,`Mr./Ms. ${iro_user.englishName} (IRO) send to you Mr./Ms. ${user.englishName}'s (Applicant) ACR Evaluation for Approval. See the notification here.  https://acr.inflack.xyz`);
         }
+        sendNotification('', {user : cro_user.idNo , message: `Mr./Ms. ${iro_user.englishName} (IRO) send to you Mr./Ms. ${user.englishName}'s (Applicant) ACR Evaluation for Approval.` })
         return eva;
     }
 

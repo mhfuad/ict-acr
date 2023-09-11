@@ -3,7 +3,8 @@ const { TenthForms } = require('../models');
 const { CRO_evaluations } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
-const AuthRepository = require('../repositories/authRepository')
+const AuthRepository = require('../repositories/authRepository');
+const { sendNotification } = require('../src/socket');
 
 class CroEvaluationRepository{
 
@@ -16,8 +17,12 @@ class CroEvaluationRepository{
         const user = await User.findOne({where:{idNo:form.userIdNo}})
         const cro = await User.findOne({where:{idNo:form.cro}})
 
+        //send sms
         await AuthRepository.sendSMS(user.personalNumber,`Mr./Ms. ${user.englishName} (Applicant). Your ACR approved by Mr./Ms. ${cro.englishName} (CRO)`);
+        //send mail
         AuthRepository.sendMail(user.personalMail,`Mr./Ms. ${user.englishName} (Applicant). Your ACR approved by Mr./Ms. ${cro.englishName} (CRO)`);
+        //notification
+        sendNotification('', {user : user.idNo , message: `Mr./Ms. ${user.englishName} (Applicant). Your ACR approved by Mr./Ms. ${cro.englishName} (CRO)` })
         return cro_eve;
     }
 

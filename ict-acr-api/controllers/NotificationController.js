@@ -46,6 +46,15 @@ class NotificationController{
             res.status(500).json({ error: err.message });
         }
     }
+
+    async getCount(req, res){
+        try{
+            const count = await repository.getUnReadNotification(req.params.user_id);
+            res.json(count)
+        } catch (err){
+            res.status(500).json({ error: err.message });
+        }
+    }
 }
 
 module.exports = new NotificationController();

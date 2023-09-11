@@ -7,15 +7,35 @@
 </head>
 <body>
     <button id="likes">0</button>
-    <button id="custom">custom</button>
-    
+    <button id="custom">Current users</button>
+    <h3>Users</h3>
+    <div id="users"></div>
+    <h3>Notification</h3>
+    <div id="noti"></div>
 </body>
 <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
 <script>
-    const socket = io('http://127.0.0.1:8000');
+    const customHeaders = {
+        user_id: 222222
+    };
+    const socket = io('http://localhost:8000',{
+        extraHeaders: customHeaders,
+    });
 
     socket.on("connect", ()=>{
         console.log("connected")
+    })
+
+    socket.on('noti', (data)=>{
+        alert("okay")
+    })
+
+    socket.on('users', (data)=>{
+        document.getElementById('users').innerHTML =JSON.stringify(data);
+    })
+
+    socket.on('noti', data=>{
+        document.getElementById('noti').innerHTML = data
     })
 
     const btn = document.querySelector("button")
@@ -31,10 +51,8 @@
     })
 
     custom.addEventListener('click', ()=>{
-        socket.emit('custom-event', 10, 'h1', {a: 'a'})
+        socket.emit('custom-event', {a: 'a'})
     })
-
-
     
 </script>
 </html>

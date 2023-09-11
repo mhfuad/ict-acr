@@ -7,6 +7,9 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     await controller.index(req, res)
 })
+router.get('/get_count/:user_id', async (req, res) => {
+    await controller.getCount(req, res)
+})
 //'log_user'
 router.get('/:user_id', async (req, res) => {
     await controller.getByUser(req, res)
