@@ -119,7 +119,7 @@ class AuthRepository{
         }
         //saving user information to access log
         try{
-            await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.user_id, date: new Date(Date.now() + 21600000), device: deviceName});
+            await Access_log.create({ip: req.headers['x-forwarded-for'], user_id:req.body.user_id, date: new Date(Date.now() + 21600000), device: deviceName});
         }catch (e){
             console.log(e)
         }
