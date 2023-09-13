@@ -21,6 +21,15 @@ class ReporterController{
         }
     }
 
+    async get(req, res){
+        try{
+            var response = await repository.getById(req.params.id)
+            res.status(200).json(response)
+        } catch (err){
+            res.status(500).json({ error: err.message})
+        }
+    }
+
     async getIRO(req, res){
         try {
             var response = await repository.getIRO(req.params.user);

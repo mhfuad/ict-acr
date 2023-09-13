@@ -18,6 +18,11 @@ router.get('/cro/:user', async (req, res)=>{
 router.get('/', async(req, res) => {
     await controller.getAllReporters(req, res);
 })
+
+router.get('/:id', async(req, res) => {
+    await controller.get(req, res)
+})
+
 router.get('/page/:page', async(req, res) => {
     await controller.getAllWithPagination(req, res);
 })
