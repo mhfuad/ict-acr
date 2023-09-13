@@ -464,6 +464,20 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      //65
+      {
+        title: 'Can see Setting menu',
+        name: 'setting_menu',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      //66
+      {
+        title: 'Can see Sidebar menu',
+        name: 'setting_menu',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
   },
 

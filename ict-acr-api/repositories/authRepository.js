@@ -31,13 +31,25 @@ class AuthRepository{
                 id: user.id
             }
         })
-        const send_sms = await this.sendSMS(user.personalNumber, "Your ICTD ACR System Login Verification Code "+otp);
-        //return `OTP send to 01*****${user_number.substring(user_number.length - 4)} number`;
-        if(req.email){
+
+        
+        if(req.sms && req.email){
+            await this.sendSMS(user.personalNumber, "Your ICTD ACR System Login Verification Code "+otp);
             this.sendMail(user.personalMail, "Your ICTD ACR System Login Verification Code "+otp);
             return `OTP send to 01*****${user.personalNumber.substring(user.personalNumber.length - 4)} number and ${user.personalMail} email`;
         }
-        return `OTP send to 01*****${user.personalNumber.substring(user.personalNumber.length - 4)} number`;
+        if(req.sms){
+            await this.sendSMS(user.personalNumber, "Your ICTD ACR System Login Verification Code "+otp);
+            return `OTP send to 01*****${user.personalNumber.substring(user.personalNumber.length - 4)} number.`;
+        }
+        if(req.email){
+            this.sendMail(user.personalMail, "Your ICTD ACR System Login Verification Code "+otp);
+            return `OTP send to ${user.personalMail} email`;
+        }
+        if(!req.sms && !req.email){
+            return `no`;
+        }
+        
     }
 
     async sendSMS(user_number, message){
