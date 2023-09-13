@@ -474,7 +474,7 @@ module.exports = {
       //66
       {
         title: 'Can see Sidebar menu',
-        name: 'setting_menu',
+        name: 'view_sidebar',
         createdAt: new Date(),
         updatedAt: new Date()
       },
