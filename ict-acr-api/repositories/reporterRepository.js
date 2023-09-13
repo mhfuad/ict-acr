@@ -82,7 +82,14 @@ class ReporterRepository{
         const page = parseInt(req.params.page, 10);
         const offset = (page - 1) * PAGE_SIZE;
         try{
-            const reporters = await sequelize.query(`SELECT re.*, us.banglaName as user_name, iro.banglaName as iro_name, cro.banglaName as cro_name 
+            const reporters = await sequelize.query(`SELECT 
+            re.*,
+            us.banglaName as user_name,
+            us.englishName as user_en_name,
+            iro.banglaName as iro_name,
+            iro.englishName as iro_en_name,
+            cro.banglaName as cro_name,
+            cro.englishName as cro_en_name
                     FROM Reporters as re
                     JOIN Users as us
                         on re.user_id = us.idNo
