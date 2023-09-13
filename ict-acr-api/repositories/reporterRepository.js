@@ -85,6 +85,7 @@ class ReporterRepository{
             try {
                 const results = await sequelize.query(`SELECT 
                     r.id,
+                    r.user_id,
                     r.iro, 
                     r.cro, 
                     r.start_date, 
