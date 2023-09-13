@@ -7,6 +7,9 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     await controller.index(req, res)
 })
+router.get('/page/:page', async (req, res) =>{
+    await controller.allWithPagination(req, res)
+})
 //'log_user'
 router.get('/user/:user_id', async (req, res) => {
     await controller.getByUser(req, res)

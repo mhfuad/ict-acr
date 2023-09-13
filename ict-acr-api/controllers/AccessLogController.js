@@ -28,6 +28,15 @@ class AccessLogController{
         }
     }
 
+    async allWithPagination(req, res){
+        try{
+            const data = await repository.allWithPagination(req);
+            res.json(data)
+        }catch(err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
     async update(req, res) {
         try {
             const data = await repository.update(req.params.id, req.body);

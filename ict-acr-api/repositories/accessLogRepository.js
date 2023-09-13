@@ -12,8 +12,39 @@ class AccessLogRepository{
         return await Access_log.findAll({where:{user_id:user_id}, attributes:{ exclude: ['createdAt','updatedAt'] }});
     }
 
-
     async all(){
+        try{
+            return await Access_log.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
+        }catch (err){
+            console.log(err)
+        }
+    }
+
+    async allWithPagination(req){
+        const PAGE_SIZE = 10;
+        const page = parseInt(req.params.page, 10);
+        const offset = (page - 1) * PAGE_SIZE;
+
+        try{
+            const logs = await Access_log.findAll({
+                attributes: { exclude: ['createdAt','updatedAt'] },
+                limit: PAGE_SIZE,
+                offset: offset,
+                order: [['id','DESC']]
+            });
+            const totalCount = await Access_log.count();
+            const totalpages = Math.ceil(totalCount / PAGE_SIZE);
+            const result = {
+                page:page,
+                totalpages: totalpages,
+                logs: logs
+            }
+            return result
+        }catch (error) {
+            console.error('Error fetching paginated users:', error);
+            return 500;
+        }
+
         try{
             return await Access_log.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
         }catch (err){
