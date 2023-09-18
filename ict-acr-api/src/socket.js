@@ -81,7 +81,7 @@ const ioInit = async(io)=> {
 
 setInterval(()=>{
 	console.log("User connected: ",live_users.size)
-}, 2000)
+}, 5000)
 
 module.exports = {
 	ioInit : ioInit,
