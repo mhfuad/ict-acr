@@ -15,24 +15,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        UserId: 4,
-        RoleId: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        UserId: 7,
-        RoleId: 3,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        UserId: 8,
-        RoleId: 4,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
+      // {
+      //   UserId: 4,
+      //   RoleId: 2,
+      //   createdAt: new Date(),
+      //   updatedAt: new Date()
+      // },
+      // {
+      //   UserId: 7,
+      //   RoleId: 3,
+      //   createdAt: new Date(),
+      //   updatedAt: new Date()
+      // },
+      // {
+      //   UserId: 8,
+      //   RoleId: 4,
+      //   createdAt: new Date(),
+      //   updatedAt: new Date()
+      // },
       
     ], {});
 

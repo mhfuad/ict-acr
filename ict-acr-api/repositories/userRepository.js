@@ -247,11 +247,11 @@ class UserRepository{
                 updatedAt: null,
             });
             //assign role
-            await user_role.create({
-                UserId: user_created.id,
-                RoleId: 2
-            });
-            console.log(user_created.id)
+            // await user_role.create({
+            //     UserId: user_created.id,
+            //     RoleId: 2
+            // });
+            //console.log(user_created.id)
             //send message
             await AuthRepository.sendSMS(user.personalNumber,`Welcome to ICT ACR, Link: https://acr.inflack.xyz Your user ID: ${user.idNo} for login `)
             AuthRepository.sendMail(user.personalMail,`Welcome to ICT ACR, Link: https://acr.inflack.xyz Your user ID: ${user.idNo} for login`);
