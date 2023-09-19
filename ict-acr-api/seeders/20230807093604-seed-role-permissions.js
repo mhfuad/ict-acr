@@ -36,98 +36,98 @@ module.exports = {
       
     ], {});
 
-    await queryInterface.bulkInsert('role_permissions', [
-      {
-        RoleId: 2,//user
-        PermissionId: 60,//dashboard
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,//iro
-        PermissionId: 60,//dashboard
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 60,//dashboard
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 2,//user
-        PermissionId: 28,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,//iro
-        PermissionId: 28,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 28,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 60,//settings
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 59,//form_create
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 60,//settings
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,//iro
-        PermissionId: 61,//acr_request
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 61,//acr_request
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,//iro
-        PermissionId: 62,//acr_request
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 62,//acr_request
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 3,//iro
-        PermissionId: 63,//acr_report
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        RoleId: 4,//cro
-        PermissionId: 63,//acr_report
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-    ], {});
+    // await queryInterface.bulkInsert('role_permissions', [
+    //   {
+    //     RoleId: 2,//user
+    //     PermissionId: 60,//dashboard
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 3,//iro
+    //     PermissionId: 60,//dashboard
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 60,//dashboard
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 2,//user
+    //     PermissionId: 28,//form_create
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 3,//iro
+    //     PermissionId: 28,//form_create
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 28,//form_create
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 60,//settings
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 59,//form_create
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 60,//settings
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 3,//iro
+    //     PermissionId: 61,//acr_request
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 61,//acr_request
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 3,//iro
+    //     PermissionId: 62,//acr_request
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 62,//acr_request
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 3,//iro
+    //     PermissionId: 63,//acr_report
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    //   {
+    //     RoleId: 4,//cro
+    //     PermissionId: 63,//acr_report
+    //     createdAt: new Date(),
+    //     updatedAt: new Date()
+    //   },
+    // ], {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -138,7 +138,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('user_role', null, {});
-    await queryInterface.bulkDelete('role_permissions', null, {});
+    //await queryInterface.bulkDelete('role_permissions', null, {});
     
   }
 };
