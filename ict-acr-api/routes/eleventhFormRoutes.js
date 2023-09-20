@@ -32,6 +32,9 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     await controller.updateForm(req, res)
 });
+router.put('/cro_to_iro/:id', async (req, res) => {
+    await controller.cro_to_iro(req, res)
+});
 //'form_delete'
 router.delete('/:id', async (req, res) => {
     await controller.deleteForm(req, res)

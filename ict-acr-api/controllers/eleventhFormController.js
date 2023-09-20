@@ -54,6 +54,18 @@ class FormController{
         }
     }
 
+    async cro_to_iro(req, res) {
+        try {
+            const data = await repository.cro_to_iro(req.params.id, req.body);
+            if (!data) {
+                return res.status(404).json({ error: 'Form not found' });
+            }
+            res.json(data);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
     async deleteForm(req, res) {
         try {
             await repository.delete(req.params.id);

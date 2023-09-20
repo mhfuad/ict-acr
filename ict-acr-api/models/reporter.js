@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     gread: DataTypes.INTEGER,
     designation: DataTypes.STRING,
     joining_date_current_position: DataTypes.DATE,
-    submited: DataTypes.BOOLEAN,
+    submited: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Reporter',

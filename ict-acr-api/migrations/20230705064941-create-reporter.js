@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       submited:{
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

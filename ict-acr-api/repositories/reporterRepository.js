@@ -1,4 +1,4 @@
-const { Reporter, User } = require('../models');
+const { Reporter, User, EleventhForms } = require('../models');
 const bcrypt = require('bcrypt');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
@@ -105,6 +105,7 @@ class ReporterRepository{
                         ON r.iro = iu.idNo
                     JOIN Users as cu
                         ON r.cro = cu.idNo
+                    
                     where r.id = :id`,{
                         replacements: {id:id},
                         type: sequelize.QueryTypes.SELECT
@@ -215,6 +216,7 @@ class ReporterRepository{
     }
 
     async update(id, data){
+        console.log(data.submited)
         try{
             const db_res = await Reporter.update({
                 user_id: data.user_id,
@@ -224,12 +226,18 @@ class ReporterRepository{
                 end_date: data.end_date,
                 gread: data.gread,
                 designation: data.designation,
-                joining_date_current_position: data.joining_date_current_position
+                joining_date_current_position: data.joining_date_current_position,
+                submited: data.submited
                 },
                 {
                     where:{id:id}
                 }
             );
+            await EleventhForms.update({
+                status:'user'
+            },{
+                where:{reporter_id:id}
+            });
             if(db_res == 1){
                 return "Reporter update successfull.";
             }

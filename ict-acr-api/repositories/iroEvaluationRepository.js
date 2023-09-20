@@ -57,6 +57,7 @@ class IroEvaluationRepository{
     }
 
     async update(id, data){
+        return data;
         const dbResponse = await IRO_evaluation.update({
             user_id: data.user_id,
             evaluation_value: data.evaluation_value,

@@ -80,8 +80,8 @@ const ioInit = async(io)=> {
 }
 
 setInterval(()=>{
-	console.log("User connected: ",live_users.size)
-}, 5000)
+	console.log({"Users": Array.from(live_users,([k,v])=> (k) ), "User connected: ": live_users.size  })
+}, 2000)
 
 module.exports = {
 	ioInit : ioInit,

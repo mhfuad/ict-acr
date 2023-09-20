@@ -18,7 +18,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Users', [
         {
-          banglaName: "fuad bangla",
+          banglaName: "ফুয়াদ",
           englishName: "Fuad english",
           grade: "11",
           class: "2nd class",
@@ -51,7 +51,7 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "mahadi bangla",
+          banglaName: "মেহেদী",
           englishName: "mahadi english",
           grade: "11",
           class: "2nd class",
@@ -84,8 +84,8 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "Ali Hasan",
-          englishName: "mahadi english",
+          banglaName: "আলী হাসান",
+          englishName: "Ali Hasan",
           grade: "11",
           class: "2nd class",
           idNo: "333333",
@@ -118,7 +118,7 @@ module.exports = {
         },
         {
           banglaName: "জাহেদুল ইসলাম",
-          englishName: "mahadi english",
+          englishName: "Jahedul Islam",
           grade: "11",
           class: "2nd class",
           idNo: "444444",
@@ -150,8 +150,8 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "Kamrul Islam",
-          englishName: "mahadi english",
+          banglaName: "কামরুল ইসলাম",
+          englishName: "Kamrul Islam",
           grade: "11",
           class: "2nd class",
           idNo: "555555",
@@ -183,8 +183,8 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "Abdullah al noman",
-          englishName: "noman",
+          banglaName: "আব্দুল্লাহ আল নোমান",
+          englishName: "Abdullah al noman",
           grade: "11",
           class: "2nd class",
           idNo: "666666",
@@ -216,8 +216,8 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "Kazi Ashraf",
-          englishName: "mahadi english",
+          banglaName: "কাজী আশরাফ",
+          englishName: "Kazi Ashraf",
           grade: "11",
           class: "2nd class",
           idNo: "777777",
@@ -250,7 +250,7 @@ module.exports = {
         },
         {
           banglaName: "ইবরাহিম তুহিন",
-          englishName: "mahadi english",
+          englishName: "Ibrahim Tuhin",
           grade: "11",
           class: "2nd class",
           idNo: "888888",
@@ -282,8 +282,8 @@ module.exports = {
           updatedAt: null
         },
         {
-          banglaName: "প্রিতম সাজেদ",
-          englishName: "Pritom",
+          banglaName: "আলাউদ্দিন",
+          englishName: "Alauddin",
           grade: "11",
           class: "2nd class",
           idNo: "101010",
@@ -303,9 +303,9 @@ module.exports = {
           highestEducationLevel: "MBA",
           gender: "Male",
           bloodGroup: "A+",
-          personalMail: "pritom@inflack.com",
+          personalMail: "alal@inflack.com",
           officialMail: "fuad@inflack.com",
-          personalNumber: "01640894369",
+          personalNumber: "01744424480",
           officialNumber: "01914860368",
           status: "Active",
           designation: "Sinior Software Engineer",

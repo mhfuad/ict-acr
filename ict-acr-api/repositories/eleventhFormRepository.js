@@ -1,11 +1,9 @@
-const { EleventhForms } = require('../models');
+const { EleventhForms, Reporter } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
-const { Reporter } = require('../models')
 const AuthRepository = require('../repositories/authRepository')
 const { User } = require('../models')
 const {sendNotification} = require("../src/socket");
-
 
 class eleventhFormRepository{
 
@@ -15,7 +13,7 @@ class eleventhFormRepository{
             const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
                             f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
                             f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
-                            f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position,
+                            f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position, f.reporter_id,
                              repo.designation as acr_designation
                     FROM EleventhForms f
                     INNER JOIN Reporters repo
@@ -113,6 +111,7 @@ class eleventhFormRepository{
                     idNo: data.iro
                 }
             });
+            //send Message
             if(iro){
                 await AuthRepository.sendSMS(iro.personalNumber,`${data.name}, requests to you ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
                 AuthRepository.sendMail(iro.personalMail,`${data.name}, requests to you for ACR Evaluation. See the notification here.  https://acr.inflack.xyz`);
@@ -146,11 +145,26 @@ class eleventhFormRepository{
             cro: data.cro,
             userId: data.userId,
             updatedAt: new Date(),
+            status: data.status
         },
-        {where:{id: id}});
-        if(dbResponse == 1){
-            return await EleventhForms.findByPk(id);
-        }
+        {where:{reporter_id: id}});
+
+        await Reporter.update({
+            submited: 1
+        },{where:{id:data.reporter_idid}})
+
+        return 1;
+        // if(dbResponse == 1){
+        //     return await EleventhForms.findByPk(id);
+        // }
+    }
+    async cro_to_iro(id,data){
+        const re = await EleventhForms.update({
+            status: data.status
+        },{
+            where:{id:id}
+        })
+        return re
     }
     async delete(id){
         await EleventhForms.destroy({where: {id: id}})

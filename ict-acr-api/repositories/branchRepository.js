@@ -5,7 +5,7 @@ class BranchRepository{
 
     async getAll(){
         return await Branch.findAll({
-            attributes: { exclude: ['createdAt','updatedAt'] },
+            attributes: { exclude: ['createdAt','updatedAt','WingId'] },
             include: {
                 model: Section,
                 attributes: ['id','name']
@@ -40,6 +40,7 @@ class BranchRepository{
 
         return Branch.update({
             name: section.name,
+            wingId: section.wingId,
             createdAt: new Date(),
             updatedAt: new Date(),
         },{
