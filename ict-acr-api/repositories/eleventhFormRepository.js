@@ -10,14 +10,41 @@ class eleventhFormRepository{
     async allForms(req){
         //return await EleventhForms.findAll({});
         try {
-            const results = await sequelize.query(`SELECT f.id,f.name, f.userIdNo, f.highestEducationLevel, 
-                            f.dateOfBirth, f.joiningDate, f.departmentExamPass, f.departmentExamDate, f.jobStatus,
-                            f.acrStart, f.acrEnd, f.language, f.specialTraining, f.designation, f.salary, f.iro,
-                            f.cro, f.userId, f.status, f.createdAt, repo.joining_date_current_position, f.reporter_id,
-                             repo.designation as acr_designation
-                    FROM EleventhForms f
-                    INNER JOIN Reporters repo
-	                    ON f.reporter_id = repo.id`,{
+            const results = await sequelize.query(`SELECT 
+                f.id,
+                f.name, 
+                f.userIdNo, 
+                f.highestEducationLevel, 
+                f.dateOfBirth, 
+                f.joiningDate, 
+                f.departmentExamPass, 
+                f.departmentExamDate, 
+                f.jobStatus,  
+                f.acrStart, 
+                f.acrEnd, 
+                f.language, 
+                f.specialTraining, 
+                f.designation, 
+                f.salary, 
+                f.iro,     
+                f.cro,
+                iro.englishName iroName,
+                cro.englishName croName,
+                f.userId, 
+                f.status, 
+                f.createdAt, 
+                repo.joining_date_current_position, 
+                f.reporter_id,
+                repo.designation as acr_designation
+                    
+                FROM EleventhForms f
+                    
+                INNER JOIN Reporters repo
+	                ON f.reporter_id = repo.id
+                LEFT JOIN Users iro
+                    ON f.iro = iro.idNo
+                LEFT JOIN Users cro
+                    ON f.iro = cro.idNo`,{
                 //replacements: {user_id:user_id},
                 type: sequelize.QueryTypes.SELECT,
                 model: EleventhForms
@@ -159,6 +186,11 @@ class eleventhFormRepository{
         // }
     }
     async cro_to_iro(id,data){
+        try{
+
+        } catch(e){
+            return e;
+        }
         const re = await EleventhForms.update({
             status: data.status
         },{
