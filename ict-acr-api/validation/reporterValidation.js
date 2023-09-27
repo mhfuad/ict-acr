@@ -5,7 +5,7 @@ const roleValidation = Joi.object({
     iro : Joi.string().required(),
     user_id : Joi.number().required(),
     gread : Joi.number().required(),
-    designation : Joi.string().required(),
+    designation : Joi.string(),
     cro : Joi.string().required(),
     joining_date_current_position : Joi.string().required(),
     start_date : Joi.string().required(),

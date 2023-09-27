@@ -1,4 +1,6 @@
 const repository = require('../repositories/branchRepository')
+const validation = require('../validation/sectionValidation')
+
 class BranchController{
 
     async get(req, res) {
@@ -22,6 +24,10 @@ class BranchController{
         }
     }
     async create(req, res){
+        const { error, value } = validation.validate(req.body)
+        if(error){
+            return res.status(400).json({ error: error.details });
+        }
         try {
             var test = await repository.create(req.body)
             res.json(test);

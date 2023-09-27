@@ -30,14 +30,15 @@ class IroEvaluationController{
 
     async update(req, res) {
         try {
-            const data = await repository.update(req.params.id, req.body);
+            const data = await repository.update(req.params.form_id, req.body);
             if (!data) {
                 return res.status(404).json({ error: 'Evaluation not found' });
             }
             if(data == 1){
                 return res.status(201).json({ success: 'Evaluation update successfull.' });
             }else{
-                return res.status(500).json({ error: 'Problem' });
+                //return res.status(500).json({ error: 'Problem' });
+                return res.json(data);
             }
         } catch (err) {
             res.status(500).json({ error: err.message });

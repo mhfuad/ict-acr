@@ -2,9 +2,17 @@ const { User, Notification } = require('../models');
 let likes = 0;
 let live_users = new Map();
 
+setInterval(()=> {
+	live_users.forEach(e => {
+		e.emit('noti2', "test hello")
+	})
+}, 2000)
+
 const sendNotification = (type, data) => {
 	try{
+		console.error(data)
 		if(live_users.has(data.user)){
+			//console.log("///////////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+data.user);
 			(live_users.get(data.user)).emit('noti', data.message);
 			Notification.create({userId:data.user, message: data.message, viewed: 0, createdAt: new Date(), updatedAt: new Date()})
 		}else{
@@ -18,6 +26,12 @@ const sendNotification = (type, data) => {
 
 const ioInit = async(io)=> {
 	try{
+
+		setInterval(()=>{
+			console.log({"Users": Array.from(live_users,([k,v])=> (k) ), "User connected: ": live_users.size  })
+			//io.adepter.socket.
+		}, 2000)
+
 		const authSocketMiddleware = async (socket , next) =>{
 			
 			try {
@@ -79,9 +93,7 @@ const ioInit = async(io)=> {
 	}
 }
 
-setInterval(()=>{
-	console.log({"Users": Array.from(live_users,([k,v])=> (k) ), "User connected: ": live_users.size  })
-}, 2000)
+
 
 module.exports = {
 	ioInit : ioInit,

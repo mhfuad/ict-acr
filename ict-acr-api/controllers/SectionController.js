@@ -1,4 +1,6 @@
 const repository = require('../repositories/sectionRepository')
+const validation = require('../validation/sectionValidation') 
+
 class SectionController{
 
     async getSections(req, res) {
@@ -22,6 +24,10 @@ class SectionController{
         }
     }
     async createSection(req, res){
+        const { error, value } = validation.validate(req.body)
+        if(error){
+            return res.status(400).json({ error: error.details });
+        }
         try {
             var test = await repository.createSection(req.body)
             res.json(test);

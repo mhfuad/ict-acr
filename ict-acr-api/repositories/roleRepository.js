@@ -4,24 +4,31 @@ const { sequelize } = require('../models')
 class RoleRepository{
 
     async assignRole(user, roles){
-        const us = await User.findByPk(user,{ include:{model: Role}});
-        await this.removeRole(user, roles);
+        
+        await this.removeRole(user);
 
-        if(roles){
-            roles.forEach ( async (r) => {
-                await us.addRole(r)
-            })
+        if(Object.keys(roles).length != 0){
+            await this.assign(user, roles);
         }
-
         return "Role assign success";
     }
+    async assign(us, roles){
+        const user = await User.findByPk(us,{ include:{model: Role}});
+        roles.forEach ( async (r) => {
+            await user.addRole(r)
+        })
+    }
 
-    async removeRole(user, roles){
+    async removeRole(user){
         const us = await User.findByPk(user,{ include:{model: Role}});
-        roles.forEach(async (role) => {
-            const r = await Role.findByPk(role)
-            await us.removeRole(r);
-        });
+        const previous_roles = us.Roles.map(obj => obj.id);
+        if(Object.keys(previous_roles).length != 0){
+            console.log(typeof previous_roles)
+            previous_roles.forEach(async (role) => {
+                const r = await Role.findByPk(role)
+                await us.removeRole(r);
+            });
+        }
         return "Role remove success";
     }
 

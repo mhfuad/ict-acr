@@ -89,6 +89,15 @@ const io = new Server(server,{
 	}
 });
 
+setInterval(()=>{
+    console.log("socket", io.engine.clientsCount )
+    //io.adepter.socket.
+}, 2000)
+
+
+
+io.sockets.adapter
+
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })

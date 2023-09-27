@@ -1,6 +1,6 @@
 const { Question } = require('../models');
 const { TenthForms } = require('../models');
-const { IRO_evaluation } = require('../models');
+const { IRO_evaluation, FormHistory } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const { User } = require('../models')
@@ -47,7 +47,6 @@ class IroEvaluationRepository{
         return await IRO_evaluation.findOne({where:{form_id:form_id}, attributes:{ exclude: ['createdAt','updatedAt'] }});
     }
 
-
     async all(){
         try{
             return await IRO_evaluation.findAll({attributes: { exclude: ['createdAt','updatedAt'] }})
@@ -57,19 +56,24 @@ class IroEvaluationRepository{
     }
 
     async update(id, data){
-        return data;
-        const dbResponse = await IRO_evaluation.update({
-            user_id: data.user_id,
-            evaluation_value: data.evaluation_value,
-            decision: data.decision,
-            cro: data.cro,
-            cro_date: data.cro_date
-            },
-            {
-                where:{form_id:id}
-            }
-        );
-        return dbResponse;
+        try{
+            await FormHistory.destroy({where: {formId: id}})
+            
+            const dbResponse = await IRO_evaluation.update({
+                user_id: data.user_id,
+                evaluation_value: data.evaluation_value,
+                decision: data.decision,
+                cro: data.cro,
+                cro_date: data.cro_date
+                },
+                {
+                    where:{form_id:id}
+                }
+            );
+            return dbResponse;
+        } catch (e){
+            return e
+        }
     }
     
     async delete(id){

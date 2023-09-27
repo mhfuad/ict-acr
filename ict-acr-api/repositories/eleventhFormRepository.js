@@ -1,4 +1,4 @@
-const { EleventhForms, Reporter } = require('../models');
+const { EleventhForms, Reporter, FormHistory } = require('../models');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const AuthRepository = require('../repositories/authRepository')
@@ -96,7 +96,24 @@ class eleventhFormRepository{
     }
 
     async getOne(id){
-        return await EleventhForms.findByPk(id);
+        const history = await FormHistory.findOne({where: {formId:id}});
+        if(history){
+            const results = await sequelize.query(`SELECT 
+                    *
+                    FROM 
+                        EleventhForms as f 
+                    JOIN FormHistories as fh
+                        ON f.id = fh.formId
+                    
+                    where f.id = :id`,{
+                        replacements: {id:id},
+                        type: sequelize.QueryTypes.SELECT
+                    }
+                )
+                return results[0]
+        }else{
+            return await EleventhForms.findByPk(id);
+        }
     }
 
     async create(data){
@@ -153,6 +170,7 @@ class eleventhFormRepository{
     }
 
     async update(id, data){
+        console.log("=========================form update===========================");
         const dbResponse = await EleventhForms.update({
             name: data.name,
             userIdNo: data.userIdNo,
@@ -178,26 +196,34 @@ class eleventhFormRepository{
 
         await Reporter.update({
             submited: 1
-        },{where:{id:data.reporter_idid}})
+        },{where:{id:id}});
 
+        await this.deleteComments(id);
         return 1;
-        // if(dbResponse == 1){
-        //     return await EleventhForms.findByPk(id);
-        // }
     }
+
     async cro_to_iro(id,data){
         try{
-
+            const re = await EleventhForms.update({
+                status: data.status
+            },{
+                where:{id:id}
+            })
+            if(data.comment){
+                
+                await FormHistory.create({
+                    formId: id,
+                    comment: data.comment,
+                    route: data.route,
+                    createdAt: new Date()
+                })
+            }
+            return re
         } catch(e){
             return e;
         }
-        const re = await EleventhForms.update({
-            status: data.status
-        },{
-            where:{id:id}
-        })
-        return re
     }
+
     async delete(id){
         await EleventhForms.destroy({where: {id: id}})
     }
@@ -274,6 +300,17 @@ class eleventhFormRepository{
             return result
         }catch(err){
             return err
+        }
+    }
+
+    async deleteComments(reporter_id){
+        try {
+            const form = await EleventhForms.findOne({where:{reporter_id:reporter_id}})
+            if(form){
+                await FormHistory.destroy({where:{formId:form.id}})
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }

@@ -45,11 +45,11 @@ class AccessLogRepository{
             return 500;
         }
 
-        try{
-            return await Access_log.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
-        }catch (err){
-            console.log(err)
-        }
+        // try{
+        //     return await Access_log.findAll({attributes: { exclude: ['createdAt','updatedAt'] },order: [['id', 'DESC']]})
+        // }catch (err){
+        //     console.log(err)
+        // }
     }
 
     async update(id, data){

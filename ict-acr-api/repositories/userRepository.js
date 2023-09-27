@@ -11,7 +11,6 @@ class UserRepository{
         this.nextId = 1;
     }
     async allUser(req){
-        
         try{
             const users = await User.findAll({
                 attributes: { exclude: ['otp','password','createdAt','updatedAt'] },

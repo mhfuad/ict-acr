@@ -1,4 +1,5 @@
 const repository = require('../repositories/departmentRepository')
+const validation = require('../validation/departmentValidation') 
 
 class DepartmentController{
 
@@ -23,6 +24,10 @@ class DepartmentController{
         }
     }
     async createDepartment(req, res){
+        const { error, value } = validation.validate(req.body)
+        if(error){
+            return res.status(400).json({ error: error.details });
+        }
         try {
             var test = await repository.createDepartment(req.body)
             res.json(test);

@@ -1,10 +1,11 @@
-const { Reporter, User, EleventhForms } = require('../models');
+const { Reporter, User, EleventhForms, FormHistory } = require('../models');
 const bcrypt = require('bcrypt');
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../models')
 const jwt = require('jsonwebtoken');
 const config = require('../config/index')
 const { Op } = require('sequelize');
+const {sendNotification} = require("../src/socket");
 
 class ReporterRepository{
 
@@ -27,12 +28,15 @@ class ReporterRepository{
                 ]
             }
         });
+        sendNotification('', {user : body.user_id, message: `You have a ACR request .` })
         if(check){
             return `not_available`;
         }else{
             try{
                 body.submited = false;
                 const data = await Reporter.create(body);
+                //system notification 
+                
                 return data;
             }catch (e){
                 return e;
@@ -79,9 +83,43 @@ class ReporterRepository{
     }
 
     async getById(id){
-        try{
-            // const data = await Reporter.findOne({where: {id: id}, attributes: { exclude: ['createdAt','updatedAt'] }})
-            // return data;
+        const form = await EleventhForms.findOne({where:{reporter_id:id}});
+        
+        if(form){
+            const results = await sequelize.query(`SELECT 
+                r.id,
+                r.user_id,
+                r.iro, 
+                r.cro, 
+                r.start_date, 
+                r.end_date, 
+                r.gread, 
+                r.designation, 
+                r.joining_date_current_position, 
+                r.submited, 
+                iu.banglaName as iro_bangla_name, 
+                iu.englishName as iro_name, 
+                cu.banglaName as cro_bangla_name, 
+                cu.englishName as cro_name,
+                fh.comment as comment
+
+                FROM 
+                    Reporters as r 
+                JOIN Users as iu
+                    ON r.iro = iu.idNo
+                JOIN Users as cu
+                    ON r.cro = cu.idNo
+                JOIN EleventhForms as f
+                    ON f.reporter_id = r.id
+                JOIN FormHistories as fh
+                    ON fh.formId = f.id              
+                where r.id = :id`,{
+                    replacements: {id:id},
+                    type: sequelize.QueryTypes.SELECT
+                }
+            )
+            return results
+        }else{
             try {
                 const results = await sequelize.query(`SELECT 
                     r.id,
@@ -104,8 +142,7 @@ class ReporterRepository{
                     JOIN Users as iu
                         ON r.iro = iu.idNo
                     JOIN Users as cu
-                        ON r.cro = cu.idNo
-                    
+                        ON r.cro = cu.idNo                  
                     where r.id = :id`,{
                         replacements: {id:id},
                         type: sequelize.QueryTypes.SELECT
@@ -116,9 +153,6 @@ class ReporterRepository{
                 console.error('Error:', error.message);
                 return error.message
             }
-
-        }catch (e){
-            return e;
         }
     }
 
@@ -216,7 +250,6 @@ class ReporterRepository{
     }
 
     async update(id, data){
-        console.log(data.submited)
         try{
             const db_res = await Reporter.update({
                 user_id: data.user_id,
@@ -233,16 +266,37 @@ class ReporterRepository{
                     where:{id:id}
                 }
             );
+            //form status change
             await EleventhForms.update({
                 status:'user'
             },{
                 where:{reporter_id:id}
             });
+            //comment
+            if(data.comment){
+                await this.commentCreate(id,data)
+            }
+
             if(db_res == 1){
                 return "Reporter update successfull.";
             }
         }catch (e){
             return e;
+        }
+    }
+
+    async commentCreate(reporter_id, data){
+        try {
+            const form = await EleventhForms.findOne({where:{reporter_id:reporter_id}})
+            await FormHistory.destroy({where:{formId:form.id}})
+            await FormHistory.create({
+                formId: form.id,
+                comment: data.comment,
+                route: data.route,
+                createdAt: new Date()
+            })
+        } catch (error) {
+            console.log(error)
         }
     }
 }

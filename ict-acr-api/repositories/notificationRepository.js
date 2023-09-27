@@ -25,12 +25,9 @@ class NotificationRepository{
     }
 
     async update(id){
-        const dbResponse = await Notification.update({
-            viewed: true
-            },
-            {
-                where:{id:id}
-            }
+        const dbResponse = await Notification.update(
+            {viewed: 1},
+            {where:{id:id}}
         );
         return dbResponse;
     }
